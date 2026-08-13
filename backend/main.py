@@ -48,7 +48,7 @@ async def load_data():
         print("WARNING: Data files not found. Run precompute_embeddings.py first.")
         
     print("Loading SentenceTransformer model...")
-    model = SentenceTransformer('all-mpnet-base-v2')
+    model = SentenceTransformer('all-MiniLM-L6-v2')
     
     print("Fitting PCA model on embeddings for visualization...")
     global pca_model, pca_scale

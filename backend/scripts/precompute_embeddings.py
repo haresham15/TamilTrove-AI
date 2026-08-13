@@ -97,7 +97,7 @@ def main():
     
     # Generate embeddings
     print("Loading SentenceTransformer model...")
-    model = SentenceTransformer('all-mpnet-base-v2')
+    model = SentenceTransformer('all-MiniLM-L6-v2')
     
     print("Generating embeddings...")
     embeddings = model.encode(df['text_to_embed'].tolist(), show_progress_bar=True)
