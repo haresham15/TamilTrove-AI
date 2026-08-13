@@ -1,0 +1,13 @@
+# Python / Backend
+backend/venv/
+backend/__pycache__/
+*.pyc
+.env
+
+# Note: We are explicitly NOT ignoring backend/data/movies_processed.json 
+# and backend/data/embeddings.npy because they are required for deployment.
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
