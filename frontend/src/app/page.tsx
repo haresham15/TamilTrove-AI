@@ -14,6 +14,8 @@ interface Movie {
   similarity_score: number;
   final_score: number;
   poster_url?: string;
+  plot_x?: number;
+  plot_y?: number;
 }
 
 export default function Home() {
