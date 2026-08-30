@@ -11,8 +11,8 @@
   --border: rgba(212, 175, 55, 0.25);
   --glass-bg: rgba(26, 17, 16, 0.85);
   
-  --font-bebas: var(--font-bebas-neue), 'Bebas Neue', sans-serif;
-  --font-lora: var(--font-lora), 'Lora', serif;
+  --font-bebas: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --font-lora: Georgia, 'Times New Roman', serif;
 }
 
 body {

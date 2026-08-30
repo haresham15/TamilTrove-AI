@@ -44,6 +44,7 @@ Render provides a fantastic free tier for Python web services.
    - **Build Command:** `pip install -r requirements.txt`
    - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
    - **Instance Type:** `Free`
+   - **Environment Variable:** Set `ALLOWED_ORIGINS` to your frontend URL. Multiple origins can be supplied as a comma-separated list.
 5. Click **Create Web Service**. 
 6. Render will now download your requirements (including SentenceTransformers and Scikit-learn). *Note: The first build might take 3-5 minutes.*
 7. Once deployed, you will get a URL like `https://tamiltrove-backend.onrender.com`. Copy this URL!
@@ -66,7 +67,7 @@ Vercel is the creator of Next.js and provides the absolute best hosting for it.
 5. **Set Environment Variables:**
    - Expand the **Environment Variables** section.
    - **Name:** `NEXT_PUBLIC_API_URL`
-   - **Value:** Paste the URL you got from Render in Step 2 (e.g., `https://tamiltrove-backend.onrender.com`). *Make sure there is NO trailing slash `/` at the end of the URL!*
+   - **Value:** Paste the URL you got from Render in Step 2 (e.g., `https://tamiltrove-backend.onrender.com`).
    - Click **Add**.
 6. Click **Deploy**.
 
@@ -81,7 +82,7 @@ You now have a production-ready URL!
 When talking to AI/ML recruiters, be sure to highlight this specific architecture:
 - **Frontend:** React / Next.js (Hosted on Vercel)
 - **Backend:** Python / FastAPI (Hosted on Render)
-- **AI Core:** SentenceTransformers (all-mpnet-base-v2) for 768-dimensional semantic embeddings.
+- **AI Core:** SentenceTransformers (`all-MiniLM-L6-v2`) for semantic embeddings.
 - **Data Engineering:** Automated web-scraping and cross-referencing Wikipedia APIs for data augmentation.
 - **Mathematical Modeling:** Real-time Principal Component Analysis (PCA) via Scikit-learn for dimensionality reduction and visualization of semantic clustering.
 - **Algorithm:** Custom Maximal Marginal Relevance (MMR) scoring logic for result diversity with dynamic, similarity-gated "Hidden Gem" boosting.

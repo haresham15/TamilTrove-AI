@@ -314,6 +314,17 @@
   margin-top: 2rem;
 }
 
+.errorMessage {
+  margin: 1.5rem auto;
+  max-width: 760px;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.45);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  text-align: center;
+}
+
 .heroBadge {
   display: inline-block;
   background: var(--primary);

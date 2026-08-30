@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Lora } from "next/font/google";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  variable: "--font-bebas-neue",
-  subsets: ["latin"],
-});
-
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tamiltrove.com"),
   title: "TamilTrove | Kollywood AI Search Engine & Movie Discovery",
   description: "Discover modern Tamil cinema (Kollywood) masterpieces. Describe the narrative vibe, plot, or aesthetics of your favorite films, and our AI will find the perfect counterpart.",
   keywords: ["Tamil cinema", "Kollywood", "AI movie search", "Tamil movies 2024", "semantic movie search", "Tamil movie recommendations", "Kollywood hidden gems"],
@@ -50,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${lora.variable}`}>
+    <html lang="en">
       <body suppressHydrationWarning>{children}</body>
     </html>
   );

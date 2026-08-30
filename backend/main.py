@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import json
@@ -10,10 +10,16 @@ from sklearn.decomposition import PCA
 
 app = FastAPI(title="TamilTrove API")
 
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+    if origin.strip()
+]
+
 # Setup CORS to allow Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For production, restrict this to frontend URL
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -30,7 +36,7 @@ pca_scale = 1.0
 
 @app.on_event("startup")
 async def load_data():
-    global model, movies_data, movie_embeddings
+    global model, movies_data, movie_embeddings, pca_model, pca_scale
     print("Initializing model and loading data...")
     
     # Paths
@@ -39,19 +45,29 @@ async def load_data():
     json_path = os.path.join(data_dir, 'movies_processed.json')
     npy_path = os.path.join(data_dir, 'embeddings.npy')
     
-    if os.path.exists(json_path) and os.path.exists(npy_path):
-        with open(json_path, 'r', encoding='utf-8') as f:
-            movies_data = json.load(f)
-        movie_embeddings = np.load(npy_path)
-        print(f"Loaded {len(movies_data)} movies and embeddings shape: {movie_embeddings.shape}")
-    else:
+    if not os.path.exists(json_path) or not os.path.exists(npy_path):
         print("WARNING: Data files not found. Run precompute_embeddings.py first.")
+        return
+
+    with open(json_path, 'r', encoding='utf-8') as f:
+        loaded_movies = json.load(f)
+    loaded_embeddings = np.load(npy_path, allow_pickle=False)
+
+    if not isinstance(loaded_movies, list) or not loaded_movies:
+        raise RuntimeError("movies_processed.json must contain a non-empty list")
+    if loaded_embeddings.ndim != 2 or loaded_embeddings.shape[0] != len(loaded_movies):
+        raise RuntimeError("Movie and embedding counts do not match")
+    if loaded_embeddings.shape[0] < 2 or not np.isfinite(loaded_embeddings).all():
+        raise RuntimeError("Embeddings must contain at least two finite rows")
+
+    movies_data = loaded_movies
+    movie_embeddings = loaded_embeddings
+    print(f"Loaded {len(movies_data)} movies and embeddings shape: {movie_embeddings.shape}")
         
     print("Loading SentenceTransformer model...")
     model = SentenceTransformer('all-MiniLM-L6-v2')
     
     print("Fitting PCA model on embeddings for visualization...")
-    global pca_model, pca_scale
     pca_model = PCA(n_components=2)
     movie_pca = pca_model.fit_transform(movie_embeddings)
     
@@ -63,14 +79,14 @@ async def load_data():
     print("Startup complete.")
 
 class SearchRequest(BaseModel):
-    query: str
-    beta: float = 0.5  # Default hidden gem weight
-    alpha: float = 1.0 # Similarity weight
+    query: str = Field(min_length=1, max_length=500)
+    beta: float = Field(default=0.5, ge=0.0, le=2.0)
+    alpha: float = Field(default=1.0, ge=0.0, le=1.0)
 
 @app.post("/api/search")
 async def search_movies(req: SearchRequest):
-    if not movies_data or movie_embeddings is None or model is None:
-        return {"error": "Server not fully initialized. Data or model missing."}
+    if not movies_data or movie_embeddings is None or model is None or pca_model is None:
+        raise HTTPException(status_code=503, detail="Search service is not initialized")
         
     if not req.query.strip():
         return {"results": []}
@@ -107,7 +123,10 @@ async def search_movies(req: SearchRequest):
         # Normalize similarity from [-1, 1] to [0, 1]
         norm_sim = (sim + 1.0) / 2.0
         
-        prom = movie.get('prominence_score', 0.5)
+        try:
+            prom = max(0.0, min(1.0, float(movie.get('prominence_score', 0.5))))
+        except (TypeError, ValueError):
+            prom = 0.5
         
         # --- NEW AI SCORING ALGORITHM ---
         # Instead of a weighted average that lets obscurity overpower relevance,
@@ -166,9 +185,10 @@ async def search_movies(req: SearchRequest):
             
             for idx, candidate in enumerate(top_candidates):
                 cand_emb = candidate["embedding"]
-                # Embeddings should be normalized, so dot product is roughly cosine similarity
+                cand_norm = np.linalg.norm(cand_emb)
                 max_sim_to_selected = max([
-                    float(np.dot(cand_emb, sel["embedding"]))
+                    float(np.dot(cand_emb, sel["embedding"]) / (cand_norm * np.linalg.norm(sel["embedding"])))
+                    if cand_norm and np.linalg.norm(sel["embedding"]) else 0.0
                     for sel in final_results
                 ])
                 

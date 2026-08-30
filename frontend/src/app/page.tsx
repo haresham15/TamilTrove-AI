@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import styles from './page.module.css';
 
 interface Movie {
@@ -25,18 +26,38 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [queryPlot, setQueryPlot] = useState<{x: number, y: number} | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const activeRequest = useRef<AbortController | null>(null);
 
   // Modal State
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
+  useEffect(() => {
+    return () => activeRequest.current?.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedMovie) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedMovie(null);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [selectedMovie]);
+
   const handleSearch = async () => {
     if (!query.trim()) return;
     
+    activeRequest.current?.abort();
+    const controller = new AbortController();
+    activeRequest.current = controller;
     setLoading(true);
     setHasSearched(true);
+    setError(null);
     
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001').replace(/\/+$/, '');
       const response = await fetch(`${apiUrl}/api/search`, {
         method: 'POST',
         headers: {
@@ -47,9 +68,13 @@ export default function Home() {
           beta: beta,
           alpha: 1.0
         }),
+        signal: controller.signal,
       });
-      
-      const data = await response.json();
+
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error(data?.detail || data?.error || `Search failed (${response.status})`);
+      }
       if (data.results) {
         setResults(data.results);
       } else {
@@ -62,14 +87,21 @@ export default function Home() {
         setQueryPlot(null);
       }
     } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') return;
       console.error("Error searching movies:", error);
+      setResults([]);
+      setQueryPlot(null);
+      setError(error instanceof Error ? error.message : 'Unable to search right now.');
     } finally {
-      setLoading(false);
+      if (activeRequest.current === controller) {
+        activeRequest.current = null;
+        setLoading(false);
+      }
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       handleSearch();
     }
   };
@@ -83,22 +115,17 @@ export default function Home() {
       handleSearch();
     }
   };
-
-
-
-  const maxScore = results.length > 0 ? Math.max(1.0, ...results.map(r => r.final_score)) : 1.0;
-
   return (
     <main className={styles.main}>
       <header className={styles.hero}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1rem' }}>
-          <img src="/logo.png" alt="TamilTrove Logo - Film reel and glowing treasure trove" style={{ width: '64px', height: '64px', borderRadius: '16px', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.5)' }} />
+          <Image src="/logo.png" width={64} height={64} priority alt="TamilTrove logo" style={{ borderRadius: '16px', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.5)' }} />
           <div className={styles.heroBadge}>TamilTrove AI</div>
         </div>
         <h1 className={styles.title}>Unearth Kollywood Masterpieces</h1>
         <p className={styles.subtitle}>
-          New to Kollywood or searching for your next favorite film? Don't let the sheer volume of releases overwhelm you. 
-          Simply describe the narrative "vibe" or plot you are craving, and our AI will instantly dig up the perfect Tamil cinematic counterpart from the modern era (2015-2025). 
+          New to Kollywood or searching for your next favorite film? Don&apos;t let the sheer volume of releases overwhelm you.
+          Simply describe the narrative &quot;vibe&quot; or plot you are craving, and our AI will instantly dig up the perfect Tamil cinematic counterpart from the modern era (2015-2025).
           Use the <strong>Hidden Gem</strong> slider to dynamically filter out mainstream blockbusters and uncover critically acclaimed, under-the-radar masterpieces.
         </p>
       </header>
@@ -143,6 +170,8 @@ export default function Home() {
           </button>
         </div>
       </div>
+
+      {error && <p className={styles.errorMessage} role="alert">{error}</p>}
 
       {results.length > 0 && (
         <div className={styles.resultsGrid}>
@@ -243,19 +272,19 @@ export default function Home() {
         </div>
       )}
       
-      {hasSearched && results.length === 0 && !loading && (
+      {hasSearched && results.length === 0 && !loading && !error && (
         <p className={styles.noResults}>No matches found. Try adjusting your vibe search!</p>
       )}
 
       {/* Modal Overlay */}
       {selectedMovie && (
-        <div className={styles.modalOverlay} onClick={() => setSelectedMovie(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.modalOverlay} onClick={() => setSelectedMovie(null)} role="presentation">
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="movie-dialog-title">
             <button className={styles.closeButton} onClick={() => setSelectedMovie(null)} title="Close Movie Details">✕</button>
             
             <div className={styles.modalPoster}>
               {selectedMovie.poster_url ? (
-                <img src={selectedMovie.poster_url} alt={`${selectedMovie.title} Poster`} className={styles.posterImage} />
+                <Image src={selectedMovie.poster_url} alt={`${selectedMovie.title} poster`} className={styles.posterImage} width={500} height={750} unoptimized />
               ) : (
                 <div className={styles.posterFallback}>
                   <span style={{ fontSize: '3rem' }}>🎬</span>
@@ -265,7 +294,7 @@ export default function Home() {
             </div>
             
             <div className={styles.modalBody}>
-              <h2 className={styles.title} style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{selectedMovie.title}</h2>
+              <h2 id="movie-dialog-title" className={styles.title} style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{selectedMovie.title}</h2>
               
               <div className={styles.tags}>
                 {selectedMovie.genre && selectedMovie.genre.split(new RegExp('[/,]')).map(g => (
