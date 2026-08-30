@@ -7,6 +7,7 @@ import json
 import os
 import math
 from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = FastAPI(title="TamilTrove API")
 
@@ -33,10 +34,13 @@ movie_embeddings = None
 # PCA Visualization Model
 pca_model = None
 pca_scale = 1.0
+tfidf_vectorizer = None
+movie_tfidf = None
 
 @app.on_event("startup")
 async def load_data():
     global model, movies_data, movie_embeddings, pca_model, pca_scale
+    global tfidf_vectorizer, movie_tfidf
     print("Initializing model and loading data...")
     
     # Paths
@@ -66,6 +70,18 @@ async def load_data():
         
     print("Loading SentenceTransformer model...")
     model = SentenceTransformer('all-MiniLM-L6-v2')
+
+    print("Fitting lexical search index...")
+    searchable_texts = [
+        f"{movie.get('title', '')} {movie.get('genre', '')} {movie.get('overview', '')}"
+        for movie in movies_data
+    ]
+    tfidf_vectorizer = TfidfVectorizer(
+        stop_words="english",
+        ngram_range=(1, 2),
+        sublinear_tf=True,
+    )
+    movie_tfidf = tfidf_vectorizer.fit_transform(searchable_texts)
     
     print("Fitting PCA model on embeddings for visualization...")
     pca_model = PCA(n_components=2)
@@ -85,7 +101,8 @@ class SearchRequest(BaseModel):
 
 @app.post("/api/search")
 async def search_movies(req: SearchRequest):
-    if not movies_data or movie_embeddings is None or model is None or pca_model is None:
+    if (not movies_data or movie_embeddings is None or model is None or pca_model is None
+            or tfidf_vectorizer is None or movie_tfidf is None):
         raise HTTPException(status_code=503, detail="Search service is not initialized")
         
     if not req.query.strip():
@@ -114,14 +131,21 @@ async def search_movies(req: SearchRequest):
     norms = np.linalg.norm(movie_embeddings, axis=1) * query_norm
     # Avoid division by zero
     similarities = np.divide(dot_products, norms, out=np.zeros_like(dot_products), where=norms!=0)
+
+    query_tfidf = tfidf_vectorizer.transform([req.query])
+    lexical_similarities = (movie_tfidf @ query_tfidf.T).toarray().ravel()
     
     # Calculate initial scores
     candidates = []
     for i, movie in enumerate(movies_data):
         sim = float(similarities[i])
         
-        # Normalize similarity from [-1, 1] to [0, 1]
-        norm_sim = (sim + 1.0) / 2.0
+        lexical_sim = float(lexical_similarities[i])
+
+        # Blend semantic retrieval with exact plot/genre phrase matching. The
+        # combined raw score remains in [-1, 1] and is normalized for the UI.
+        combined_relevance = 0.5 * sim + 0.5 * lexical_sim
+        norm_sim = (combined_relevance + 1.0) / 2.0
         
         try:
             prom = max(0.0, min(1.0, float(movie.get('prominence_score', 0.5))))
@@ -158,6 +182,7 @@ async def search_movies(req: SearchRequest):
             "poster_url": movie.get('poster_url'),
             "prominence_score": round(prom, 4),
             "similarity_score": round(sim, 4),
+            "lexical_score": round(lexical_sim, 4),
             "final_score": round(final_score, 4),
             "plot_x": round(movie_x, 4),
             "plot_y": round(movie_y, 4),
