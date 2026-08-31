@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM python:3.12.14-slim-trixie AS builder
+FROM python:3.14.7-slim-trixie AS builder
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
@@ -13,7 +13,7 @@ RUN python -m pip install --upgrade pip==26.2 \
     && python -m pip install --requirement /tmp/requirements.txt
 
 
-FROM python:3.12.14-slim-trixie AS runtime
+FROM python:3.14.7-slim-trixie AS runtime
 
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
