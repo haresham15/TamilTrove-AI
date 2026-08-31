@@ -1,0 +1,3819 @@
+{
+  "dataset_version": "2.0.0",
+  "mode": "offline_lexical_baseline",
+  "query_count": 120,
+  "experiment": {
+    "code_commit": "86023a7b21406fc13ce7cdf07f1ba57bbb49de8a",
+    "recorded_at": "2026-08-30T21:59:35.592626+00:00",
+    "embedding_model": "none",
+    "ranking_version": "offline-lexical-v1",
+    "ranking_weights": {
+      "exact_title": 25.0,
+      "title_token": 8.0,
+      "director_token": 6.0,
+      "cast_token": 5.0,
+      "genre_token": 3.0,
+      "overview_token": 1.0
+    },
+    "runtime_seconds": 1.2091686000057962,
+    "peak_traced_memory_mb": 0.3082733154296875,
+    "runtime": "Python 3.13.3 on Windows-11-10.0.26200-SP0"
+  },
+  "metrics": {
+    "hit@1": 0.275,
+    "hit@5": 0.9416666666666667,
+    "hit@10": 0.9666666666666667,
+    "precision@5": 0.18833333333333335,
+    "precision@10": 0.09666666666666668,
+    "recall@5": 0.9416666666666667,
+    "recall@10": 0.9666666666666667,
+    "mrr": 0.5744907407407407,
+    "ndcg@10": 0.6740553269878223,
+    "catalog_coverage_count": 425,
+    "result_diversity": 0.3541666666666667,
+    "zero_result_rate": 0.0,
+    "error_rate": 0.0,
+    "latency_ms": {
+      "p50": 9.304250008426607,
+      "p95": 11.133445010636933,
+      "p99": 12.383324997208547,
+      "mean": 9.484431669019008
+    }
+  },
+  "slices": {
+    "language": {
+      "en": {
+        "hit@1": 0.275,
+        "hit@5": 0.9,
+        "hit@10": 0.925,
+        "precision@5": 0.18,
+        "precision@10": 0.0925,
+        "recall@5": 0.9,
+        "recall@10": 0.925,
+        "mrr": 0.548611111111111,
+        "ndcg@10": 0.6439314792238522,
+        "catalog_coverage_count": 206,
+        "result_diversity": 0.515,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.254450007574633,
+          "p95": 10.800325007585341,
+          "p99": 12.603172019007614,
+          "mean": 9.463840005628299
+        }
+      },
+      "ta": {
+        "hit@1": 0.15,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5383333333333333,
+        "ndcg@10": 0.657082731745267,
+        "catalog_coverage_count": 203,
+        "result_diversity": 0.5075,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.369149993290193,
+          "p95": 10.93152000394184,
+          "p99": 11.914325999678113,
+          "mean": 9.418774998630397
+        }
+      },
+      "tanglish": {
+        "hit@1": 0.4,
+        "hit@5": 0.925,
+        "hit@10": 0.975,
+        "precision@5": 0.185,
+        "precision@10": 0.0975,
+        "recall@5": 0.925,
+        "recall@10": 0.975,
+        "mrr": 0.6365277777777778,
+        "ndcg@10": 0.7211517699943478,
+        "catalog_coverage_count": 188,
+        "result_diversity": 0.47,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.287600012612529,
+          "p95": 11.32947502337629,
+          "p99": 12.083502006717026,
+          "mean": 9.570680002798326
+        }
+      }
+    },
+    "category": {
+      "actor_director_lookup": {
+        "hit@1": 0.3333333333333333,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.648611111111111,
+        "ndcg@10": 0.7397048029917158,
+        "catalog_coverage_count": 293,
+        "result_diversity": 0.48833333333333334,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.060399999725632,
+          "p95": 10.528225000598468,
+          "p99": 11.462196002830746,
+          "mean": 9.166470002674032
+        }
+      },
+      "hidden_gem": {
+        "hit@1": 0.14285714285714285,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5238095238095238,
+        "ndcg@10": 0.6456943498778502,
+        "catalog_coverage_count": 83,
+        "result_diversity": 0.5928571428571429,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.478949985350482,
+          "p95": 9.988475008867681,
+          "p99": 10.026174993254244,
+          "mean": 9.37757856861156
+        }
+      },
+      "mixed_plot_description": {
+        "hit@1": 0.4,
+        "hit@5": 0.85,
+        "hit@10": 0.95,
+        "precision@5": 0.17,
+        "precision@10": 0.095,
+        "recall@5": 0.85,
+        "recall@10": 0.95,
+        "mrr": 0.5938888888888889,
+        "ndcg@10": 0.6803048352992971,
+        "catalog_coverage_count": 80,
+        "result_diversity": 0.4,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 10.17275000049267,
+          "p95": 11.614110018126667,
+          "p99": 12.251142002642153,
+          "mean": 10.1883050010656
+        }
+      },
+      "plot_description": {
+        "hit@1": 0.15,
+        "hit@5": 0.8,
+        "hit@10": 0.85,
+        "precision@5": 0.16,
+        "precision@10": 0.085,
+        "recall@5": 0.8,
+        "recall@10": 0.85,
+        "mrr": 0.4138888888888889,
+        "ndcg@10": 0.5223980816619755,
+        "catalog_coverage_count": 101,
+        "result_diversity": 0.505,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.469299999182113,
+          "p95": 11.245060010696763,
+          "p99": 13.088212021975774,
+          "mean": 9.742985005141236
+        }
+      },
+      "structured_constraints": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.20000000000000004,
+        "precision@10": 0.10000000000000002,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.4222222222222222,
+        "ndcg@10": 0.568428636920062,
+        "catalog_coverage_count": 46,
+        "result_diversity": 0.7666666666666667,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 9.748249998665415,
+          "p95": 11.248200011323206,
+          "p99": 11.338680013432167,
+          "mean": 9.7052833395234
+        }
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "v2-001",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 10.151800001040101,
+      "result_titles": [
+        "100",
+        "i",
+        "2",
+        "empuraan tamil dub",
+        "trigger",
+        "boomerang",
+        "dna",
+        "100 kadhal",
+        "iru mugan",
+        "chakra"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-002",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.145599993644282,
+      "result_titles": [
+        "36 vayadhinile",
+        "i",
+        "udanpirappe",
+        "thaai manasu",
+        "tourist family",
+        "valiyavan",
+        "kathai thiraikathai vasanam directed",
+        "nandhan",
+        "game over",
+        "mehandi circus"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-003",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.691299997735769,
+      "result_titles": [
+        "i",
+        "90 ml",
+        "english film",
+        "tamizh film 2 0",
+        "100 kadhal",
+        "veetla vishesham",
+        "kattappava kanom",
+        "kalavani 2",
+        "podhuvaga en manasu thangam",
+        "desingu raja 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-004",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.196700004395097,
+      "result_titles": [
+        "aadukalam",
+        "i",
+        "thug life",
+        "oru nodi",
+        "oru iyakkunarin kadhal diary",
+        "oru kidayin karunai manu",
+        "chennaiyil oru naal 2",
+        "oru mugathirai",
+        "oru nalla naal paathu solren",
+        "maamannan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-005",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.461200010264292,
+      "result_titles": [
+        "i",
+        "aaranya kaandam 2",
+        "super deluxe",
+        "kattappava kanom",
+        "nagarvalam",
+        "thookudurai",
+        "yaanai mugathaan",
+        "naane varuvean",
+        "boat",
+        "ghosty"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-006",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.67329999548383,
+      "result_titles": [
+        "i",
+        "acp shiva",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "rum",
+        "ennai vittu pogaathe",
+        "karu",
+        "amaran",
+        "regina"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-007",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.976000001188368,
+      "result_titles": [
+        "i",
+        "aghathiyaa",
+        "the greatest of all time goat",
+        "the house next door",
+        "tourist family",
+        "rocketry the nambi effect",
+        "house owner",
+        "baahubali 2 the conclusion",
+        "aranmanai 4",
+        "kutty story"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-008",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.687400026246905,
+      "result_titles": [
+        "i",
+        "ambajipeta marriage band tamil dub",
+        "kathai thiraikathai vasanam directed",
+        "english film",
+        "anbulla ghilli",
+        "tamizh film 2 0",
+        "natchathiram nagargiradhu",
+        "ennai vittu pogaathe",
+        "thalaikoothal",
+        "thiri"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-009",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.388500009663403,
+      "result_titles": [
+        "aneethi",
+        "i",
+        "sivaranjiniyum innum sila pengalum",
+        "kaithi",
+        "good bad ugly",
+        "english film",
+        "madraskaaran",
+        "pushpa the rise tamil dub",
+        "por",
+        "leo"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-010",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 8.413300005486235,
+      "result_titles": [
+        "por",
+        "i",
+        "mrs and mr",
+        "coffee with kadhal",
+        "pariyerum perumal",
+        "vaazhai",
+        "oru mugathirai",
+        "oru kidayin karunai manu",
+        "oru iyakkunarin kadhal diary",
+        "maamannan"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-011",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.003899991512299,
+      "result_titles": [
+        "i",
+        "arrambam",
+        "english film",
+        "uriyadi",
+        "veeram",
+        "thunivu",
+        "vidaamuyarchi",
+        "vivegam",
+        "nerkonda paarvai",
+        "uriyadi 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-012",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 8.143600018229336,
+      "result_titles": [
+        "i",
+        "karthikeyan",
+        "ayalaan",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "indru netru naalai",
+        "lingaa",
+        "ennai vittu pogaathe",
+        "kakki sattai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-013",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.890100027201697,
+      "result_titles": [
+        "i",
+        "bagheera",
+        "magalir mattum",
+        "comali",
+        "kedi billa killadi ranga",
+        "por thozhil",
+        "jigarthanda",
+        "raghu thatha",
+        "por",
+        "nimir"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-014",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.159500022884458,
+      "result_titles": [
+        "i",
+        "bayama irukku",
+        "english film",
+        "kazhuvethi moorkkan",
+        "ghajinikanth",
+        "hara hara mahadevaki",
+        "thiruchitrambalam",
+        "tamizh film 2 0",
+        "idiyappam",
+        "iruttu araiyil murattu kuthu"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-015",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.672099997056648,
+      "result_titles": [
+        "uriyadi",
+        "uriyadi 2",
+        "bigil",
+        "i",
+        "theri",
+        "sindhubaadh",
+        "mersal",
+        "english film",
+        "yennai arindhaal",
+        "goli soda"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-016",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.441299993544817,
+      "result_titles": [
+        "2",
+        "i",
+        "bogan",
+        "oru nalla naal paathu solren",
+        "oru mugathirai",
+        "the greatest of all time goat",
+        "naachiyaar",
+        "the house next door",
+        "baahubali 2 the conclusion",
+        "annadurai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-017",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.567500015487894,
+      "result_titles": [
+        "bottle radha",
+        "uru",
+        "i",
+        "madras",
+        "sarpatta parambarai",
+        "kabali",
+        "thangalaan",
+        "kaala",
+        "natchathiram nagargiradhu",
+        "joker"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-018",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.748399985255674,
+      "result_titles": [
+        "byri",
+        "i",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "thunivu",
+        "sarpatta parambarai",
+        "bottle radha",
+        "azhagu kutti chellam",
+        "maargan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-019",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.190700016915798,
+      "result_titles": [
+        "irumbu thirai",
+        "i",
+        "rum",
+        "chakra",
+        "baahubali 2 the conclusion",
+        "the greatest of all time goat",
+        "the house next door",
+        "the fly",
+        "rocketry the nambi effect",
+        "pushpa the rise tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-020",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.683100022608414,
+      "result_titles": [
+        "chennai city gangsters",
+        "i",
+        "saani kaayidham",
+        "indru netru naalai",
+        "gatta kusthi",
+        "madha gaja raja",
+        "fir",
+        "english film",
+        "lal salaam",
+        "jeeva"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-021",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.155400020768866,
+      "result_titles": [
+        "i",
+        "coffee with kadhal",
+        "tamizh film 2 0",
+        "aranmanai 3",
+        "aranmanai 2",
+        "aranmanai 4",
+        "oh manapenne",
+        "english film",
+        "theeya velai seiyyanum kumaru",
+        "kalakalappu"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-022",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.77699999930337,
+      "result_titles": [
+        "i",
+        "darling",
+        "oru nalla naal paathu solren",
+        "aranmanai 4",
+        "english film",
+        "tamizh film 2 0",
+        "the greatest of all time goat",
+        "aranmanai 2",
+        "kamali from nadukkaveri",
+        "oru nodi"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-023",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.092199994483963,
+      "result_titles": [
+        "i",
+        "demonte colony",
+        "imaikkaa nodigal",
+        "demonte colony 2",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "enakkul oruvan",
+        "thappu thanda",
+        "kuttram kadithal"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-024",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 11.361300013959408,
+      "result_titles": [
+        "i",
+        "dharma prabhu",
+        "kattappava kanom",
+        "nagarvalam",
+        "thookudurai",
+        "yaanai mugathaan",
+        "naane varuvean",
+        "boat",
+        "ghosty",
+        "gurkha"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-025",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.704100007889792,
+      "result_titles": [
+        "i",
+        "diary",
+        "chennai 600028 second innings",
+        "chennai ungalai anbudan varaverkirathu",
+        "vada chennai",
+        "chennai city gangsters",
+        "shot boot three",
+        "malaikottai vaaliban tamil dub",
+        "puli joodham tamil dub",
+        "mrs and mr"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-026",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.011399990413338,
+      "result_titles": [
+        "dream factory",
+        "i",
+        "kathai thiraikathai vasanam directed",
+        "chithha",
+        "aruvi",
+        "shot boot three",
+        "veera dheera sooran part 2",
+        "vanangaan",
+        "yaanai",
+        "english film"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-027",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.284900006605312,
+      "result_titles": [
+        "enai noki paayum thota",
+        "dev",
+        "i",
+        "achcham yenbadhu madamaiyada",
+        "neethaane en ponvasantham",
+        "selfie",
+        "vendhu thanindhathu kaadu",
+        "yennai arindhaal",
+        "power paandi",
+        "rudra thandavam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-028",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.996100008720532,
+      "result_titles": [
+        "english film",
+        "2",
+        "i",
+        "oru nalla naal paathu solren",
+        "satyam sundaram tamil dub",
+        "chennaiyil oru naal 2",
+        "oru nodi",
+        "uriyadi",
+        "uriyadi 2",
+        "mrs and mr"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-029",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.088699996937066,
+      "result_titles": [
+        "i",
+        "karthikeyan",
+        "ethir neechal",
+        "garudan",
+        "pattas",
+        "english film",
+        "dharma durai",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "ennai vittu pogaathe"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-030",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 8.734300005016848,
+      "result_titles": [
+        "game over",
+        "i",
+        "vai raja vai",
+        "valiyavan",
+        "maya",
+        "kanchana 2",
+        "english film",
+        "saravanan irukka bayamaen",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-031",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.620499982498586,
+      "result_titles": [
+        "i",
+        "2",
+        "the greatest of all time goat",
+        "the fly",
+        "pushpa the rise tamil dub",
+        "baahubali 2 the conclusion",
+        "the house next door",
+        "gangs of madras",
+        "tamizh film 2 0",
+        "rocketry the nambi effect"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-032",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.928100014803931,
+      "result_titles": [
+        "good luck sakhi tamil dub",
+        "i",
+        "por",
+        "kee",
+        "maamannan",
+        "oru kidayin karunai manu",
+        "inayathalam",
+        "raghu thatha",
+        "annaatthe",
+        "saani kaayidham"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-033",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 7.956700021168217,
+      "result_titles": [
+        "lakshmi",
+        "house owner",
+        "i",
+        "ammani",
+        "komban",
+        "sivaranjiniyum innum sila pengalum",
+        "english film",
+        "tamizh film 2 0",
+        "naan kadavul illai",
+        "sabdham"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-034",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.108699992997572,
+      "result_titles": [
+        "inayathalam",
+        "i",
+        "2",
+        "oru nalla naal paathu solren",
+        "oru mugathirai",
+        "oru iyakkunarin kadhal diary",
+        "oru kidayin karunai manu",
+        "tamizh film 2 0",
+        "brindavanam",
+        "ayngaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-035",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.558699995977804,
+      "result_titles": [
+        "i",
+        "irandam ulagam",
+        "english film",
+        "pudhupettai 2",
+        "maalai nerathu mayakkam",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "naane varuvean",
+        "nenjam marappathillai",
+        "ngk"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-036",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.541899984469637,
+      "result_titles": [
+        "i",
+        "irumbu thirai",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "ariyavan",
+        "thiruchitrambalam",
+        "sardar",
+        "pandiya naadu",
+        "ayogya"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-037",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 10.206400009337813,
+      "result_titles": [
+        "i",
+        "the house next door",
+        "jackpot",
+        "the greatest of all time goat",
+        "aranmanai 2",
+        "tamizh film 2 0",
+        "kamali from nadukkaveri",
+        "baahubali 2 the conclusion",
+        "byri",
+        "ayngaran"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-038",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 10.049399978015572,
+      "result_titles": [
+        "i",
+        "jigarthanda",
+        "petta",
+        "jigarthanda doublex",
+        "retro",
+        "pizza",
+        "mercury",
+        "iraivi",
+        "suriya 44",
+        "eagle tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-039",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.20090000727214,
+      "result_titles": [
+        "i",
+        "junga",
+        "uriyadi",
+        "sindhubaadh",
+        "maharaja",
+        "naanum rowdy dhaan 2",
+        "naanum rowdy thaan",
+        "petta",
+        "uriyadi 2",
+        "mission"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-040",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 11.316700023598969,
+      "result_titles": [
+        "kaalangalil aval vasantham",
+        "kaala",
+        "2",
+        "i",
+        "chithha",
+        "taramani",
+        "game changer tamil dub",
+        "satyam sundaram tamil dub",
+        "pushpa the rise tamil dub",
+        "thanga meengal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-041",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.381799998460338,
+      "result_titles": [
+        "i",
+        "kaatteri",
+        "katteri",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "meyaadha maan",
+        "sixer",
+        "aranmanai 2",
+        "buffoon"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-042",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 8.775299997068942,
+      "result_titles": [
+        "i",
+        "kadaisi ulaga por",
+        "meesaya murukku",
+        "natpe thunai",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "vantha rajavathaan varuven",
+        "oru iyakkunarin kadhal diary",
+        "sivalinga kanchana returns"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-043",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.318199998233467,
+      "result_titles": [
+        "i",
+        "2",
+        "kadhalikka neramillai",
+        "prince",
+        "kamali from nadukkaveri",
+        "pushpa the rise tamil dub",
+        "the greatest of all time goat",
+        "enna solla pogirai",
+        "good night",
+        "oh manapenne"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-044",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.573499992256984,
+      "result_titles": [
+        "i",
+        "kalakalappu",
+        "aranmanai 3",
+        "aranmanai 2",
+        "aranmanai 4",
+        "english film",
+        "kalakalappu 2",
+        "desingu raja 2",
+        "madha gaja raja",
+        "theeya velai seiyyanum kumaru"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-045",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.392099978867918,
+      "result_titles": [
+        "i",
+        "kalavu thozhirchalai",
+        "krishna vrinda vihari tamil dub",
+        "kuttram 23 part 2",
+        "english film",
+        "pathu thala",
+        "tamizh film 2 0",
+        "yaadhum oore yaavarum kelir",
+        "kathakali",
+        "maalai nerathu mayakkam"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-046",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 11.572200019145384,
+      "result_titles": [
+        "i",
+        "kanchana 2",
+        "the greatest of all time goat",
+        "pushpa the rise tamil dub",
+        "krishna vrinda vihari tamil dub",
+        "the house next door",
+        "varudu kaavalenu tamil dub",
+        "oru nalla naal paathu solren",
+        "english film",
+        "tamizh film 2 0"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-047",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.65720001840964,
+      "result_titles": [
+        "kanne kalaimaane 2",
+        "i",
+        "koodal nagar",
+        "dharma durai",
+        "ippadai vellum",
+        "maamannan",
+        "kalaga thalaivan",
+        "kannai nambathey",
+        "dharmadurai",
+        "nanbenda"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-048",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 9.145399992121384,
+      "result_titles": [
+        "i",
+        "kathai thiraikathai vasanam directed",
+        "komban",
+        "sembi",
+        "azhagu kutti chellam",
+        "english film",
+        "isai u a",
+        "sandamarudham",
+        "tamizh film 2 0",
+        "thanne vandi"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-049",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.924299996579066,
+      "result_titles": [
+        "i",
+        "2",
+        "tamizh film 2 0",
+        "the house next door",
+        "rocketry the nambi effect",
+        "the greatest of all time goat",
+        "baahubali 2 the conclusion",
+        "kaatteri",
+        "katteri",
+        "mrs and mr"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 1.0,
+        "precision@5": 0.0,
+        "precision@10": 0.1,
+        "recall@5": 0.0,
+        "recall@10": 1.0,
+        "mrr": 0.1111111111111111,
+        "ndcg@10": 0.3010299956639812
+      },
+      "error": null
+    },
+    {
+      "id": "v2-050",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.07919999351725,
+      "result_titles": [
+        "i",
+        "kennedy club",
+        "kathai thiraikathai vasanam directed",
+        "eeswaran",
+        "nandhan",
+        "kombu vatcha singam",
+        "thaarai thappattai",
+        "garudan",
+        "udanpirappe",
+        "jeeva"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-051",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.745300001464784,
+      "result_titles": [
+        "i",
+        "kochadaiiyaan",
+        "velaiyilla pattathari 2",
+        "lal salaam",
+        "english film",
+        "tamizh film 2 0",
+        "maaveeran",
+        "game over",
+        "maya",
+        "enna solla pogirai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-052",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 8.82010001805611,
+      "result_titles": [
+        "2",
+        "i",
+        "pushpa the rise tamil dub",
+        "komban",
+        "oru kidayin karunai manu",
+        "oru mugathirai",
+        "the greatest of all time goat",
+        "karnan",
+        "oru iyakkunarin kadhal diary",
+        "ayngaran"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-053",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 10.902300011366606,
+      "result_titles": [
+        "i",
+        "kottukkaali",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "desingu raja 2",
+        "paramasivan fathima",
+        "velan",
+        "anbulla ghilli",
+        "kombu vatcha singam"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-054",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 8.626399998320267,
+      "result_titles": [
+        "i",
+        "kuppathu raja",
+        "english film",
+        "100 kadhal",
+        "raghu thatha",
+        "uriyadi",
+        "watchman",
+        "uriyadi 2",
+        "ayngaran",
+        "selfie"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-055",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.325800008606166,
+      "result_titles": [
+        "i",
+        "2",
+        "tamizh film 2 0",
+        "the house next door",
+        "rocketry the nambi effect",
+        "baahubali 2 the conclusion",
+        "the fly",
+        "pushpa the rise tamil dub",
+        "the greatest of all time goat",
+        "12 12 1950"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-056",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.439700002782047,
+      "result_titles": [
+        "i",
+        "lift",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "velan",
+        "dada",
+        "vithaikkaaran",
+        "maargan",
+        "vai raja vai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-057",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.491800021147355,
+      "result_titles": [
+        "lucky baskhar",
+        "i",
+        "hey sinamika",
+        "thug life",
+        "ok kanmani",
+        "freedom",
+        "vaayai moodi pesavum",
+        "solo",
+        "ok kanmani",
+        "english film"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-058",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.999899979447946,
+      "result_titles": [
+        "i",
+        "selfie",
+        "chennaiyil oru naal 2",
+        "ayngaran",
+        "oru nodi",
+        "vivegam",
+        "valimai",
+        "uriyadi",
+        "maaran",
+        "watchman"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 1.0,
+        "precision@5": 0.0,
+        "precision@10": 0.1,
+        "recall@5": 0.0,
+        "recall@10": 1.0,
+        "mrr": 0.1111111111111111,
+        "ndcg@10": 0.3010299956639812
+      },
+      "error": null
+    },
+    {
+      "id": "v2-059",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.598899992648512,
+      "result_titles": [
+        "i",
+        "madha gaja raja",
+        "aranmanai 3",
+        "aranmanai 2",
+        "aranmanai 4",
+        "english film",
+        "aambala u",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "kalakalappu"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-060",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.415999986231327,
+      "result_titles": [
+        "i",
+        "mahanati",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "maaveeran",
+        "game over",
+        "enna solla pogirai",
+        "sembi",
+        "velaiyilla pattathari 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-061",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 10.66910001100041,
+      "result_titles": [
+        "marakkuma nenjam",
+        "i",
+        "2",
+        "24",
+        "pushpa the rise tamil dub",
+        "the greatest of all time goat",
+        "kathai thiraikathai vasanam directed",
+        "the verdict",
+        "ko",
+        "mrs and mr"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-062",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.868200005963445,
+      "result_titles": [
+        "mathimaran",
+        "i",
+        "kida",
+        "kathai thiraikathai vasanam directed",
+        "sila nerangalil sila manithargal",
+        "ayngaran",
+        "english film",
+        "shot boot three",
+        "tamizh film 2 0",
+        "vithaikkaaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-063",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.736199990380555,
+      "result_titles": [
+        "mercury",
+        "dev",
+        "i",
+        "vetri vizha 2",
+        "pizza",
+        "the greatest of all time goat",
+        "jigarthanda",
+        "retro",
+        "petta",
+        "jigarthanda doublex"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-064",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 8.983900013845414,
+      "result_titles": [
+        "methagu 2",
+        "methagu",
+        "2",
+        "i",
+        "rocketry the nambi effect",
+        "oru mugathirai",
+        "oru iyakkunarin kadhal diary",
+        "pushpa the rise tamil dub",
+        "tamizh film 2 0",
+        "oru kidayin karunai manu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-065",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.819599985145032,
+      "result_titles": [
+        "i",
+        "mission",
+        "mission chapter 1",
+        "sindhubaadh",
+        "pannaiyarum padminiyum",
+        "thalaivii",
+        "uriyadi",
+        "vanangaan",
+        "thadam",
+        "yaanai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-066",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 8.321400004206225,
+      "result_titles": [
+        "i",
+        "kaatru veliyidai",
+        "ponniyin selvan ii",
+        "ponniyin selvan i",
+        "mouna raagam 2",
+        "chekka chivantha vaanam",
+        "ok kanmani",
+        "ok kanmani",
+        "thug life",
+        "freedom"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.38685280723454163
+      },
+      "error": null
+    },
+    {
+      "id": "v2-067",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.49870000476949,
+      "result_titles": [
+        "i",
+        "tamizh film 2 0",
+        "mrs and mr",
+        "muthuramalingam",
+        "english film",
+        "irugapatru",
+        "parundhaaguthu oor kuruvi",
+        "ghosty",
+        "kathanayagan",
+        "agni devi"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-068",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.994400006486103,
+      "result_titles": [
+        "i",
+        "naan kadavul illai",
+        "thunivu",
+        "ramam raghavam",
+        "maanaadu",
+        "yaanai",
+        "garudan",
+        "kaala",
+        "english film",
+        "maaran"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-069",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.941800013417378,
+      "result_titles": [
+        "naduvula konjam pakkatha kaanom",
+        "i",
+        "seethakaathi",
+        "veetla vishesham",
+        "naanum rowdy dhaan 2",
+        "kadhalum kadanthu pogum",
+        "pannaiyarum padminiyum",
+        "soodhu kavvum",
+        "kaathuvaakula rendu kaadhal",
+        "tughlaq durbar"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-070",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.562799998093396,
+      "result_titles": [
+        "2",
+        "i",
+        "navarasa",
+        "rocketry the nambi effect",
+        "oru mugathirai",
+        "pushpa the rise tamil dub",
+        "oru kidayin karunai manu",
+        "pariyerum perumal",
+        "vaazhai",
+        "the greatest of all time goat"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-071",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.033200010890141,
+      "result_titles": [
+        "neram",
+        "i",
+        "richie",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "oru iyakkunarin kadhal diary",
+        "sivalinga kanchana returns",
+        "ennai vittu pogaathe",
+        "visithiran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-072",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.963100019376725,
+      "result_titles": [
+        "i",
+        "nilavuku enmel ennadi kobam",
+        "miruthan",
+        "power paandi",
+        "raayan",
+        "english film",
+        "vai raja vai",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "pudhupettai 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-073",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.334399976069108,
+      "result_titles": [
+        "i",
+        "the greatest of all time goat",
+        "oh manapenne",
+        "kutty story",
+        "rocketry the nambi effect",
+        "pushpa the rise tamil dub",
+        "gangs of madras",
+        "the fly",
+        "baahubali 2 the conclusion",
+        "chennai story"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-074",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 10.783300007460639,
+      "result_titles": [
+        "operation valentine tamil dub",
+        "i",
+        "teddy",
+        "miruthan",
+        "tik tik tik",
+        "captain",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "theeran adhigaaram ondru"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-075",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.926100010285154,
+      "result_titles": [
+        "i",
+        "oru nodi",
+        "english film",
+        "fire 2025",
+        "uriyadi",
+        "uriyadi 2",
+        "watchman",
+        "magamuni",
+        "crime 23",
+        "thunivu"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-076",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 11.063999991165474,
+      "result_titles": [
+        "i",
+        "pannaiyarum padminiyum",
+        "love today",
+        "oru nalla naal paathu solren",
+        "mrs and mr",
+        "english film",
+        "tamizh film 2 0",
+        "chennaiyil oru naal 2",
+        "press 1 for tamil",
+        "oru mugathirai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-077",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 12.267899990547448,
+      "result_titles": [
+        "i",
+        "pariyerum perumal",
+        "maamannan",
+        "vaazhai",
+        "karnan",
+        "kaatu pura",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "thuppakki munai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-078",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.076599992113188,
+      "result_titles": [
+        "i",
+        "pattathu arasan",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "kalavani 2",
+        "vaagai sooda vaa",
+        "boomerang",
+        "dna",
+        "thalli pogathey"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-079",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.801800013519824,
+      "result_titles": [
+        "i",
+        "petta rap",
+        "mrs and mr",
+        "udanpirappe",
+        "baby and baby",
+        "raangi",
+        "kalaga thalaivan",
+        "nibunan",
+        "saamy square",
+        "game changer tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-080",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.021000005304813,
+      "result_titles": [
+        "i",
+        "pisasu 2",
+        "pisasu 3",
+        "aranmanai 3",
+        "valiyavan",
+        "vada chennai",
+        "uttama villain",
+        "english film",
+        "anbulla appa",
+        "tamizh film 2 0"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-081",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.634600002551451,
+      "result_titles": [
+        "vikram",
+        "i",
+        "ponniyin selvan ii",
+        "ponniyin selvan i",
+        "mouna raagam 2",
+        "ok kanmani",
+        "thug life",
+        "freedom",
+        "chekka chivantha vaanam",
+        "ok kanmani"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-082",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 9.558699995977804,
+      "result_titles": [
+        "lover",
+        "i",
+        "freedom",
+        "power paandi",
+        "pariyerum perumal",
+        "viswasam",
+        "oru iyakkunarin kadhal diary",
+        "vaazhai",
+        "empuraan tamil dub",
+        "oru nalla naal paathu solren"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-083",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.426599979633465,
+      "result_titles": [
+        "puriyaatha puthir",
+        "i",
+        "ko",
+        "uriyadi",
+        "ispade rajavum idhaya raniyum",
+        "junga",
+        "aandavan kattalai",
+        "sindhubaadh",
+        "yaadhum oore yaavarum kelir",
+        "merry christmas"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-084",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 10.908900003414601,
+      "result_titles": [
+        "i",
+        "raatchasan",
+        "mundaasupatti",
+        "english film",
+        "uriyadi",
+        "thanga meengal",
+        "lal salaam",
+        "indru netru naalai",
+        "gatta kusthi",
+        "uriyadi 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-085",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 13.549000024795532,
+      "result_titles": [
+        "i",
+        "rajathandhiram",
+        "pichaikkaran 2",
+        "mrs and mr",
+        "pothanur thabal nilayam",
+        "mark antony",
+        "the fly",
+        "the greatest of all time goat",
+        "tamilarasan",
+        "annadurai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-086",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 10.101200023200363,
+      "result_titles": [
+        "i",
+        "regina",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "vithaikkaaran",
+        "maargan",
+        "vai raja vai",
+        "dhuruvangal pathinaaru",
+        "chennai city gangsters"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-087",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.057399991434067,
+      "result_titles": [
+        "i",
+        "rubaai",
+        "english film",
+        "tamizh film 2 0",
+        "kamali from nadukkaveri",
+        "visaranai",
+        "dev",
+        "karuppan",
+        "naan kadavul illai",
+        "thugs"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-088",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.402099986094981,
+      "result_titles": [
+        "saaho",
+        "i",
+        "2",
+        "baahubali 2 the conclusion",
+        "the fly",
+        "pushpa the rise tamil dub",
+        "oru nodi",
+        "the greatest of all time goat",
+        "the house next door",
+        "thoongavanam 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-089",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.746600000653416,
+      "result_titles": [
+        "i",
+        "saivam",
+        "thalaivii",
+        "uriyadi",
+        "uriyadi 2",
+        "mission",
+        "mission chapter 1",
+        "pichaikkaran 2",
+        "english film",
+        "tamizh film 2 0"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-090",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 10.351100005209446,
+      "result_titles": [
+        "i",
+        "sardar",
+        "sardar 2",
+        "english film",
+        "kadaisi bench karthi",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "ariyavan",
+        "irumbu thirai",
+        "thiruchitrambalam"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-091",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 11.12380000995472,
+      "result_titles": [
+        "sathuranga vettai",
+        "2",
+        "i",
+        "shot boot three",
+        "mrs and mr",
+        "baby and baby",
+        "mohini",
+        "c o surya",
+        "anbanavan asaradhavan adangadhavan",
+        "devi 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-092",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.756800020113587,
+      "result_titles": [
+        "maaran",
+        "i",
+        "seetha payana",
+        "karthikeyan",
+        "ennai vittu pogaathe",
+        "vaadi vaasal",
+        "kathai thiraikathai vasanam directed",
+        "prince",
+        "english film",
+        "kakki sattai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-093",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 10.514800000237301,
+      "result_titles": [
+        "sindhubaadh",
+        "uriyadi",
+        "uriyadi 2",
+        "pannaiyarum padminiyum",
+        "i",
+        "mission",
+        "mission chapter 1",
+        "yennai arindhaal",
+        "96",
+        "veera dheera sooran part 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-094",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 12.410399998771027,
+      "result_titles": [
+        "siren",
+        "24",
+        "2",
+        "i",
+        "eagle tamil dub",
+        "pushpa the rise tamil dub",
+        "pichaikkaran 2",
+        "bhoomi",
+        "mrs and mr",
+        "the greatest of all time goat"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-095",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.540599974570796,
+      "result_titles": [
+        "i",
+        "sixer",
+        "meyaadha maan",
+        "aranmanai 2",
+        "english film",
+        "aambala u",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "kaatteri",
+        "katteri"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-096",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 10.035599989350885,
+      "result_titles": [
+        "uru",
+        "i",
+        "spyder",
+        "thookudurai",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "kattappava kanom",
+        "tamilarasan",
+        "katham katham"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-097",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.964700002456084,
+      "result_titles": [
+        "2",
+        "i",
+        "the greatest of all time goat",
+        "pushpa the rise tamil dub",
+        "gangs of madras",
+        "the fly",
+        "rocketry the nambi effect",
+        "baahubali 2 the conclusion",
+        "tamizh film 2 0",
+        "the house next door"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-098",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.668400016380474,
+      "result_titles": [
+        "thaanaa serndha koottam",
+        "i",
+        "naanum rowdy dhaan 2",
+        "naanum rowdy thaan",
+        "kaathuvaakula rendu kaadhal",
+        "por thozhil",
+        "thittam irandu",
+        "suriya 44",
+        "english film",
+        "the verdict"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-099",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.290300018619746,
+      "result_titles": [
+        "i",
+        "thalaimai seyalagam",
+        "thalaimai seyalagam 2",
+        "suzhal the vortex",
+        "english film",
+        "tamizh film 2 0",
+        "kaaviya thalaivan",
+        "maanaadu",
+        "empuraan tamil dub",
+        "vithaikkaaran"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-100",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.79800000297837,
+      "result_titles": [
+        "thandatti",
+        "2",
+        "i",
+        "oru kidayin karunai manu",
+        "kalyana samayal saadham",
+        "mrs and mr",
+        "pushpa the rise tamil dub",
+        "jama",
+        "game changer tamil dub",
+        "thanga meengal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-101",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.4939999980852,
+      "result_titles": [
+        "i",
+        "thappu thanda",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "imaikkaa nodigal",
+        "demonte colony 2",
+        "demonte colony",
+        "enakkul oruvan",
+        "kuttram kadithal"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-102",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.129099984420463,
+      "result_titles": [
+        "dev",
+        "i",
+        "vetri vizha 2",
+        "theal",
+        "the greatest of all time goat",
+        "bagheera",
+        "petta rap",
+        "devi 2",
+        "mercury",
+        "charlie chaplin 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    },
+    {
+      "id": "v2-103",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 9.439899993594736,
+      "result_titles": [
+        "2",
+        "i",
+        "thegidi",
+        "pisasu",
+        "pisasu 2",
+        "pisasu 3",
+        "aadhalal kadhal seiveer",
+        "adhe kangal",
+        "sathuranga vettai",
+        "kanaa"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-104",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.063400008017197,
+      "result_titles": [
+        "i",
+        "thiruvin kural",
+        "the greatest of all time goat",
+        "vetri vizha 2",
+        "vithaikkaaran",
+        "manmatha leelai",
+        "bagheera",
+        "ramam raghavam",
+        "naane varuvean",
+        "demonte colony 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-105",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.978300000308082,
+      "result_titles": [
+        "thoongavanam 2",
+        "thoongaavanam",
+        "i",
+        "kadaram kondan",
+        "hindustani 2",
+        "vishwaroopam 2",
+        "thug life",
+        "indian 2",
+        "vikram",
+        "papanasam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-106",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.7875999819953,
+      "result_titles": [
+        "i",
+        "thuppakki",
+        "the greatest of all time goat",
+        "pushpa the rise tamil dub",
+        "the fly",
+        "baahubali 2 the conclusion",
+        "valimai",
+        "vaazhai",
+        "pariyerum perumal",
+        "gurkha"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-107",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.112399984383956,
+      "result_titles": [
+        "i",
+        "tourist family",
+        "yaadhum oore yaavarum kelir",
+        "tamizh film 2 0",
+        "krishna vrinda vihari tamil dub",
+        "english film",
+        "kathai thiraikathai vasanam directed",
+        "neethaane en ponvasantham",
+        "kalavu thozhirchalai",
+        "pathu thala"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-108",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.748300013598055,
+      "result_titles": [
+        "i",
+        "unnaal ennaal",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "vadakkupatti ramasamy",
+        "vai raja vai",
+        "veeram",
+        "vivegam",
+        "jigarthanda"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-109",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 8.869500015862286,
+      "result_titles": [
+        "sathya",
+        "i",
+        "vaa vaathiyaar",
+        "fire 2025",
+        "baahubali 2 the conclusion",
+        "baby and baby",
+        "baahubali",
+        "kadhalikka neramillai",
+        "idly kadai",
+        "the house next door"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-110",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.103799995500594,
+      "result_titles": [
+        "vaazhai",
+        "i",
+        "kaatu pura",
+        "maamannan",
+        "pariyerum perumal",
+        "karnan",
+        "kathai thiraikathai vasanam directed",
+        "english film",
+        "tamizh film 2 0",
+        "kuttram kuttrame"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-111",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.11640000413172,
+      "result_titles": [
+        "i",
+        "valiyavan",
+        "saravanan irukka bayamaen",
+        "raangi",
+        "ivan veramaathiri",
+        "english film",
+        "jai bhim",
+        "phoenix",
+        "udanpirappe",
+        "tamizh film 2 0"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-112",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.236800007987767,
+      "result_titles": [
+        "i",
+        "varisu",
+        "the greatest of all time goat",
+        "rocketry the nambi effect",
+        "baahubali 2 the conclusion",
+        "pariyerum perumal",
+        "tourist family",
+        "pushpa the rise tamil dub",
+        "oru iyakkunarin kadhal diary",
+        "vaazhai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-113",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.32230000034906,
+      "result_titles": [
+        "i",
+        "vikram",
+        "veera dheera sooran part 2",
+        "chithha",
+        "english film",
+        "sindhubaadh",
+        "pannaiyarum padminiyum",
+        "uriyadi",
+        "uriyadi 2",
+        "yennai arindhaal"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-114",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.234099998138845,
+      "result_titles": [
+        "i",
+        "velaiyilla pattathari 2",
+        "kochadaiiyaan",
+        "english film",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "maaveeran",
+        "game over",
+        "enna solla pogirai",
+        "sembi"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-115",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 10.300900001311675,
+      "result_titles": [
+        "i",
+        "vidaamuyarchi",
+        "baahubali 2 the conclusion",
+        "the greatest of all time goat",
+        "the verdict",
+        "the house next door",
+        "rocketry the nambi effect",
+        "tamizh film 2 0",
+        "the fly",
+        "pushpa the rise tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-116",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.576499996706843,
+      "result_titles": [
+        "i",
+        "vil ambu",
+        "kathai thiraikathai vasanam directed",
+        "farhana",
+        "demonte colony",
+        "uttama villain",
+        "meiyazhagan",
+        "irugapatru",
+        "kaaka muttai",
+        "english film"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-117",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 8.886199997505173,
+      "result_titles": [
+        "viswasam",
+        "i",
+        "veeram",
+        "vivegam",
+        "uriyadi",
+        "english film",
+        "thunivu",
+        "vidaamuyarchi",
+        "arrambam",
+        "uriyadi 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-118",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 10.319799999706447,
+      "result_titles": [
+        "i",
+        "the greatest of all time goat",
+        "pushpa the rise tamil dub",
+        "oru nodi",
+        "chennaiyil oru naal 2",
+        "journey of love 18 tamil dub",
+        "empuraan tamil dub",
+        "eagle tamil dub",
+        "puli joodham tamil dub",
+        "watchman"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 1.0,
+        "precision@5": 0.0,
+        "precision@10": 0.1,
+        "recall@5": 0.0,
+        "recall@10": 1.0,
+        "mrr": 0.1,
+        "ndcg@10": 0.2890648263178878
+      },
+      "error": null
+    },
+    {
+      "id": "v2-119",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 9.157599997706711,
+      "result_titles": [
+        "i",
+        "yaanum theeyavan",
+        "english film",
+        "naai sekar",
+        "naai sekar returns",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "byri",
+        "andhagan",
+        "bruce lee"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-120",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 9.583700011717156,
+      "result_titles": [
+        "i",
+        "onaayum aattukkuttiyum",
+        "english film",
+        "yutham sei",
+        "tamizh film 2 0",
+        "kathai thiraikathai vasanam directed",
+        "pisasu",
+        "thupparivaalan",
+        "oru iyakkunarin kadhal diary",
+        "sivalinga kanchana returns"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.25,
+        "ndcg@10": 0.43067655807339306
+      },
+      "error": null
+    }
+  ]
+}

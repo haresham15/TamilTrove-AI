@@ -1,8 +1,19 @@
 # Python / Backend
 backend/venv/
+backend/.venv/
 backend/__pycache__/
 *.pyc
 .env
+.env.*
+!.env.example
+!**/.env.example
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
 
 # Note: We are explicitly NOT ignoring backend/data/movies_processed.json 
 # and backend/data/embeddings.npy because they are required for deployment.
@@ -11,3 +22,19 @@ backend/__pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Frontend / test output
+frontend/.next/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+
+# Generated local evaluation output (the reviewed baseline stays versioned)
+evaluation/reports/latest.json
+evaluation/reports/api-local.json
+
+# Local observability and load-test output
+infrastructure/load-tests/results/
+
+.pytest_temp/
+.pytest_cache/

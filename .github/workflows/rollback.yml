@@ -1,0 +1,160 @@
+name: Rollback immutable release
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Protected target environment
+        required: true
+        type: choice
+        options: [staging, production]
+      release_sha:
+        description: Full Git commit for the last known-good release
+        required: true
+        type: string
+      backend_image:
+        description: Last known-good backend GHCR reference pinned with @sha256
+        required: true
+        type: string
+      frontend_image:
+        description: Last known-good frontend GHCR reference pinned with @sha256
+        required: true
+        type: string
+      dataset_version:
+        description: Retained compatible dataset version to activate
+        required: true
+        type: string
+      embedding_model:
+        description: Retained compatible embedding model name
+        required: true
+        type: string
+      embedding_model_version:
+        description: Retained compatible embedding model version
+        required: true
+        type: string
+      ranking_version:
+        description: Retained compatible ranking version to activate
+        required: true
+        type: string
+      reason:
+        description: Incident or regression reason, at least 10 characters
+        required: true
+        type: string
+      confirmation:
+        description: Type rollback staging or rollback production
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  rollback:
+    name: Roll back ${{ inputs.environment }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: ${{ inputs.environment }}
+    env:
+      DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      API_BASE_URL: ${{ vars.API_BASE_URL }}
+      WEB_BASE_URL: ${{ vars.WEB_BASE_URL }}
+      TARGET_ENVIRONMENT: ${{ inputs.environment }}
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      BACKEND_IMAGE: ${{ inputs.backend_image }}
+      FRONTEND_IMAGE: ${{ inputs.frontend_image }}
+      DATASET_VERSION: ${{ inputs.dataset_version }}
+      EMBEDDING_MODEL: ${{ inputs.embedding_model }}
+      EMBEDDING_MODEL_VERSION: ${{ inputs.embedding_model_version }}
+      RANKING_VERSION: ${{ inputs.ranking_version }}
+      ROLLBACK_REASON: ${{ inputs.reason }}
+    steps:
+      - name: Validate rollback coordinates and intent
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          repository="${GITHUB_REPOSITORY,,}"
+          if [[ "$CONFIRMATION" != "rollback $TARGET_ENVIRONMENT" ]]; then
+            echo "confirmation text does not match target environment" >&2
+            exit 1
+          fi
+          if [[ ! "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]] || (( ${#ROLLBACK_REASON} < 10 )); then
+            echo "rollback requires a full release SHA and meaningful reason" >&2
+            exit 1
+          fi
+          if [[ ! "$BACKEND_IMAGE" =~ ^ghcr.io/${repository}/backend@sha256:[0-9a-f]{64}$ ]]; then
+            echo "backend image must be an immutable digest from this repository" >&2
+            exit 1
+          fi
+          if [[ ! "$FRONTEND_IMAGE" =~ ^ghcr.io/${repository}/frontend@sha256:[0-9a-f]{64}$ ]]; then
+            echo "frontend image must be an immutable digest from this repository" >&2
+            exit 1
+          fi
+          if [[ -z "$DATASET_VERSION" || -z "$EMBEDDING_MODEL" || -z "$EMBEDDING_MODEL_VERSION" || -z "$RANKING_VERSION" ]]; then
+            echo "dataset, embedding-model, and ranking versions are required" >&2
+            exit 1
+          fi
+          if [[ ! "$API_BASE_URL" =~ ^https://[^[:space:]]+$ ]]; then
+            echo "environment variable API_BASE_URL must be HTTPS" >&2
+            exit 1
+          fi
+
+      - name: Check out rollback client
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.release_sha }}
+          persist-credentials: false
+
+      - name: Authenticate to GHCR
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$REGISTRY_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Verify rollback images and revisions
+        run: |
+          docker pull "$BACKEND_IMAGE"
+          docker pull "$FRONTEND_IMAGE"
+          backend_revision="$(docker image inspect "$BACKEND_IMAGE" --format '{{index .Config.Labels "org.opencontainers.image.revision"}}')"
+          frontend_revision="$(docker image inspect "$FRONTEND_IMAGE" --format '{{index .Config.Labels "org.opencontainers.image.revision"}}')"
+          if [[ "$backend_revision" != "$RELEASE_SHA" || "$frontend_revision" != "$RELEASE_SHA" ]]; then
+            echo "rollback image revision labels do not match release_sha" >&2
+            exit 1
+          fi
+
+      - name: Request immutable rollback
+        run: |
+          python infrastructure/scripts/deployment_webhook.py \
+            --action rollback \
+            --environment "$TARGET_ENVIRONMENT" \
+            --release-id "$RELEASE_SHA" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE" \
+            --dataset-version "$DATASET_VERSION" \
+            --embedding-model "$EMBEDDING_MODEL" \
+            --embedding-model-version "$EMBEDDING_MODEL_VERSION" \
+            --ranking-version "$RANKING_VERSION" \
+            --reason "$ROLLBACK_REASON"
+
+      - name: Verify rollback
+        run: |
+          arguments=(--api-url "$API_BASE_URL" --ready-timeout 180)
+          if [[ -n "$WEB_BASE_URL" ]]; then arguments+=(--web-url "$WEB_BASE_URL"); fi
+          arguments+=(--expected-ranking-version "$RANKING_VERSION")
+          python infrastructure/scripts/smoke.py "${arguments[@]}"
+          output="evaluation/reports/rollback-${TARGET_ENVIRONMENT}.json"
+          python evaluation/scripts/evaluate.py --api-url "$API_BASE_URL" --output "$output"
+          python evaluation/scripts/release_gate.py "$output"
+
+      - name: Upload rollback evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rollback-${{ inputs.environment }}-${{ inputs.release_sha }}
+          path: evaluation/reports/rollback-${{ inputs.environment }}.json
+          if-no-files-found: warn
+          retention-days: 90

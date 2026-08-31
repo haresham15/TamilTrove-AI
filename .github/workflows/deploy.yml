@@ -1,0 +1,176 @@
+name: Deploy immutable release
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Protected target environment
+        required: true
+        type: choice
+        options: [staging, production]
+      release_sha:
+        description: Full 40-character commit from a published release manifest
+        required: true
+        type: string
+      backend_image:
+        description: Backend GHCR reference pinned with @sha256 from that manifest
+        required: true
+        type: string
+      frontend_image:
+        description: Frontend GHCR reference pinned with @sha256 from that manifest
+        required: true
+        type: string
+      dataset_version:
+        description: Existing compatible canonical dataset version
+        required: true
+        type: string
+      embedding_model:
+        description: Embedding model name recorded in the release manifest
+        required: true
+        type: string
+      embedding_model_version:
+        description: Embedding model version recorded in the release manifest
+        required: true
+        type: string
+      ranking_version:
+        description: Existing compatible ranking configuration version
+        required: true
+        type: string
+      apply_migration:
+        description: Request the allowlisted backward-compatible migration first
+        required: true
+        default: true
+        type: boolean
+      confirmation:
+        description: Type deploy staging or deploy production
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.environment }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    environment: ${{ inputs.environment }}
+    env:
+      DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      API_BASE_URL: ${{ vars.API_BASE_URL }}
+      WEB_BASE_URL: ${{ vars.WEB_BASE_URL }}
+      TARGET_ENVIRONMENT: ${{ inputs.environment }}
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      BACKEND_IMAGE: ${{ inputs.backend_image }}
+      FRONTEND_IMAGE: ${{ inputs.frontend_image }}
+      DATASET_VERSION: ${{ inputs.dataset_version }}
+      EMBEDDING_MODEL: ${{ inputs.embedding_model }}
+      EMBEDDING_MODEL_VERSION: ${{ inputs.embedding_model_version }}
+      RANKING_VERSION: ${{ inputs.ranking_version }}
+    steps:
+      - name: Validate operator intent
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          repository="${GITHUB_REPOSITORY,,}"
+          if [[ "$CONFIRMATION" != "deploy $TARGET_ENVIRONMENT" ]]; then
+            echo "confirmation text does not match target environment" >&2
+            exit 1
+          fi
+          if [[ ! "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "release_sha must be a full lowercase Git commit" >&2
+            exit 1
+          fi
+          if [[ ! "$BACKEND_IMAGE" =~ ^ghcr.io/${repository}/backend@sha256:[0-9a-f]{64}$ ]]; then
+            echo "backend image must be an immutable digest from this repository" >&2
+            exit 1
+          fi
+          if [[ ! "$FRONTEND_IMAGE" =~ ^ghcr.io/${repository}/frontend@sha256:[0-9a-f]{64}$ ]]; then
+            echo "frontend image must be an immutable digest from this repository" >&2
+            exit 1
+          fi
+          if [[ -z "$DATASET_VERSION" || -z "$EMBEDDING_MODEL" || -z "$EMBEDDING_MODEL_VERSION" || -z "$RANKING_VERSION" ]]; then
+            echo "dataset, embedding-model, and ranking versions are required" >&2
+            exit 1
+          fi
+          if [[ ! "$API_BASE_URL" =~ ^https://[^[:space:]]+$ ]]; then
+            echo "environment variable API_BASE_URL must be HTTPS" >&2
+            exit 1
+          fi
+
+      - name: Check out released source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.release_sha }}
+          persist-credentials: false
+
+      - name: Authenticate to GHCR
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$REGISTRY_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Verify published image digests are pullable
+        run: |
+          docker pull "$BACKEND_IMAGE"
+          docker pull "$FRONTEND_IMAGE"
+          backend_revision="$(docker image inspect "$BACKEND_IMAGE" --format '{{index .Config.Labels "org.opencontainers.image.revision"}}')"
+          frontend_revision="$(docker image inspect "$FRONTEND_IMAGE" --format '{{index .Config.Labels "org.opencontainers.image.revision"}}')"
+          if [[ "$backend_revision" != "$RELEASE_SHA" || "$frontend_revision" != "$RELEASE_SHA" ]]; then
+            echo "image revision labels do not match release_sha" >&2
+            exit 1
+          fi
+
+      - name: Apply backward-compatible migration
+        if: inputs.apply_migration
+        run: |
+          python infrastructure/scripts/deployment_webhook.py \
+            --action migrate \
+            --environment "$TARGET_ENVIRONMENT" \
+            --release-id "$RELEASE_SHA" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE" \
+            --migration-id 001_v2_schema \
+            --reason "approved release migration"
+
+      - name: Deploy immutable images
+        run: |
+          python infrastructure/scripts/deployment_webhook.py \
+            --action deploy \
+            --environment "$TARGET_ENVIRONMENT" \
+            --release-id "$RELEASE_SHA" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE" \
+            --migration-id 001_v2_schema \
+            --dataset-version "$DATASET_VERSION" \
+            --embedding-model "$EMBEDDING_MODEL" \
+            --embedding-model-version "$EMBEDDING_MODEL_VERSION" \
+            --ranking-version "$RANKING_VERSION" \
+            --reason "approved $TARGET_ENVIRONMENT deployment"
+
+      - name: Smoke test deployment
+        run: |
+          arguments=(--api-url "$API_BASE_URL" --ready-timeout 180)
+          if [[ -n "$WEB_BASE_URL" ]]; then arguments+=(--web-url "$WEB_BASE_URL"); fi
+          arguments+=(--expected-ranking-version "$RANKING_VERSION")
+          python infrastructure/scripts/smoke.py "${arguments[@]}"
+
+      - name: Run live relevance gate
+        run: |
+          output="evaluation/reports/api-${TARGET_ENVIRONMENT}.json"
+          python evaluation/scripts/evaluate.py --api-url "$API_BASE_URL" --output "$output"
+          python evaluation/scripts/release_gate.py "$output"
+
+      - name: Upload deployment evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: deployment-${{ inputs.environment }}-${{ inputs.release_sha }}
+          path: evaluation/reports/api-${{ inputs.environment }}.json
+          if-no-files-found: warn
+          retention-days: 90

@@ -1,0 +1,5 @@
+# Optional transformer runtime. The default image uses the deterministic,
+# dependency-light multilingual character index.
+-r requirements.txt
+
+sentence-transformers==6.0.0

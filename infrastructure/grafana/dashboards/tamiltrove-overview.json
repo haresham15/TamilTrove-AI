@@ -1,0 +1,56 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 1,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "API requests / second",
+      "targets": [{"expr": "sum(rate(tamiltrove_http_requests_total[5m]))", "legendFormat": "requests/s"}],
+      "gridPos": {"h": 7, "w": 6, "x": 0, "y": 0}
+    },
+    {
+      "type": "stat",
+      "title": "5xx error rate",
+      "targets": [{"expr": "sum(rate(tamiltrove_http_requests_total{status=~\"5..\"}[5m])) / clamp_min(sum(rate(tamiltrove_http_requests_total[5m])), 1)", "legendFormat": "error ratio"}],
+      "fieldConfig": {"defaults": {"unit": "percentunit"}},
+      "gridPos": {"h": 7, "w": 6, "x": 6, "y": 0}
+    },
+    {
+      "type": "stat",
+      "title": "Search p95 latency",
+      "targets": [{"expr": "histogram_quantile(0.95, sum by (le) (rate(tamiltrove_search_duration_seconds_bucket[10m])))", "legendFormat": "p95"}],
+      "fieldConfig": {"defaults": {"unit": "s"}},
+      "gridPos": {"h": 7, "w": 6, "x": 12, "y": 0}
+    },
+    {
+      "type": "stat",
+      "title": "Zero-result rate",
+      "targets": [{"expr": "sum(rate(tamiltrove_search_zero_results_total[15m])) / clamp_min(sum(rate(tamiltrove_search_requests_total[15m])), 1)", "legendFormat": "zero-result ratio"}],
+      "fieldConfig": {"defaults": {"unit": "percentunit"}},
+      "gridPos": {"h": 7, "w": 6, "x": 18, "y": 0}
+    },
+    {
+      "type": "timeseries",
+      "title": "Request duration by route",
+      "targets": [{"expr": "histogram_quantile(0.95, sum by (le, route) (rate(tamiltrove_http_request_duration_seconds_bucket[5m])))", "legendFormat": "{{route}}"}],
+      "fieldConfig": {"defaults": {"unit": "s"}},
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 7}
+    },
+    {
+      "type": "timeseries",
+      "title": "Interactions",
+      "targets": [{"expr": "sum by (type) (rate(tamiltrove_interactions_total[15m]))", "legendFormat": "{{type}}"}],
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 7}
+    }
+  ],
+  "schemaVersion": 41,
+  "tags": ["tamiltrove", "v2"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "TamilTrove V2 overview",
+  "uid": "tamiltrove-v2",
+  "version": 1
+}

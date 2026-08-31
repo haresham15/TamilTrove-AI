@@ -1,0 +1,262 @@
+name: Publish V2 release candidate
+
+on:
+  workflow_run:
+    workflows: [V2 quality gates]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Full commit SHA to publish; defaults to the selected branch commit
+        required: false
+        type: string
+
+concurrency:
+  group: release-${{ github.event.workflow_run.head_sha || inputs.release_sha || github.sha }}
+  cancel-in-progress: false
+
+permissions:
+  actions: read
+  contents: read
+  packages: write
+
+env:
+  PYTHON_VERSION: "3.12"
+  RELEASE_SHA: ${{ github.event.workflow_run.head_sha || inputs.release_sha || github.sha }}
+
+jobs:
+  publish:
+    name: Build and publish immutable images
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    outputs:
+      release_sha: ${{ steps.release.outputs.release_sha }}
+      backend_image: ${{ steps.images.outputs.backend_image }}
+      frontend_image: ${{ steps.images.outputs.frontend_image }}
+    steps:
+      - name: Validate release coordinates
+        id: release
+        env:
+          PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+          DATASET_VERSION: ${{ vars.TAMILTROVE_DATASET_VERSION }}
+          EMBEDDING_MODEL: ${{ vars.TAMILTROVE_MODEL_NAME }}
+          EMBEDDING_MODEL_VERSION: ${{ vars.TAMILTROVE_MODEL_VERSION }}
+          RANKING_VERSION: ${{ vars.TAMILTROVE_RANKING_VERSION }}
+        run: |
+          if [[ ! "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "release_sha must be a full lowercase Git commit" >&2
+            exit 1
+          fi
+          if [[ ! "$PUBLIC_API_URL" =~ ^https://[^[:space:]]+$ ]]; then
+            echo "Repository variable NEXT_PUBLIC_API_URL must be an HTTPS origin" >&2
+            exit 1
+          fi
+          if [[ -z "$DATASET_VERSION" || -z "$EMBEDDING_MODEL" || -z "$EMBEDDING_MODEL_VERSION" || -z "$RANKING_VERSION" ]]; then
+            echo "Repository dataset, embedding-model, and ranking version variables are required" >&2
+            exit 1
+          fi
+          echo "release_sha=$RELEASE_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Check out release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify release commit belongs to main
+        run: |
+          if ! git merge-base --is-ancestor "$RELEASE_SHA" origin/main; then
+            echo "release_sha must identify a commit on the repository main branch" >&2
+            exit 1
+          fi
+
+      - name: Verify quality gates for manual publication
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          successful_runs="$(gh api --method GET \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs" \
+            -f head_sha="$RELEASE_SHA" \
+            -f branch=main \
+            -f event=push \
+            -f status=success \
+            --jq '.total_count')"
+          if [[ "$successful_runs" -lt 1 ]]; then
+            echo "manual publication requires a successful main-branch V2 quality-gates run for release_sha" >&2
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Re-run release relevance gate
+        run: |
+          python evaluation/scripts/validate_dataset.py
+          python evaluation/scripts/evaluate.py --output evaluation/reports/release.json
+          python evaluation/scripts/release_gate.py evaluation/reports/release.json
+
+      - name: Authenticate to GHCR
+        env:
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$REGISTRY_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+
+      - name: Build and push commit-addressed images
+        id: images
+        env:
+          PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+          DATASET_VERSION: ${{ vars.TAMILTROVE_DATASET_VERSION }}
+          EMBEDDING_MODEL: ${{ vars.TAMILTROVE_MODEL_NAME }}
+          EMBEDDING_MODEL_VERSION: ${{ vars.TAMILTROVE_MODEL_VERSION }}
+          RANKING_VERSION: ${{ vars.TAMILTROVE_RANKING_VERSION }}
+        run: |
+          repository="${GITHUB_REPOSITORY,,}"
+          backend_tag="ghcr.io/${repository}/backend:${RELEASE_SHA}"
+          frontend_tag="ghcr.io/${repository}/frontend:${RELEASE_SHA}"
+
+          docker build \
+            --label "org.opencontainers.image.revision=${RELEASE_SHA}" \
+            --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}" \
+            --tag "$backend_tag" backend
+          docker build \
+            --build-arg "NEXT_PUBLIC_API_URL=${PUBLIC_API_URL}" \
+            --label "org.opencontainers.image.revision=${RELEASE_SHA}" \
+            --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}" \
+            --tag "$frontend_tag" frontend
+
+          docker push "$backend_tag"
+          docker push "$frontend_tag"
+          docker pull "$backend_tag"
+          docker pull "$frontend_tag"
+
+          backend_image="$(docker image inspect "$backend_tag" --format '{{index .RepoDigests 0}}')"
+          frontend_image="$(docker image inspect "$frontend_tag" --format '{{index .RepoDigests 0}}')"
+          if [[ ! "$backend_image" =~ @sha256:[0-9a-f]{64}$ ]] || [[ ! "$frontend_image" =~ @sha256:[0-9a-f]{64}$ ]]; then
+            echo "Registry did not return immutable image digests" >&2
+            exit 1
+          fi
+          echo "backend_image=$backend_image" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=$frontend_image" >> "$GITHUB_OUTPUT"
+
+          jq -n \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg backend_image "$backend_image" \
+            --arg frontend_image "$frontend_image" \
+            --arg public_api_url "$PUBLIC_API_URL" \
+            --arg dataset_version "$DATASET_VERSION" \
+            --arg migration_id "001_v2_schema" \
+            --arg embedding_model "$EMBEDDING_MODEL" \
+            --arg embedding_model_version "$EMBEDDING_MODEL_VERSION" \
+            --arg ranking_version "$RANKING_VERSION" \
+            '{schema_version:2,release_sha:$release_sha,backend_image:$backend_image,frontend_image:$frontend_image,public_api_url:$public_api_url,migration_id:$migration_id,dataset_version:$dataset_version,embedding_model:$embedding_model,embedding_model_version:$embedding_model_version,ranking_version:$ranking_version}' \
+            > release-manifest.json
+
+      - name: Upload release evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-${{ env.RELEASE_SHA }}
+          path: |
+            release-manifest.json
+            evaluation/reports/release.json
+          if-no-files-found: error
+          retention-days: 90
+
+  staging:
+    name: Deploy and verify staging
+    needs: publish
+    if: vars.STAGING_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    environment: staging
+    permissions:
+      contents: read
+    env:
+      DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      API_BASE_URL: ${{ vars.API_BASE_URL }}
+      WEB_BASE_URL: ${{ vars.WEB_BASE_URL }}
+      DATASET_VERSION: ${{ vars.TAMILTROVE_DATASET_VERSION }}
+      EMBEDDING_MODEL: ${{ vars.TAMILTROVE_MODEL_NAME }}
+      EMBEDDING_MODEL_VERSION: ${{ vars.TAMILTROVE_MODEL_VERSION }}
+      RANKING_VERSION: ${{ vars.TAMILTROVE_RANKING_VERSION }}
+    steps:
+      - name: Check out released source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.publish.outputs.release_sha }}
+          persist-credentials: false
+
+      - name: Validate staging configuration
+        run: |
+          if [[ ! "$API_BASE_URL" =~ ^https://[^[:space:]]+$ ]]; then
+            echo "staging variable API_BASE_URL must be HTTPS" >&2
+            exit 1
+          fi
+          if [[ -z "$DATASET_VERSION" || -z "$EMBEDDING_MODEL" || -z "$EMBEDDING_MODEL_VERSION" || -z "$RANKING_VERSION" ]]; then
+            echo "staging dataset, embedding-model, and ranking version variables are required" >&2
+            exit 1
+          fi
+
+      - name: Apply backward-compatible migration
+        env:
+          RELEASE_SHA: ${{ needs.publish.outputs.release_sha }}
+          BACKEND_IMAGE: ${{ needs.publish.outputs.backend_image }}
+          FRONTEND_IMAGE: ${{ needs.publish.outputs.frontend_image }}
+        run: |
+          python infrastructure/scripts/deployment_webhook.py \
+            --action migrate \
+            --environment staging \
+            --release-id "$RELEASE_SHA" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE" \
+            --migration-id 001_v2_schema \
+            --reason "main branch release migration"
+
+      - name: Deploy immutable release
+        env:
+          RELEASE_SHA: ${{ needs.publish.outputs.release_sha }}
+          BACKEND_IMAGE: ${{ needs.publish.outputs.backend_image }}
+          FRONTEND_IMAGE: ${{ needs.publish.outputs.frontend_image }}
+        run: |
+          python infrastructure/scripts/deployment_webhook.py \
+            --action deploy \
+            --environment staging \
+            --release-id "$RELEASE_SHA" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE" \
+            --migration-id 001_v2_schema \
+            --dataset-version "$DATASET_VERSION" \
+            --embedding-model "$EMBEDDING_MODEL" \
+            --embedding-model-version "$EMBEDDING_MODEL_VERSION" \
+            --ranking-version "$RANKING_VERSION" \
+            --reason "verified main branch release"
+
+      - name: Smoke test staging
+        run: |
+          arguments=(--api-url "$API_BASE_URL" --ready-timeout 180)
+          if [[ -n "$WEB_BASE_URL" ]]; then arguments+=(--web-url "$WEB_BASE_URL"); fi
+          arguments+=(--expected-ranking-version "$RANKING_VERSION")
+          python infrastructure/scripts/smoke.py "${arguments[@]}"
+
+      - name: Run live staging relevance gate
+        run: |
+          python evaluation/scripts/evaluate.py --api-url "$API_BASE_URL" --output evaluation/reports/api-staging.json
+          python evaluation/scripts/release_gate.py evaluation/reports/api-staging.json
+
+      - name: Upload staging evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: staging-evidence-${{ needs.publish.outputs.release_sha }}
+          path: evaluation/reports/api-staging.json
+          if-no-files-found: warn
+          retention-days: 90

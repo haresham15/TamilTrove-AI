@@ -1,0 +1,3812 @@
+{
+  "dataset_version": "2.0.0",
+  "mode": "live_api",
+  "query_count": 120,
+  "experiment": {
+    "code_commit": "86023a7b21406fc13ce7cdf07f1ba57bbb49de8a",
+    "recorded_at": "2026-08-31T13:36:23.572363+00:00",
+    "embedding_model": "api-configured",
+    "ranking_version": "api-response",
+    "ranking_weights": "configured by API",
+    "runtime_seconds": 18.25622929999372,
+    "peak_traced_memory_mb": 0.4394998550415039,
+    "runtime": "Python 3.13.3 on Windows-11-10.0.26200-SP0"
+  },
+  "metrics": {
+    "hit@1": 0.8083333333333333,
+    "hit@5": 0.975,
+    "hit@10": 0.975,
+    "precision@5": 0.195,
+    "precision@10": 0.0975,
+    "recall@5": 0.975,
+    "recall@10": 0.975,
+    "mrr": 0.8822222222222221,
+    "ndcg@10": 0.9059989113102912,
+    "catalog_coverage_count": 486,
+    "result_diversity": 0.405,
+    "zero_result_rate": 0.0,
+    "error_rate": 0.0,
+    "latency_ms": {
+      "p50": 148.8077000103658,
+      "p95": 180.13294501724886,
+      "p99": 218.99301500554435,
+      "mean": 151.59539750044738
+    }
+  },
+  "slices": {
+    "language": {
+      "en": {
+        "hit@1": 0.825,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.8966666666666667,
+        "ndcg@10": 0.9227642955380093,
+        "catalog_coverage_count": 282,
+        "result_diversity": 0.705,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 144.6486500208266,
+          "p95": 179.46965499868384,
+          "p99": 187.814561012201,
+          "mean": 147.4330175034993
+        }
+      },
+      "ta": {
+        "hit@1": 0.725,
+        "hit@5": 0.925,
+        "hit@10": 0.925,
+        "precision@5": 0.185,
+        "precision@10": 0.0925,
+        "recall@5": 0.925,
+        "recall@10": 0.925,
+        "mrr": 0.8166666666666667,
+        "ndcg@10": 0.8446394630357187,
+        "catalog_coverage_count": 235,
+        "result_diversity": 0.5875,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 147.94339999207295,
+          "p95": 180.17202001647092,
+          "p99": 208.20652399706884,
+          "mean": 151.94550499945763
+        }
+      },
+      "tanglish": {
+        "hit@1": 0.875,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.9333333333333333,
+        "ndcg@10": 0.9505929753571458,
+        "catalog_coverage_count": 252,
+        "result_diversity": 0.63,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 154.87230000144336,
+          "p95": 177.23955999827007,
+          "p99": 226.17327301093607,
+          "mean": 155.40766999838524
+        }
+      }
+    },
+    "category": {
+      "actor_director_lookup": {
+        "hit@1": 0.8,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.8866666666666667,
+        "ndcg@10": 0.9155715139301034,
+        "catalog_coverage_count": 338,
+        "result_diversity": 0.5633333333333334,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 146.25484999851324,
+          "p95": 171.04136999550974,
+          "p99": 196.64876499620718,
+          "mean": 148.4405549999792
+        }
+      },
+      "hidden_gem": {
+        "hit@1": 0.7857142857142857,
+        "hit@5": 0.9285714285714286,
+        "hit@10": 0.9285714285714286,
+        "precision@5": 0.18571428571428572,
+        "precision@10": 0.09285714285714286,
+        "recall@5": 0.9285714285714286,
+        "recall@10": 0.9285714285714286,
+        "mrr": 0.8452380952380952,
+        "ndcg@10": 0.8664949823979613,
+        "catalog_coverage_count": 94,
+        "result_diversity": 0.6714285714285714,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 147.4257999943802,
+          "p95": 175.802480004495,
+          "p99": 179.11113601527177,
+          "mean": 151.07275714607178
+        }
+      },
+      "mixed_plot_description": {
+        "hit@1": 0.85,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.925,
+        "ndcg@10": 0.9446394630357187,
+        "catalog_coverage_count": 150,
+        "result_diversity": 0.75,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 158.58529999968596,
+          "p95": 202.7600650166278,
+          "p99": 234.5351330089033,
+          "mean": 161.1738149978919
+        }
+      },
+      "plot_description": {
+        "hit@1": 0.9,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.95,
+        "ndcg@10": 0.9630929753571458,
+        "catalog_coverage_count": 165,
+        "result_diversity": 0.825,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 145.23945000837557,
+          "p95": 184.157705004327,
+          "p99": 189.12058101501316,
+          "mean": 152.01825000403915
+        }
+      },
+      "structured_constraints": {
+        "hit@1": 0.5,
+        "hit@5": 0.6666666666666666,
+        "hit@10": 0.6666666666666666,
+        "precision@5": 0.13333333333333333,
+        "precision@10": 0.06666666666666667,
+        "recall@5": 0.6666666666666666,
+        "recall@10": 0.6666666666666666,
+        "mrr": 0.5555555555555556,
+        "ndcg@10": 0.5833333333333334,
+        "catalog_coverage_count": 52,
+        "result_diversity": 0.8666666666666667,
+        "zero_result_rate": 0.0,
+        "error_rate": 0.0,
+        "latency_ms": {
+          "p50": 145.08844999363646,
+          "p95": 180.1955249902676,
+          "p99": 183.72926498850575,
+          "mean": 151.02574999521798
+        }
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "v2-001",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 190.3613000176847,
+      "result_titles": [
+        "100",
+        "thuppakki munai",
+        "adanga maru",
+        "raatchasan",
+        "vikram",
+        "iru mugan",
+        "k 13",
+        "dev",
+        "captain",
+        "pattathu arasan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-002",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 141.5205000084825,
+      "result_titles": [
+        "36 vayadhinile",
+        "thaai manasu",
+        "udanpirappe",
+        "raayan",
+        "magalir mattum",
+        "nandhan",
+        "velan",
+        "varisu",
+        "tourist family",
+        "lucky baskhar"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-003",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 141.81749999988824,
+      "result_titles": [
+        "90 ml",
+        "tamizh film 2 0",
+        "100 kadhal",
+        "moodar koodam",
+        "kootathil oruthan",
+        "devi 2",
+        "good night",
+        "pannaiyarum padminiyum",
+        "kalavani 2",
+        "sixer"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-004",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 165.6045000127051,
+      "result_titles": [
+        "aadukalam",
+        "iravukku aayiram kangal",
+        "gangs of madras",
+        "good bad ugly",
+        "naachiyaar",
+        "mission chapter 1",
+        "ayngaran",
+        "mission",
+        "madras",
+        "bigil"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-005",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 151.5763999777846,
+      "result_titles": [
+        "super deluxe",
+        "aaranya kaandam 2",
+        "andhagan",
+        "nagarvalam",
+        "siren",
+        "maayakoothu",
+        "kaaka muttai",
+        "oho enthan baby",
+        "jailer",
+        "ghosty"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-006",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 142.06140002352186,
+      "result_titles": [
+        "bhoomi",
+        "acp shiva",
+        "lucky baskhar",
+        "maari 2",
+        "the fly",
+        "agni devi",
+        "neeya 2",
+        "mission",
+        "kadugu",
+        "chennai 600028 second innings"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-007",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 165.84999999031425,
+      "result_titles": [
+        "aghathiyaa",
+        "thupparivaalan",
+        "bhaagamathie",
+        "thappu thanda",
+        "neethaane en ponvasantham",
+        "black",
+        "achcham yenbadhu madamaiyada",
+        "aranmanai 2",
+        "rudra thandavam",
+        "vaayai moodi pesavum"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-008",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 141.95680001284927,
+      "result_titles": [
+        "kanaa",
+        "anbulla ghilli",
+        "ambajipeta marriage band tamil dub",
+        "kottukkaali",
+        "thalaikoothal",
+        "clap",
+        "thiri",
+        "kombu vatcha singam",
+        "petta",
+        "eeswaran"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-009",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 140.80739999189973,
+      "result_titles": [
+        "aneethi",
+        "madraskaaran",
+        "vanamagan",
+        "good bad ugly",
+        "kombu vatcha singam",
+        "irumbu thirai",
+        "sivaranjiniyum innum sila pengalum",
+        "pichaikkaran 2",
+        "kodiveeran",
+        "thamizh desam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-010",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 143.0648999812547,
+      "result_titles": [
+        "annapoorani",
+        "oru mugathirai",
+        "enakkul oruvan",
+        "thaai manasu",
+        "coffee with kadhal",
+        "aandavan kattalai",
+        "velan",
+        "sila nerangalil sila manithargal",
+        "ok kanmani",
+        "clap"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-011",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 135.04560000728816,
+      "result_titles": [
+        "arrambam",
+        "veeram",
+        "nerkonda paarvai",
+        "mankatha",
+        "viswasam",
+        "nesippaya",
+        "good bad ugly",
+        "valimai",
+        "uriyadi",
+        "pannaiyarum padminiyum"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-012",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 133.80660000257194,
+      "result_titles": [
+        "ayalaan",
+        "ethir neechal",
+        "rajini murugan",
+        "seema raja",
+        "amaran",
+        "odu raja odu",
+        "sk23",
+        "kanaa",
+        "bhoomi",
+        "indru netru naalai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-013",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 155.25769998203032,
+      "result_titles": [
+        "bagheera",
+        "por",
+        "raatchasan",
+        "chakra",
+        "por thozhil",
+        "iraivi",
+        "comali",
+        "magalir mattum",
+        "lkg",
+        "valimai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-014",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 153.34919997258112,
+      "result_titles": [
+        "bayama irukku",
+        "ghajinikanth",
+        "vithaikkaaran",
+        "enakku vaaitha adimaigal",
+        "podhuvaga en manasu thangam",
+        "kazhuvethi moorkkan",
+        "hara hara mahadevaki",
+        "naai sekar returns",
+        "english film",
+        "adhagappattathu magajanangalay"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-015",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 135.1004999887664,
+      "result_titles": [
+        "bigil",
+        "sarkar",
+        "theri",
+        "yaman",
+        "mersal",
+        "uriyadi",
+        "uriyadi 2",
+        "mission",
+        "yennai arindhaal",
+        "bairavaa"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-016",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 150.66829998977482,
+      "result_titles": [
+        "bogan",
+        "naachiyaar",
+        "annadurai",
+        "vanamagan",
+        "solo",
+        "selfie",
+        "rum",
+        "maayavan",
+        "jackpot",
+        "sangili bungili kadhava thorae"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-017",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 130.31900001806207,
+      "result_titles": [
+        "bottle radha",
+        "joker",
+        "thoongaavanam",
+        "kaala",
+        "aaranya kaandam 2",
+        "thoongavanam 2",
+        "sarpatta parambarai",
+        "thangalaan",
+        "petta",
+        "blue star"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-018",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 135.98700001602992,
+      "result_titles": [
+        "byri",
+        "maayavan",
+        "agni devi",
+        "kadugu",
+        "neeya 2",
+        "iravukku aayiram kangal",
+        "chennai 600028 second innings",
+        "neram",
+        "maari 2",
+        "raatchasi"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-019",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 144.28860001498833,
+      "result_titles": [
+        "chakra",
+        "neeya 2",
+        "baahubali 2 the conclusion",
+        "bayama irukku",
+        "dhilluku dhuddu 2",
+        "kolaigaran",
+        "irumbu thirai",
+        "devi 2",
+        "house owner",
+        "maharaja"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-020",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 154.9352000001818,
+      "result_titles": [
+        "chennai city gangsters",
+        "gatta kusthi",
+        "indru netru naalai",
+        "saani kaayidham",
+        "carbon",
+        "desingu raja 2",
+        "madha gaja raja",
+        "oho enthan baby",
+        "vennila kabaddi kuzhu 2",
+        "jeeva"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-021",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 154.928200005088,
+      "result_titles": [
+        "coffee with kadhal",
+        "theeya velai seiyyanum kumaru",
+        "vantha rajavathaan varuven",
+        "tamizh film 2 0",
+        "aranmanai 2",
+        "madha gaja raja",
+        "100 kadhal",
+        "varuthapadatha valibar sangam",
+        "kalakalappu",
+        "sixer"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-022",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 139.46629999554716,
+      "result_titles": [
+        "darling",
+        "masss",
+        "aranmanai 2",
+        "idiot",
+        "devi 2",
+        "bayama irukku",
+        "mercury",
+        "kaatteri",
+        "aranmanai 4",
+        "katteri"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-023",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 160.69299998343922,
+      "result_titles": [
+        "demonte colony",
+        "demonte colony 2",
+        "masss",
+        "imaikkaa nodigal",
+        "boomika",
+        "d block",
+        "pizza",
+        "mercury",
+        "siren",
+        "karungaapiyam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-024",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 135.34199999412522,
+      "result_titles": [
+        "thookudurai",
+        "yaanai mugathaan",
+        "aranmanai 4",
+        "nagarvalam",
+        "kaaka muttai",
+        "kundakka mandakka",
+        "demonte colony",
+        "siren",
+        "ghosty",
+        "tourist family"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-025",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 156.392999982927,
+      "result_titles": [
+        "diary",
+        "deiva thirumagal",
+        "neethaane en ponvasantham",
+        "8 thottakkal",
+        "mugizh",
+        "chennai 600028 second innings",
+        "thoongaavanam",
+        "kallapart",
+        "dharmadurai",
+        "vaigai express"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-026",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 133.22499999776483,
+      "result_titles": [
+        "dream factory",
+        "byri",
+        "kanaa",
+        "cuckoo",
+        "meiyazhagan",
+        "idly kadai",
+        "erumbu",
+        "chithha",
+        "ennai vittu pogaathe",
+        "kombu vatcha singam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-027",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 156.09150001546368,
+      "result_titles": [
+        "enai noki paayum thota",
+        "achcham yenbadhu madamaiyada",
+        "selfie",
+        "power paandi",
+        "asuran",
+        "rudra thandavam",
+        "maari 2",
+        "rangoon",
+        "raayan",
+        "yennai arindhaal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-028",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 162.73529999307357,
+      "result_titles": [
+        "english film",
+        "rum",
+        "tamizh film 2 0",
+        "idiot",
+        "adhagappattathu magajanangalay",
+        "ghosty",
+        "katteri",
+        "mohini",
+        "dhilluku dhuddu 2",
+        "iruttu araiyil murattu kuthu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-029",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 171.03349999524653,
+      "result_titles": [
+        "ethir neechal",
+        "ayalaan",
+        "rajini murugan",
+        "seema raja",
+        "prince",
+        "odu raja odu",
+        "amaran",
+        "varuthapadatha valibar sangam",
+        "garudan",
+        "sk23"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-030",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 163.07290000258945,
+      "result_titles": [
+        "game over",
+        "mahanati",
+        "thanne vandi",
+        "thaai manasu",
+        "mankatha",
+        "sembi",
+        "mehandi circus",
+        "raangi",
+        "pannaiyarum padminiyum",
+        "kanchana 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-031",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 167.99270000774413,
+      "result_titles": [
+        "ghajinikanth",
+        "ayogya",
+        "kuppathu raja",
+        "vantha rajavathaan varuven",
+        "thalli pogathey",
+        "idiot",
+        "baahubali",
+        "u turn",
+        "bayama irukku",
+        "sathya"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-032",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 147.25130001897924,
+      "result_titles": [
+        "good luck sakhi tamil dub",
+        "maamannan",
+        "raghu thatha",
+        "saani kaayidham",
+        "thaanaa serndha koottam",
+        "siren",
+        "oru kidayin karunai manu",
+        "paambhu sattai",
+        "kanaa",
+        "annaatthe"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-033",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 170.68290000315756,
+      "result_titles": [
+        "house owner",
+        "ammani",
+        "aramm",
+        "brindavanam",
+        "lens",
+        "thaai manasu",
+        "kottukkaali",
+        "komban",
+        "aruvi",
+        "kadugu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-034",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 167.1904000104405,
+      "result_titles": [
+        "inayathalam",
+        "brindavanam",
+        "anbulla ghilli",
+        "ennodu vilayadu",
+        "oru mugathirai",
+        "mehandi circus",
+        "kanne kalaimaane 2",
+        "kathanayagan",
+        "udanpirappe",
+        "aramm"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-035",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 146.34019997902215,
+      "result_titles": [
+        "irandam ulagam",
+        "naane varuvean",
+        "saani kaayidham",
+        "pudhupettai 2",
+        "ngk",
+        "maalai nerathu mayakkam",
+        "farhana",
+        "purampokku",
+        "indru netru naalai",
+        "enemy"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-036",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 153.50869999383576,
+      "result_titles": [
+        "irumbu thirai",
+        "enemy",
+        "sardar",
+        "gatta kusthi",
+        "oho enthan baby",
+        "7 naatkal",
+        "jeeva",
+        "thupparivaalan",
+        "indru netru naalai",
+        "puli joodham tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-037",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 142.13130000280216,
+      "result_titles": [
+        "jackpot",
+        "parundhaaguthu oor kuruvi",
+        "ispade rajavum idhaya raniyum",
+        "byri",
+        "sixer",
+        "sivappu manjal pachai",
+        "lift",
+        "kanne kalaimaane 2",
+        "maari 2",
+        "bakrid"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-038",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 162.1277999947779,
+      "result_titles": [
+        "jigarthanda",
+        "jigarthanda doublex",
+        "retro",
+        "pizza",
+        "theeya velai seiyyanum kumaru",
+        "eagle tamil dub",
+        "petta",
+        "dev",
+        "mercury",
+        "velaikkaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-039",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 169.57309999270365,
+      "result_titles": [
+        "junga",
+        "sindhubaadh",
+        "dharmadurai",
+        "naanum rowdy thaan",
+        "yaadhum oore yaavarum kelir",
+        "petta",
+        "mugizh",
+        "naanum rowdy dhaan 2",
+        "maharaja",
+        "purampokku"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-040",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 161.79949999786913,
+      "result_titles": [
+        "kaalangalil aval vasantham",
+        "theera kaadhal",
+        "oru mugathirai",
+        "kanne kalaimaane 2",
+        "thanga meengal",
+        "taramani",
+        "ayngaran",
+        "mehandi circus",
+        "chithha",
+        "peranbu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-041",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 149.54660000512376,
+      "result_titles": [
+        "katteri",
+        "kaatteri",
+        "aranmanai 2",
+        "demonte colony",
+        "boomika",
+        "masss",
+        "balloon",
+        "sixer",
+        "darling",
+        "mercury"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-042",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 141.79960000910796,
+      "result_titles": [
+        "kadaisi ulaga por",
+        "meesaya murukku",
+        "natpe thunai",
+        "vantha rajavathaan varuven",
+        "pushpa the rise tamil dub",
+        "maayakoothu",
+        "kadugu",
+        "good bad ugly",
+        "neeya 2",
+        "athomugam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-043",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 160.07230000104755,
+      "result_titles": [
+        "kadhalikka neramillai",
+        "prince",
+        "kadaisi bench karthi",
+        "kathanayagan",
+        "varuthapadatha valibar sangam",
+        "kalavani 2",
+        "kadhalum kadanthu pogum",
+        "devi 2",
+        "theri",
+        "sixer"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-044",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 131.97660000878386,
+      "result_titles": [
+        "kalakalappu",
+        "theeya velai seiyyanum kumaru",
+        "deiva machan",
+        "kalavani 2",
+        "coffee with kadhal",
+        "kalakalappu 2",
+        "aranmanai 3",
+        "oh manapenne",
+        "desingu raja 2",
+        "madha gaja raja"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-045",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 127.04009999288246,
+      "result_titles": [
+        "kalavu thozhirchalai",
+        "good bad ugly",
+        "kuttram 23 part 2",
+        "agilan",
+        "sathru",
+        "thoongavanam 2",
+        "maayakoothu",
+        "ennodu vilayadu",
+        "sync",
+        "kabadadaari"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-046",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 131.94550000480376,
+      "result_titles": [
+        "dhilluku dhuddu 2",
+        "kanchana 2",
+        "aranmanai 2",
+        "devi 2",
+        "krishna vrinda vihari tamil dub",
+        "aranmanai 4",
+        "bayama irukku",
+        "en aaloda seruppa kaanom",
+        "katteri",
+        "sixer"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-047",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 127.08350000320934,
+      "result_titles": [
+        "kanne kalaimaane 2",
+        "maamannan",
+        "dharma durai",
+        "koodal nagar",
+        "nanbenda",
+        "kannai nambathey",
+        "7 aum arivu",
+        "ippadai vellum",
+        "nimir",
+        "kalaga thalaivan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-048",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 154.8348999931477,
+      "result_titles": [
+        "komban",
+        "sembi",
+        "kathai thiraikathai vasanam directed",
+        "bairavaa",
+        "thanne vandi",
+        "tughlaq durbar",
+        "vizhithiru",
+        "masss",
+        "kuttram 23 part 2",
+        "bhoomi"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-049",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 132.23149999976158,
+      "result_titles": [
+        "jackpot",
+        "katteri",
+        "kolaigaran",
+        "kaatteri",
+        "dejavu",
+        "thiruttu payale 2",
+        "taramani",
+        "neeya 2",
+        "raangi",
+        "raaja paarvai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-050",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 155.66150000086054,
+      "result_titles": [
+        "nandhan",
+        "eeswaran",
+        "kennedy club",
+        "kombu vatcha singam",
+        "mgr magan",
+        "pandiya naadu",
+        "jeeva",
+        "udanpirappe",
+        "mgr magan 2",
+        "c o surya"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-051",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 159.18730001430959,
+      "result_titles": [
+        "kochadaiiyaan",
+        "lal salaam",
+        "velaiyilla pattathari 2",
+        "kabali",
+        "vettaiyan",
+        "petta",
+        "yaanum theeyavan",
+        "2",
+        "sivaji 3d re release",
+        "kaala"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-052",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 161.86110000126064,
+      "result_titles": [
+        "ayngaran",
+        "komban",
+        "kombu vatcha singam",
+        "theri",
+        "kadugu",
+        "rudra thandavam",
+        "sivappu manjal pachai",
+        "bhoomi",
+        "maari 2",
+        "thaarai thappattai"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-053",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 156.72890000860207,
+      "result_titles": [
+        "viduthalai part 2",
+        "kottukkaali",
+        "viduthalai part 1",
+        "velan",
+        "thaarai thappattai",
+        "sketch",
+        "aame",
+        "kombu vatcha singam",
+        "sardar",
+        "devi 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-054",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 136.01240000571124,
+      "result_titles": [
+        "kuppathu raja",
+        "raghu thatha",
+        "nilavuku enmel ennadi kobam",
+        "ayngaran",
+        "100 kadhal",
+        "soodhu kavvum",
+        "unnaal ennaal",
+        "selfie",
+        "idiot",
+        "peechaankai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-055",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 145.47019999008626,
+      "result_titles": [
+        "jackpot",
+        "kutty story",
+        "kamali from nadukkaveri",
+        "sketch",
+        "vadakkupatti ramasamy",
+        "kalavani 2",
+        "oru nalla naal paathu solren",
+        "kadhal kan kattudhe",
+        "methagu",
+        "romeo juliet"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-056",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 135.54769998881966,
+      "result_titles": [
+        "lift",
+        "carbon",
+        "dhuruvangal pathinaaru",
+        "vithaikkaaran",
+        "athomugam",
+        "ennodu vilayadu",
+        "regina",
+        "vil ambu",
+        "parundhaaguthu oor kuruvi",
+        "naan kadavul illai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-057",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 150.90400000917725,
+      "result_titles": [
+        "lucky baskhar",
+        "kondraal paavam",
+        "thug life",
+        "vaayai moodi pesavum",
+        "vada chennai",
+        "visaranai",
+        "pagadi aattam",
+        "chithha",
+        "hey sinamika",
+        "ok kanmani"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-058",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 137.7595999801997,
+      "result_titles": [
+        "selfie",
+        "maaran",
+        "carbon",
+        "ayngaran",
+        "veeram",
+        "theri",
+        "hindustani 2",
+        "vivegam",
+        "kalaga thalaivan",
+        "enai noki paayum thota"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-059",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 139.7986999945715,
+      "result_titles": [
+        "aranmanai 2",
+        "madha gaja raja",
+        "theeya velai seiyyanum kumaru",
+        "vantha rajavathaan varuven",
+        "indru netru naalai",
+        "aranmanai 3",
+        "aranmanai 4",
+        "enemy",
+        "gatta kusthi",
+        "kalakalappu"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-060",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 160.2497999847401,
+      "result_titles": [
+        "mahanati",
+        "mankatha",
+        "game over",
+        "chennai 600028 second innings",
+        "sembi",
+        "kadugu",
+        "bhoomi",
+        "kochadaiiyaan",
+        "neeya 2",
+        "good bad ugly"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-061",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 143.37990002240986,
+      "result_titles": [
+        "marakkuma nenjam",
+        "dada",
+        "raghu thatha",
+        "bakrid",
+        "kaaviya thalaivan",
+        "saivam",
+        "the verdict",
+        "kennedy club",
+        "nandhan",
+        "velan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-062",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 146.16950001800433,
+      "result_titles": [
+        "mathimaran",
+        "ayngaran",
+        "nandhan",
+        "cuckoo",
+        "byri",
+        "shot boot three",
+        "game over",
+        "viruman",
+        "kottukkaali",
+        "theera kaadhal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-063",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 143.57169999857433,
+      "result_titles": [
+        "mercury",
+        "pizza",
+        "vetri vizha 2",
+        "devi 2",
+        "masss",
+        "theal",
+        "petta",
+        "the greatest of all time goat",
+        "kadugu",
+        "meyaadha maan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-064",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 145.46709999558516,
+      "result_titles": [
+        "methagu 2",
+        "oru mugathirai",
+        "methagu",
+        "clap",
+        "mehandi circus",
+        "kathai thiraikathai vasanam directed",
+        "rocketry the nambi effect",
+        "udanpirappe",
+        "viruman",
+        "goli soda 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-065",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 155.80030001001433,
+      "result_titles": [
+        "mission",
+        "crime 23",
+        "mission chapter 1",
+        "kuttram 23 part 2",
+        "yennai arindhaal",
+        "pannaiyarum padminiyum",
+        "yaman",
+        "sindhubaadh",
+        "chekka chivantha vaanam",
+        "mersal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-066",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 166.94399999687448,
+      "result_titles": [
+        "mouna raagam 2",
+        "kaatru veliyidai",
+        "ok kanmani",
+        "ok kanmani",
+        "thug life",
+        "ponniyin selvan i",
+        "kadaisi bench karthi",
+        "ponniyin selvan ii",
+        "chekka chivantha vaanam",
+        "bhoomi"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-067",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 141.27360002021305,
+      "result_titles": [
+        "muthuramalingam",
+        "agni devi",
+        "bakrid",
+        "irugapatru",
+        "kanne kalaimaane 2",
+        "kathanayagan",
+        "udanpirappe",
+        "parundhaaguthu oor kuruvi",
+        "ghosty",
+        "sixer"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-068",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 134.9960999796167,
+      "result_titles": [
+        "naan kadavul illai",
+        "yaanai",
+        "thondan",
+        "don",
+        "garudan",
+        "agilan",
+        "udanpirappe",
+        "thiruma",
+        "ramam raghavam",
+        "vanangaan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-069",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 149.36780001153238,
+      "result_titles": [
+        "naduvula konjam pakkatha kaanom",
+        "seethakaathi",
+        "naanum rowdy dhaan 2",
+        "tughlaq durbar",
+        "pannaiyarum padminiyum",
+        "naanum rowdy thaan",
+        "junga",
+        "sindhubaadh",
+        "kadhalum kadanthu pogum",
+        "mugizh"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-070",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 164.3430999829434,
+      "result_titles": [
+        "navarasa",
+        "sivaranjiniyum innum sila pengalum",
+        "house owner",
+        "mehandi circus",
+        "enakkul oruvan",
+        "oru mugathirai",
+        "raaja paarvai",
+        "ok kanmani",
+        "kodiyil oruvan",
+        "pattas"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-071",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 136.47630001651123,
+      "result_titles": [
+        "neram",
+        "kadugu",
+        "thaarai thappattai",
+        "pushpa the rise tamil dub",
+        "bhoomi",
+        "maayakoothu",
+        "richie",
+        "devi 2",
+        "kodiveeran",
+        "bongu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-072",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 131.27280000480823,
+      "result_titles": [
+        "nilavuku enmel ennadi kobam",
+        "miruthan",
+        "velaiilla pattadhari",
+        "idly kadai",
+        "maari 2",
+        "power paandi",
+        "raayan",
+        "maryan",
+        "thiruchitrambalam",
+        "maaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-073",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 150.8005000068806,
+      "result_titles": [
+        "oh manapenne",
+        "goli soda 2",
+        "goli soda",
+        "baahubali",
+        "thanga meengal",
+        "iraivi",
+        "96",
+        "thoothukudi thalapathy",
+        "kaaviya thalaivan",
+        "merry christmas"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-074",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 127.39849998615682,
+      "result_titles": [
+        "pudhupettai 2",
+        "vanamagan",
+        "captain",
+        "singam 3",
+        "operation valentine tamil dub",
+        "karuppan",
+        "neruppu da",
+        "teddy",
+        "saala khadoos",
+        "singam 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.2,
+        "ndcg@10": 0.38685280723454163
+      },
+      "error": null
+    },
+    {
+      "id": "v2-075",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 139.87270000507124,
+      "result_titles": [
+        "oru nodi",
+        "dhuruvangal pathinaaru",
+        "watchman",
+        "maargan",
+        "kondraal paavam",
+        "fire 2025",
+        "naan",
+        "kuttram kuttrame",
+        "good bad ugly",
+        "kuttram 23 part 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-076",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 155.37110000150278,
+      "result_titles": [
+        "pannaiyarum padminiyum",
+        "sixer",
+        "aranmanai 2",
+        "indru netru naalai",
+        "uttama villain",
+        "vaagai sooda vaa",
+        "devi 2",
+        "kalakalappu",
+        "raghu thatha",
+        "krishna vrinda vihari tamil dub"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-077",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 142.92220000061207,
+      "result_titles": [
+        "pariyerum perumal",
+        "thaarai thappattai",
+        "karnan",
+        "vaazhai",
+        "sathriyan",
+        "maamannan",
+        "pushpa the rise tamil dub",
+        "kadugu",
+        "maari 2",
+        "siren"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-078",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 150.69839998614043,
+      "result_titles": [
+        "vaagai sooda vaa",
+        "dna",
+        "pattathu arasan",
+        "paradesi",
+        "thalli pogathey",
+        "boomerang",
+        "gemini ganesanum suruli rajanum",
+        "sathya",
+        "lover",
+        "chennai 600028 second innings"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-079",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 131.26910000573844,
+      "result_titles": [
+        "petta rap",
+        "game changer tamil dub",
+        "lingaa",
+        "gangers",
+        "udanpirappe",
+        "hindustani 2",
+        "maryan",
+        "vaanam",
+        "saamy square",
+        "arrambam"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-080",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 130.18490001559258,
+      "result_titles": [
+        "pisasu 2",
+        "pisasu 3",
+        "aranmanai 3",
+        "sivalinga kanchana returns",
+        "uttama villain",
+        "pisasu",
+        "valiyavan",
+        "thupparivaalan",
+        "vada chennai",
+        "anbulla appa"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-081",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 154.81639999779873,
+      "result_titles": [
+        "ponniyin selvan ii",
+        "freedom",
+        "ponniyin selvan i",
+        "thug life",
+        "chekka chivantha vaanam",
+        "mouna raagam 2",
+        "ok kanmani",
+        "kadugu",
+        "irugapatru",
+        "ok kanmani"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5
+      },
+      "error": null
+    },
+    {
+      "id": "v2-082",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 148.24760000919923,
+      "result_titles": [
+        "power paandi",
+        "krishna vrinda vihari tamil dub",
+        "thangalaan",
+        "kaththi",
+        "empuraan tamil dub",
+        "achcham yenbadhu madamaiyada",
+        "captain",
+        "maari 2",
+        "thupparivaalan",
+        "kolaigaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-083",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 134.06829998712055,
+      "result_titles": [
+        "puriyaatha puthir",
+        "seethakaathi",
+        "dharmadurai",
+        "sindhubaadh",
+        "pannaiyarum padminiyum",
+        "junga",
+        "mugizh",
+        "purampokku",
+        "kutty story",
+        "petta"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-084",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 130.6142999965232,
+      "result_titles": [
+        "gatta kusthi",
+        "mundaasupatti",
+        "fir",
+        "indru netru naalai",
+        "jeeva",
+        "lal salaam",
+        "oho enthan baby",
+        "enemy",
+        "ayogya",
+        "thanga meengal"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-085",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 133.5347999993246,
+      "result_titles": [
+        "rajathandhiram",
+        "spyder",
+        "theal",
+        "enai noki paayum thota",
+        "vanamagan",
+        "neruppu da",
+        "annadurai",
+        "tamilarasan",
+        "vaanam",
+        "kalaga thalaivan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-086",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 125.62410000828095,
+      "result_titles": [
+        "regina",
+        "dhuruvangal pathinaaru",
+        "vithaikkaaran",
+        "carbon",
+        "sathru",
+        "athomugam",
+        "lift",
+        "sabdham",
+        "dhayam",
+        "veedevadu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-087",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 131.85999999404885,
+      "result_titles": [
+        "rubaai",
+        "vanamagan",
+        "metro",
+        "yaman",
+        "pandigai",
+        "kodiveeran",
+        "karuppan",
+        "sakka podu podu raja",
+        "kodiyil oruvan",
+        "pichaikkaran"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-088",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 143.28779999050312,
+      "result_titles": [
+        "saaho",
+        "eagle tamil dub",
+        "saala khadoos",
+        "bhaagamathie",
+        "c o surya",
+        "valimai",
+        "baahubali",
+        "enemy",
+        "thoongavanam 2",
+        "mission chapter 1"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-089",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 140.14309999765828,
+      "result_titles": [
+        "saivam",
+        "36 vayadhinile",
+        "conjuring kannappan",
+        "devi 2",
+        "sila nerangalil sila manithargal",
+        "thaai manasu",
+        "uttama villain",
+        "mission",
+        "yaman",
+        "pannaiyarum padminiyum"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-090",
+      "language": "ta",
+      "category": "structured_constraints",
+      "latency_ms": 184.6126999880653,
+      "result_titles": [
+        "sardar",
+        "irumbu thirai",
+        "kaithi",
+        "meiyazhagan",
+        "komban",
+        "good bad ugly",
+        "masss",
+        "bhoomi",
+        "mouna raagam 2",
+        "ariyavan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-091",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 135.73639999958687,
+      "result_titles": [
+        "sathuranga vettai",
+        "mgr magan 2",
+        "rum",
+        "mgr magan",
+        "c o surya",
+        "solo",
+        "kadaram kondan",
+        "naan",
+        "mohini",
+        "bogan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-092",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 131.82700000470504,
+      "result_titles": [
+        "velaikkaran",
+        "seetha payana",
+        "ethir neechal",
+        "mr local",
+        "seema raja",
+        "maaran",
+        "ayalaan",
+        "varuthapadatha valibar sangam",
+        "kanaa",
+        "ennai vittu pogaathe"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-093",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 142.48750000842847,
+      "result_titles": [
+        "sindhubaadh",
+        "pannaiyarum padminiyum",
+        "naanum rowdy thaan",
+        "junga",
+        "super deluxe",
+        "naanum rowdy dhaan 2",
+        "purampokku",
+        "yaadhum oore yaavarum kelir",
+        "dharmadurai",
+        "karuppan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-094",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 176.00639999727719,
+      "result_titles": [
+        "siren",
+        "bhoomi",
+        "thalli pogathey",
+        "mission chapter 1",
+        "eagle tamil dub",
+        "maharaja",
+        "vidaamuyarchi",
+        "maargan",
+        "raangi",
+        "sardar"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-095",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 145.83170000696555,
+      "result_titles": [
+        "sixer",
+        "aranmanai 2",
+        "chennai city gangsters",
+        "katteri",
+        "meyaadha maan",
+        "chennai 600028 second innings",
+        "kaatteri",
+        "100 kadhal",
+        "kadaisi bench karthi",
+        "vadakkupatti ramasamy"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-096",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 173.57549999724142,
+      "result_titles": [
+        "spyder",
+        "36 vayadhinile",
+        "kadugu",
+        "visaranai",
+        "maayakoothu",
+        "thookudurai",
+        "good bad ugly",
+        "pushpa the rise tamil dub",
+        "7 aum arivu",
+        "neeya 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-097",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 145.00870002666488,
+      "result_titles": [
+        "tamilarasan",
+        "black",
+        "enakkul oruvan",
+        "sk23",
+        "naan",
+        "ayogya",
+        "amaran",
+        "meyaadha maan",
+        "asvins",
+        "neram"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-098",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 157.70810001413338,
+      "result_titles": [
+        "thaanaa serndha koottam",
+        "singam 2",
+        "singam 3",
+        "retro",
+        "7 aum arivu",
+        "thittam irandu",
+        "maargan",
+        "dhuruvangal pathinaaru",
+        "naanum rowdy thaan",
+        "kaathuvaakula rendu kaadhal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-099",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 157.3099999804981,
+      "result_titles": [
+        "thalaimai seyalagam",
+        "thalaimai seyalagam 2",
+        "kaaviya thalaivan",
+        "parundhaaguthu oor kuruvi",
+        "tughlaq durbar",
+        "empuraan tamil dub",
+        "democracy",
+        "sathru",
+        "bagheera",
+        "agilan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-100",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 155.16399999614805,
+      "result_titles": [
+        "thandatti",
+        "kalyana samayal saadham",
+        "odu raja odu",
+        "mgr magan 2",
+        "peranbu",
+        "kaaka muttai",
+        "mgr magan",
+        "36 vayadhinile",
+        "raghu thatha",
+        "taramani"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-101",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 162.3140999872703,
+      "result_titles": [
+        "thappu thanda",
+        "pushpa the rise tamil dub",
+        "maayakoothu",
+        "masss",
+        "tik tik tik",
+        "naai sekar returns",
+        "siren",
+        "aame",
+        "thaarai thappattai",
+        "devi 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-102",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 160.13989999191836,
+      "result_titles": [
+        "theal",
+        "devi 2",
+        "mercury",
+        "good bad ugly",
+        "7 naatkal",
+        "chennai 600028 second innings",
+        "petta rap",
+        "vetri vizha 2",
+        "kadugu",
+        "masss"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-103",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 179.24009999842383,
+      "result_titles": [
+        "thegidi",
+        "indrajith",
+        "thiruttu payale 2",
+        "dhuruvangal pathinaaru",
+        "nimir",
+        "meesaya murukku",
+        "dhilluku dhuddu 2",
+        "pisasu 2",
+        "adhe kangal",
+        "kanaa"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-104",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 163.29370002495125,
+      "result_titles": [
+        "thiruvin kural",
+        "dejavu",
+        "vithaikkaaran",
+        "diary",
+        "bagheera",
+        "k 13",
+        "brindavanam",
+        "veedevadu",
+        "manmatha leelai",
+        "7 naatkal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-105",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 171.19090000051074,
+      "result_titles": [
+        "thoongavanam 2",
+        "kadaram kondan",
+        "thoongaavanam",
+        "thug life",
+        "uttama villain",
+        "mission chapter 1",
+        "uttama villain",
+        "thuppakki munai",
+        "agilan",
+        "raangi"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-106",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 200.66960001713596,
+      "result_titles": [
+        "thuppakki",
+        "valimai",
+        "captain",
+        "empuraan tamil dub",
+        "gurkha",
+        "jigarthanda doublex",
+        "chakra",
+        "hindustani 2",
+        "iru mugan",
+        "jigarthanda"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-107",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 178.1345999916084,
+      "result_titles": [
+        "yaadhum oore yaavarum kelir",
+        "tourist family",
+        "kadaisi bench karthi",
+        "kathanayagan",
+        "90 ml",
+        "raja rani",
+        "indru netru naalai",
+        "kaatteri",
+        "aranmanai 2",
+        "devi 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-108",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 144.15320000262,
+      "result_titles": [
+        "unnaal ennaal",
+        "annaatthe",
+        "odu raja odu",
+        "indru netru naalai",
+        "thaanaa serndha koottam",
+        "veeram",
+        "peechaankai",
+        "kadaisi bench karthi",
+        "90 ml",
+        "oru nalla naal paathu solren"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-109",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 136.24210000853054,
+      "result_titles": [
+        "vaa vaathiyaar",
+        "idly kadai",
+        "fire 2025",
+        "pattathu arasan",
+        "baahubali",
+        "rajini murugan",
+        "prince",
+        "sathya",
+        "viruman",
+        "etharkkum thunindhavan"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-110",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 132.32740000239573,
+      "result_titles": [
+        "vaazhai",
+        "maamannan",
+        "kanaa",
+        "pudhupettai 2",
+        "meiyazhagan",
+        "byri",
+        "kottukkaali",
+        "theera kaadhal",
+        "nandhan",
+        "kakki sattai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-111",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 136.02909998735413,
+      "result_titles": [
+        "valiyavan",
+        "kodiveeran",
+        "raangi",
+        "thaai manasu",
+        "saravanan irukka bayamaen",
+        "meyaadha maan",
+        "mupparimanam",
+        "vanamagan",
+        "ayngaran",
+        "sakka podu podu raja"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-112",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 242.47890000697225,
+      "result_titles": [
+        "varisu",
+        "thanga meengal",
+        "uttama villain",
+        "36 vayadhinile",
+        "ponniyin selvan ii",
+        "mouna raagam 2",
+        "kolaigaran",
+        "peranbu",
+        "adithya varma",
+        "96"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-113",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 223.29110000282526,
+      "result_titles": [
+        "veera dheera sooran part 2",
+        "pannaiyarum padminiyum",
+        "crime 23",
+        "chithha",
+        "ennodu vilayadu",
+        "24",
+        "kuttram 23 part 2",
+        "i",
+        "saani kaayidham",
+        "yennai arindhaal"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-114",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 179.93830001796596,
+      "result_titles": [
+        "velaiyilla pattathari 2",
+        "kochadaiiyaan",
+        "sembi",
+        "velaiilla pattadhari",
+        "kadugu",
+        "maanagaram",
+        "pushpa the rise tamil dub",
+        "game over",
+        "chennai 600028 second innings",
+        "sagaptham"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-115",
+      "language": "en",
+      "category": "plot_description",
+      "latency_ms": 183.83120000362396,
+      "result_titles": [
+        "vidaamuyarchi",
+        "krishna vrinda vihari tamil dub",
+        "peranbu",
+        "kaappaan",
+        "sk23",
+        "lakshmi",
+        "hey sinamika",
+        "amaran",
+        "aruvi",
+        "valimai"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-116",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "latency_ms": 149.87480000127107,
+      "result_titles": [
+        "vil ambu",
+        "ramam raghavam",
+        "irugapatru",
+        "farhana",
+        "kaaka muttai",
+        "meiyazhagan",
+        "tamiluku en ondrai aluthavum",
+        "vai raja vai",
+        "byri",
+        "uttama villain"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-117",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "latency_ms": 160.19189998041838,
+      "result_titles": [
+        "veeram",
+        "viswasam",
+        "nerkonda paarvai",
+        "good bad ugly",
+        "mankatha",
+        "arrambam",
+        "jailer",
+        "enai noki paayum thota",
+        "2",
+        "chekka chivantha vaanam"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 0.5,
+        "ndcg@10": 0.6309297535714575
+      },
+      "error": null
+    },
+    {
+      "id": "v2-118",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "latency_ms": 170.34529999364167,
+      "result_titles": [
+        "watchman",
+        "athomugam",
+        "boomika",
+        "i",
+        "merry christmas",
+        "vaigai express",
+        "thoongavanam 2",
+        "irumbu thirai",
+        "parundhaaguthu oor kuruvi",
+        "maayakoothu"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-119",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "latency_ms": 169.49999998905696,
+      "result_titles": [
+        "yaanum theeyavan",
+        "the greatest of all time goat",
+        "andhagan",
+        "naai sekar",
+        "naai sekar returns",
+        "mupparimanam",
+        "masss",
+        "maayakoothu",
+        "parundhaaguthu oor kuruvi",
+        "maari 2"
+      ],
+      "metrics": {
+        "hit@1": 1.0,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "precision@5": 0.2,
+        "precision@10": 0.1,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "v2-120",
+      "language": "ta",
+      "category": "hidden_gem",
+      "latency_ms": 142.54870000877418,
+      "result_titles": [
+        "neeya 2",
+        "maayakoothu",
+        "kadugu",
+        "neram",
+        "chennai 600028 second innings",
+        "good bad ugly",
+        "thupparivaalan",
+        "onaayum aattukkuttiyum",
+        "yaman",
+        "maari 2"
+      ],
+      "metrics": {
+        "hit@1": 0.0,
+        "hit@5": 0.0,
+        "hit@10": 0.0,
+        "precision@5": 0.0,
+        "precision@10": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0
+      },
+      "error": null
+    }
+  ]
+}

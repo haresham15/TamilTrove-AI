@@ -1,0 +1,1813 @@
+{
+  "dataset_version": "2.0.0",
+  "catalog_source": "backend/data/movies_processed.json",
+  "judgment_scale": {
+    "0": "not relevant",
+    "1": "related",
+    "2": "relevant",
+    "3": "exact/strong match"
+  },
+  "review_policy": "Each seed judgment is checked against canonical plot or credit metadata. Ambiguous additions require two independent reviewers and disagreement notes.",
+  "queries": [
+    {
+      "id": "v2-001",
+      "query": "100 (2019, Action): An action thriller about a cop working undercover to bust a drug racket, filled with suspense and action, starring Atharvaa",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "100",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-002",
+      "query": "A Family Drama film starring : Jyotika Saravanan, directed by Rosshan Andrrews",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "36 Vayadhinile",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-003",
+      "query": "Oviya nadicha Comedy padam, Anita Udeep direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "90 ML",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-004",
+      "query": "Aadukalam,\"A young man’s life changes after a cockfighting competition turns deadly.\" maadhiri oru Action padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Aadukalam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-005",
+      "query": "Yogi Babu நடித்த குற்ற பரபரப்பு திரைப்படம், Thiagarajan Kumararaja இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Aaranya Kaandam 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-006",
+      "query": "Sai Ramani இயக்கிய Joy Badlani நடித்த அதிகம் பிரபலமில்லாத அதிரடி படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "ACP Shiva",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-007",
+      "query": "The story revolves around a young art director (Jiiva) and his fiancée (Khanna) trapped into a haunted house, which leads them to uncover the old mysteries of 1940",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Aghathiyaa",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-008",
+      "query": "A Drama film starring Suhas, directed by Dushyanth Katikaneni",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Ambajipeta Marriage Band (Tamil Dub)",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-009",
+      "query": "Arjun Das nadicha Action Drama padam, Vasantha Balan direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Aneethi",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-010",
+      "query": "Muthuraman, with Srikanth, Major Sundarrajan and Cho in supporting roles maadhiri oru Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Annapoorani",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-011",
+      "query": "Ajith Kumar நடித்த அதிரடி திரைப்படம், Vishnuvardhan இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Arrambam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-012",
+      "query": "R Ravikumar இயக்கிய Sivakarthikeyan நடித்த நல்ல தமிழ் படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Ayalaan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-013",
+      "query": "It revolves around a man who becomes a serial killer targeting women due to their perceived immorality",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Bagheera",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-014",
+      "query": "A Comedy film starring Santhosh Prathap, directed by Jawahar",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Bayama Irukku",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-015",
+      "query": "Joseph Vijay nadicha Action padam, Atlee Kumar direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Bigil",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-016",
+      "query": "Imman, the film began production during March 2016 and released on 2 February 2017 to positive reviews with praise for cast performances, story narration and Imman's music maadhiri oru Action padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Bogan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-017",
+      "query": "Guru Somasundaram நடித்த நாடக திரைப்படம், Pa Ranjith இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Bottle Radha",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-018",
+      "query": "John Glady இயக்கிய Syed Majeed நடித்த அதிகம் பிரபலமில்லாத நாடக படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Byri",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-019",
+      "query": "It was perceived to be an unofficial stand-alone sequel to Irumbu Thirai due to the similar theme and ending between the two films",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Chakra",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-020",
+      "query": "A Action Comedy film starring Vishnu Vishal, directed by Arun Matheswaran",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Chennai City Gangsters",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-021",
+      "query": "Jiiva nadicha Romantic Comedy padam, Sundar C direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Coffee with Kadhal",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-022",
+      "query": "A group of youngsters plan to commit suicide, but a ghost prevents them from carrying out their plan in this horror comedy maadhiri oru Horror Comedy padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Darling",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-023",
+      "query": "Arulnidhi நடித்த பரபரப்பு திகில் திரைப்படம், Ajay Gnanamuthu இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Demonte Colony",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-024",
+      "query": "S. Muthukumaran இயக்கிய Yogi Babu நடித்த நல்ல நாடக படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Dharma Prabhu",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-025",
+      "query": "It was shot extensively across Tamil Nadu including Chennai, Coonoor, Ooty, Mettupalayam and Coimbatore",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Diary",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-026",
+      "query": "A Drama film starring Jiya Anil Manne, directed by Arun Chidambaram",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Dream Factory",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-027",
+      "query": "Dhanush nadicha Action padam, Gautham Vasudev Menon direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Enai Noki Paayum Thota",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-028",
+      "query": "English Padam is a 2017 Indian Tamil-language horror comedy film writen and directed by Kumaresh Kumar, starring Sanjeev, Meenakshi and Ramki maadhiri oru Comedy padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "English Padam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-029",
+      "query": "Sivakarthikeyan நடித்த நகைச்சுவை திரைப்படம், R.S. Durai Senthilkumar இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Ethir Neechal",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-030",
+      "query": "Ashwin Saravanan இயக்கிய Taapsee Pannu நடித்த அதிகம் பிரபலமில்லாத நாடக படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Game Over",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-031",
+      "query": "It is a remake of the 2015 Telugu film Bhale Bhale Magadivoy",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Ghajinikanth",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-032",
+      "query": "A Sports Drama film starring Keerthy Suresh, directed by Nagesh Kukunoor",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Good Luck Sakhi (Tamil Dub)",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-033",
+      "query": "Lovelyn Chandrasekhar nadicha Drama padam, Lakshmi Ramakrishnan direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "House Owner",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-034",
+      "query": "Featuring music composed by Arrol Corelli, Inayathalam was released on 19 May 2017 to negative reviews maadhiri oru Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Inayathalam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-035",
+      "query": "Arya நடித்த அதிரடி திரைப்படம், K. Selvaraghavan இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Irandam Ulagam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-036",
+      "query": "P. S. Mithran இயக்கிய Vishal நடித்த அதிகம் பிரபலமில்லாத பரபரப்பு படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Irumbu Thirai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-037",
+      "query": "The film received mixed to positive reviews from critics.The film was a box office hit",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Jackpot",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-038",
+      "query": "A Action film starring Siddharth, directed by Karthik Subbaraj",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Jigarthanda",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-039",
+      "query": "Vijay Sethupathi nadicha Action padam, Gokul direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Junga",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-040",
+      "query": "Kaalangalil Aval Vasantham is a 2022 Indian Tamil-language romantic drama film written and directed by Raghav Mirdath. The film stars Kaushik Ram, Anjali Nair, and Heroshini Kumar. The film released on 28 maadhiri oru Romantic Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kaalangalil Aval Vasantham",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-041",
+      "query": "Vaibhav நடித்த திகில் நகைச்சுவை திரைப்படம், Deekay இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kaatteri",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-042",
+      "query": "Hiphop Tamizha இயக்கிய Hiphop Tamizha நடித்த அதிகம் பிரபலமில்லாத நாடக படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kadaisi Ulaga Por",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-043",
+      "query": "It is loosely inspired from the 2010 American romantic comedy The Switch",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kadhalikka Neramillai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-044",
+      "query": "A Comedy film starring Vimal, directed by Sundar C",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kalakalappu",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-045",
+      "query": "T. Krishnasamy nadicha Thriller padam, T Krishna Samy direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kalavu Thozhirchalai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-046",
+      "query": "All films were successful at the box office and is currently the third highest grossing Tamil film franchise maadhiri oru Horror Comedy padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kanchana 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-047",
+      "query": "Udhayanidhi Stalin நடித்த நாடக திரைப்படம், Seenu Ramasamy இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kanne Kalaimaane 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-048",
+      "query": "Parthiban இயக்கிய Thambi Ramaiah நடித்த நல்ல நாடக படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kathai Thiraikathai Vasanam Iyakkam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-049",
+      "query": "The film released theatrically on 5 August 2022 and was a box-office bomb",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Katteri",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-050",
+      "query": "A Drama film starring M. Sasikumar, directed by Suseenthiran",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kennedy Club",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-051",
+      "query": "Rajinikanth nadicha Animation padam, Soundarya R. Ashwin direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kochadaiiyaan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-052",
+      "query": "The film released on 2 April 2015 to positive reviews maadhiri oru Action Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Komban",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-053",
+      "query": "Soori நடித்த நாடக திரைப்படம், PS Vinothraj இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kottukkaali",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-054",
+      "query": "Baba Bhaskar இயக்கிய G.V. Prakash Kumar நடித்த அதிகம் பிரபலமில்லாத நகைச்சுவை படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kuppathu Raja",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-055",
+      "query": "The film was released on 12 February 2021",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Kutty Story",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-056",
+      "query": "A Thriller film starring Kavin, directed by Vineeth Varaprasad",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Lift",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-057",
+      "query": "Dulquer Salmaan nadicha Crime Drama padam, Venky Atluri direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Lucky Baskhar",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-058",
+      "query": "Prakash Kumar, with cinematography handled by Vivekanand Santhosham and editing handled by Prasanna G maadhiri oru Action Thriller padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Maaran",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-059",
+      "query": "Vishal நடித்த அதிரடி நகைச்சுவை திரைப்படம், Sundar C இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Madha Gaja Raja",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-060",
+      "query": "Savitri இயக்கிய Nag Ashwin நடித்த அதிகம் பிரபலமில்லாத தமிழ் படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Mahanati",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-061",
+      "query": "Marakkuma Nenjam is a 2024 Indian Tamil-language coming-of-age drama film written and directed by Raako.Yoagandran. The film stars Rakshan, Dheena and Malina in the lead roles. The film was produced by Raghu",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Marakkuma Nenjam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-062",
+      "query": "A Drama film starring Venkat Senguttuvan, directed by Mantra Veerapandian",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Mathimaran",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-063",
+      "query": "Prabhu Deva nadicha Horror padam, Karthik Subbaraj direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Mercury",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-064",
+      "query": "The film is a sequel to Methagu (2021), and was released on an OTT platform on 19 August 2022 maadhiri oru Biographical Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Methagu 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-065",
+      "query": "Arun Vijay நடித்த அதிரடி திரைப்படம், AL Vijay இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Mission",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-066",
+      "query": "Mani Ratnam இயக்கிய Karthi நடித்த நல்ல நாடக படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Mouna Raagam 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-067",
+      "query": "This film received highly negative reviews and was panned by critics",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Muthuramalingam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-068",
+      "query": "A Action Thriller film starring Samuthirakani, directed by SA Chandrasekhar",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Naan Kadavul Illai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-069",
+      "query": "Vijay Sethupathi nadicha Comedy padam, Balaji Tharaneetharan direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Naduvula Konjam Pakkatha Kaanom",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-070",
+      "query": "In January 2006, it was selected as an official entry to the International Film Festival Rotterdam maadhiri oru Anthology Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Navarasa",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-071",
+      "query": "Nivin Pauly நடித்த அதிரடி திரைப்படம், Alphonse Puthren இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Neram",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-072",
+      "query": "Dhanush இயக்கிய Anikha Surendran நடித்த அதிகம் பிரபலமில்லாத நகைச்சுவை நாடக படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Nilavuku Enmel Ennadi Kobam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-073",
+      "query": "How their aspirations bring them together forms the rest of the story",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Oh Manapenne",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-074",
+      "query": "A Action film starring Varun Tej, directed by Shakti Pratap Singh",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Operation Valentine (Tamil Dub)",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-075",
+      "query": "Thaman Kumar nadicha Crime Thriller padam, B Manivarman direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Oru Nodi",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-076",
+      "query": "The film revolves around an ageing landlord and his love for his vintage car, a Premier Padmini maadhiri oru Comedy padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Pannaiyarum Padminiyum",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-077",
+      "query": "Prabunath நடித்த நாடக திரைப்படம், Mari Selvaraj இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Pariyerum Perumal",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-078",
+      "query": "Sarkunam இயக்கிய Atharvaa நடித்த அதிகம் பிரபலமில்லாத அதிரடி நாடக படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Pattathu Arasan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-079",
+      "query": "Imman, while cinematography and editing were handled by Jithu Damodar and Nishad Yusuf",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Petta Rap",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-080",
+      "query": "A Horror film starring Andrea Jeremiah, directed by Mysskin",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Pisasu 3",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-081",
+      "query": "Vikram nadicha Historical Drama padam, Mani Ratnam direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Ponniyin Selvan: I",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-082",
+      "query": "It follows a retired stuntman who travels to Hyderabad to seek out freedom, and also to reunite with his old village lover maadhiri oru Action padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Power Paandi",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-083",
+      "query": "Vijay Sethupathi நடித்த பரபரப்பு திரைப்படம், Ranjit Jeyakodi இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Puriyaatha Puthir",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-084",
+      "query": "Ram Kumar இயக்கிய Vishnu Vishal நடித்த நல்ல அதிரடி படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Raatchasan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-085",
+      "query": "The film was edited by Praveen Antony, the production designed by Videsh and action sequences were designed and choreographed by Stunt Silva",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Rajathandhiram",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-086",
+      "query": "A Thriller film starring Sunaina, directed by Domin Dsilva",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Regina",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-087",
+      "query": "Anandhi nadicha Action padam, M. Anbazhagan direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Rubaai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-088",
+      "query": "Saaho is a 2019 Indian action thriller film written and directed by Sujeeth and produced by UV Creations and T-Series. Filmed simultaneously in Telugu and Hindi, it features Prabhas in the titular maadhiri oru Action padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Saaho",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-089",
+      "query": "Nassar நடித்த நாடக திரைப்படம், A.L. Vijay இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Saivam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-090",
+      "query": "PS Mithran இயக்கிய Karthi நடித்த நல்ல அதிரடி பரபரப்பு படம்",
+      "language": "ta",
+      "category": "structured_constraints",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Sardar",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-091",
+      "query": "A sequel titled Sathuranga Vettai 2 was shot between 2016 and 2017, but never released",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Sathuranga Vettai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-092",
+      "query": "A Romantic Drama film starring Sivakarthikeyan, directed by Vetri Maaran",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Seetha Payana",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-093",
+      "query": "Vijay Sethupathi nadicha Action padam, S.U. Arun Kumar direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Sindhubaadh",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-094",
+      "query": "Siren is a 2024 Tamil-language action thriller film directed by Antony Bhagyaraj, in his directorial debut, and produced by Sujatha Vijayakumar under Home Movie Makers. The film stars Ravi Mohan, Anupama Parameswaran maadhiri oru Thriller padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Siren",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-095",
+      "query": "Vaibhav Reddy நடித்த நகைச்சுவை திரைப்படம், Chachi இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Sixer",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-096",
+      "query": "A.R. Murugadoss இயக்கிய Mahesh Babu நடித்த அதிகம் பிரபலமில்லாத அதிரடி படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Spyder",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-097",
+      "query": "It is an official adaptation of the 2002 American film John Q",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Tamilarasan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-098",
+      "query": "A Crime/Heist film starring Suriya, directed by Vignesh Shivan",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thaanaa Serndha Koottam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-099",
+      "query": "Sriya Reddy nadicha Political Thriller padam, Vasanthabalan direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thalaimai Seyalagam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-100",
+      "query": "Thandatti is a 2023 Indian Tamil-language comedy drama film written and directed by Ram Sangaiah in his directorial debut. It stars Pasupathy, Rohini, Vivek Prasanna and Ammu Abhirami. The film was produced maadhiri oru Comedy Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thandatti",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-101",
+      "query": "Ajay Ghosh நடித்த குற்ற திரைப்படம், Srikantan இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thappu Thanda",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-102",
+      "query": "Harikumar இயக்கிய Prabhu Deva நடித்த அதிகம் பிரபலமில்லாத அதிரடி படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Theal",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-103",
+      "query": "It was remade in Malayalam as Chanakya Thanthram (2018)",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thegidi",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-104",
+      "query": "A Thriller film starring Arulnithi, directed by Harish Prabhu",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thiruvin Kural",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-105",
+      "query": "Kamal Haasan nadicha Action Thriller padam, Rajesh M Selva direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thoongavanam 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-106",
+      "query": "It revolves around an intelligence officer in the Indian Army, who seeks to track down, destroy and deactivate a sleeper cell, after witnessing and barely escaping a bombing carried out by the maadhiri oru Action padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Thuppakki",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-107",
+      "query": "Jiiva நடித்த நகைச்சுவை நாடக திரைப்படம், Venkata Krishna Roganath இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Tourist Family",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-108",
+      "query": "Karthik Subramanian இயக்கிய Siva நடித்த அதிகம் பிரபலமில்லாத நகைச்சுவை படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Unnaal Ennaal",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-109",
+      "query": "The cast also includes Krithi Shetty, Sathyaraj, and Rajkiran",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Vaa Vaathiyaar",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-110",
+      "query": "A Drama film starring Dhivya Dhuraisamy, directed by Mari Selvaraj",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Vaazhai",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-111",
+      "query": "Jai nadicha Romance Action padam, Saravanan M direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Valiyavan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-112",
+      "query": "It focuses on an entrepreneur's youngest son being named the chairman of his father's business, much to the dismay of his two brothers maadhiri oru Family Drama padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Varisu",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-113",
+      "query": "Vikram நடித்த அதிரடி நாடக திரைப்படம், SU Arun Kumar இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Veera Dheera Sooran: Part 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-114",
+      "query": "Soundarya R. Ashwin இயக்கிய Riaz Ahmed நடித்த அதிகம் பிரபலமில்லாத அதிரடி படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Velaiyilla Pattathari 2",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-115",
+      "query": "In the film, a husband seeks to rescue his wife after she is captured by a mysterious group",
+      "language": "en",
+      "category": "plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Vidaamuyarchi",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-116",
+      "query": "A Thriller Drama film starring Sri, directed by Ramesh Subramaniyam",
+      "language": "en",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Vil Ambu",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-117",
+      "query": "Ajith Kumar nadicha Family Action padam, Siva direction",
+      "language": "tanglish",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Viswasam",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-118",
+      "query": "The satellite rights of the film were sold to Colors Tamil maadhiri oru Thriller padam",
+      "language": "tanglish",
+      "category": "mixed_plot_description",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Watchman",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-119",
+      "query": "Prashanth G Sekar நடித்த அதிரடி திரைப்படம், Prashanth G Sekr இயக்கம்",
+      "language": "ta",
+      "category": "actor_director_lookup",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Yaanum Theeyavan",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    },
+    {
+      "id": "v2-120",
+      "query": "Myshkin இயக்கிய Cheran நடித்த அதிகம் பிரபலமில்லாத குற்ற படம்",
+      "language": "ta",
+      "category": "hidden_gem",
+      "filters": {},
+      "judgments": [
+        {
+          "movie_title": "Yutham Sei",
+          "relevance": 3
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer_notes": "Catalog-grounded, unambiguous target using plot or credited metadata. Obtain an independent audience review before publishing external quality claims."
+    }
+  ]
+}
