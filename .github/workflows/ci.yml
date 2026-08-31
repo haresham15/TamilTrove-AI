@@ -206,7 +206,7 @@ jobs:
           persist-credentials: false
 
       - name: Scan repository
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0, immutable safe release
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.35.0, immutable safe release
         with:
           scan-type: fs
           scan-ref: .
@@ -232,7 +232,7 @@ jobs:
           docker build --build-arg NEXT_PUBLIC_API_URL=http://localhost:8000 --tag tamiltrove-frontend:${GITHUB_SHA} frontend
 
       - name: Scan backend image
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0, immutable safe release
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.35.0, immutable safe release
         with:
           image-ref: tamiltrove-backend:${{ github.sha }}
           scanners: vuln,secret,misconfig
@@ -241,7 +241,7 @@ jobs:
           exit-code: "1"
 
       - name: Scan frontend image
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0, immutable safe release
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.35.0, immutable safe release
         with:
           image-ref: tamiltrove-frontend:${{ github.sha }}
           scanners: vuln,secret,misconfig
