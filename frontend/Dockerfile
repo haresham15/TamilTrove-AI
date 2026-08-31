@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1.7
-FROM node:22.22.0-alpine3.23 AS deps
+FROM node:26.8.1-alpine3.23 AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 
-FROM node:22.22.0-alpine3.23 AS builder
+FROM node:26.8.1-alpine3.23 AS builder
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 ARG NEXT_PUBLIC_API_URL=http://localhost:8000
@@ -15,7 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:22.22.0-alpine3.23 AS runner
+FROM node:26.8.1-alpine3.23 AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
