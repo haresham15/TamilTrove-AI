@@ -306,6 +306,16 @@ class PostgresStore:
             rows = connection.execute(sql, params).fetchall()
         return [self._interaction(row) for row in rows]
 
+    def list_all_interactions(self, interaction_type: str | None = None) -> list[dict[str, Any]]:
+        sql = "SELECT user_id, movie_id, interaction_type, value FROM public.user_interactions"
+        params: list[Any] = []
+        if interaction_type:
+            sql += " WHERE interaction_type=%s"
+            params.append(interaction_type)
+        with self.transaction() as connection:
+            rows = connection.execute(sql, params).fetchall()
+        return [_plain(dict(row)) for row in rows]
+
     def delete_interaction(self, user_id: str, movie_id: str, interaction_type: str) -> bool:
         with self.transaction() as connection:
             deleted = (

@@ -110,6 +110,16 @@ export interface SearchResponse {
   source: "api" | "demo";
 }
 
+export interface ChatRequest {
+  query: string;
+}
+
+export interface ChatResponse {
+  answer: string;
+  citations: MovieResult[];
+  query: string;
+}
+
 export interface RecommendationResponse {
   results: MovieResult[];
   meta: PaginationMeta;

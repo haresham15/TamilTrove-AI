@@ -1,8 +1,9 @@
 import json
 import sys
-import numpy as np
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
+
+import numpy as np
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -35,11 +36,11 @@ def main():
         print(f"Benchmark not found at {benchmark_path}. Please run generate_benchmark.py first.")
         sys.exit(1)
         
-    with open(benchmark_path, 'r', encoding='utf-8') as f:
+    with open(benchmark_path, encoding='utf-8') as f:
         benchmark_data = json.load(f)
         
     movies_path = data_dir / 'movies_processed.json'
-    with open(movies_path, 'r', encoding='utf-8') as f:
+    with open(movies_path, encoding='utf-8') as f:
         movies_data = json.load(f)
         
     embeddings_path = data_dir / 'embeddings.npy'

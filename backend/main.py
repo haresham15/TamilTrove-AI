@@ -16,8 +16,10 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from pydantic import BaseModel
 
 from app.catalog import Catalog
+from app.chat import ChatService
 from app.config import Settings
 from app.errors import AppError, AuthenticationError, AuthorizationError, NotFoundError
 from app.ingestion import IngestionService
@@ -57,6 +59,10 @@ from app.services import (
     movie_payload,
 )
 from app.storage import create_store
+
+
+class ChatRequest(BaseModel):
+    query: str
 
 logger = logging.getLogger("tamiltrove.api")
 bearer_scheme = HTTPBearer(auto_error=False, scheme_name="TamilTrove access token")
@@ -183,6 +189,9 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
                 settings.trusted_poster_hosts,
                 Path(settings.data_path).parent / "versions",
             )
+            from app.recommendation import ALSRecommender
+            recommender = ALSRecommender(catalog, store)
+            recommender.fit()
             application.state.container = ServiceContainer(
                 settings=settings,
                 catalog=catalog,
@@ -191,6 +200,7 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
                 metrics=metrics,
                 tracer=tracer,
                 ingestion=ingestion,
+                recommender=recommender,
             )
             logger.info(
                 "service_ready",
@@ -512,6 +522,14 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
     ) -> dict[str, Any]:
         return SearchService(container).search(
             body, request.state.request_id, user.id if user else None
+        )
+
+    @app.post("/api/v1/chat", tags=["discovery"])
+    def chat(
+        body: ChatRequest, request: Request, user: OptionalUser, container: Container
+    ) -> dict[str, Any]:
+        return ChatService(container).chat(
+            request.state.request_id, body.query, user.id if user else None
         )
 
     @app.get("/api/v1/movies/{movie_id}", response_model=MovieOut, tags=["movies"])

@@ -1,14 +1,16 @@
+import hashlib
 import json
 import logging
-from sentence_transformers import SentenceTransformer, InputExample, losses
+
+import wandb
+from sentence_transformers import InputExample, SentenceTransformer, losses
 from torch.utils.data import DataLoader
-from sentence_transformers.evaluation import InformationRetrievalEvaluator
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def load_triplets(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, encoding='utf-8') as f:
         return json.load(f)
 
 def prepare_training_data(triplets):
@@ -32,6 +34,26 @@ def main():
     model_name = 'all-MiniLM-L6-v2'
     logger.info(f"Loading baseline model {model_name}...")
     model = SentenceTransformer(model_name)
+    
+    # Compute dataset version
+    try:
+        with open('data/movies_processed.json', 'rb') as f:
+            digest = hashlib.sha256(f.read()).hexdigest()[:12]
+            dataset_version = f"json-{digest}"
+    except FileNotFoundError:
+        dataset_version = "unknown-dataset"
+
+    # Initialize wandb
+    wandb.init(
+        project="tamiltrove-retrieval",
+        config={
+            "dataset_version": dataset_version,
+            "baseline_model": model_name,
+            "epochs": 3,
+            "batch_size": 16,
+            "warmup_steps": 10
+        }
+    )
     
     # Load training triplets
     triplets_file = 'data/training_triplets.json'
@@ -64,10 +86,11 @@ def main():
     )
     
     # Save the fine-tuned model
-    output_path = 'models/finetuned-tamil-retriever'
+    output_path = f'models/finetuned-tamil-retriever-{dataset_version}'
     logger.info(f"Saving fine-tuned model to {output_path}...")
     model.save(output_path)
     logger.info("Fine-tuning complete!")
+    wandb.finish()
 
 if __name__ == '__main__':
     main()

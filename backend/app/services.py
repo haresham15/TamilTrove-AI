@@ -11,6 +11,7 @@ from .errors import AuthenticationError, AuthorizationError, NotFoundError
 from .normalization import normalize_query
 from .observability import MetricRegistry, Tracer, stage_timer
 from .ranking import SearchIndex, UserSignals, build_explanation
+from .recommendation import ALSRecommender
 from .schemas import SearchRequest, SearchSort
 from .security import (
     DUMMY_PASSWORD_HASH,
@@ -30,6 +31,7 @@ class ServiceContainer:
     metrics: MetricRegistry
     tracer: Tracer
     ingestion: Any
+    recommender: ALSRecommender | None = None
 
 
 class AuthService:
@@ -169,12 +171,21 @@ class SearchService:
         seed_movie_id: str | None = None,
     ) -> dict[str, Any]:
         started = time.perf_counter()
+        
+        ranking_version = self.container.settings.ranking_version
+        if user_id:
+            # A/B Testing routing based on user hash
+            if hash(user_id) % 100 < 50:
+                ranking_version = "v3-cross-encoder"
+            else:
+                ranking_version = "v2-local-hybrid-1"
+                
         timings: dict[str, float] = {}
         with self.container.tracer.span(
             "search.request",
             {
                 "search.language": "pending",
-                "ranking.version": self.container.settings.ranking_version,
+                "ranking.version": ranking_version,
             },
         ):
             with stage_timer(timings, "normalize"):
@@ -217,6 +228,7 @@ class SearchService:
                     signals,
                     seed_movie_id=seed_movie_id,
                     candidate_provider=candidate_provider,
+                    ranking_version=ranking_version,
                 )
             total = len(ranked)
             offset = (request.page - 1) * request.page_size
@@ -277,7 +289,7 @@ class SearchService:
             "results": results,
             "meta": {
                 "request_id": request_id,
-                "ranking_version": self.container.settings.ranking_version,
+                "ranking_version": ranking_version,
                 "dataset_version": self.container.catalog.dataset_version,
                 "total": total,
                 "page": request.page,
@@ -288,7 +300,7 @@ class SearchService:
                 "personalized": bool(user_id),
                 "stage_timings_ms": timings,
                 "experiment": {
-                    "ranking_version": self.container.settings.ranking_version,
+                    "ranking_version": ranking_version,
                     "feature_flags": {
                         "transformer": self.container.settings.enable_transformer,
                         "diversity": (
@@ -302,7 +314,7 @@ class SearchService:
         }
         labels = {
             "language": query.detected_language,
-            "ranking_version": self.container.settings.ranking_version,
+            "ranking_version": ranking_version,
         }
         self.container.metrics.increment("tamiltrove_search_requests_total", labels)
         self.container.metrics.observe(
@@ -320,7 +332,7 @@ class SearchService:
                     query.detected_language,
                     request.filters.model_dump(mode="json"),
                     [result["id"] for result in results],
-                    self.container.settings.ranking_version,
+                    ranking_version,
                     elapsed_ms,
                 )
         return response
@@ -328,6 +340,31 @@ class SearchService:
     def recommendations(
         self, request_id: str, user_id: str, surface: str, page: int, page_size: int
     ) -> dict[str, Any]:
+        if surface == "for_you" and self.container.recommender and self.container.recommender.model:
+            als_ids = self.container.recommender.recommend(user_id, k=page_size)
+            if als_ids:
+                results = []
+                states = interaction_state(self.container, user_id)
+                for mid in als_ids:
+                    movie = self.container.catalog.get(mid)
+                    if movie:
+                        payload = movie_payload(movie, states.get(mid))
+                        payload["scores"] = {"semantic": 0, "lexical": 0, "preference": 1, "quality": 1, "hidden_gem": 0, "final": 1}
+                        payload["final_score"] = 1.0
+                        payload["explanation"] = {"summary": "Recommended based on your activity", "confidence": "high", "evidence": []}
+                        results.append(payload)
+                return {
+                    "query": "", "normalized_query": "", "detected_language": "en", "query_plot": None,
+                    "results": results,
+                    "surface": surface,
+                    "meta": {
+                        "total": len(results), "page": 1, "page_size": page_size, "total_pages": 1,
+                        "latency_ms": 0, "inferred_filters": {}, "personalized": True, "stage_timings_ms": {},
+                        "request_id": request_id, "ranking_version": self.container.settings.ranking_version,
+                        "experiment": {"ranking_version": self.container.settings.ranking_version}
+                    }
+                }
+
         profile = self.container.store.get_user(user_id)
         if not profile:
             raise AuthenticationError()

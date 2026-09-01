@@ -16,7 +16,7 @@ def main():
     current_dir = Path(__file__).resolve().parent.parent
     data_path = current_dir / 'data' / 'movies_processed.json'
     
-    with open(data_path, 'r', encoding='utf-8') as f:
+    with open(data_path, encoding='utf-8') as f:
         movies_data = json.load(f)
         
     print(f"Loaded {len(movies_data)} movies.")
@@ -44,6 +44,7 @@ def main():
         # We will batch 20 movies per request to avoid hitting the 5 RPM rate limit
         chunk_size = 20
         import time
+
         import pydantic
         
         class QueriesList(pydantic.BaseModel):

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useApp } from "./app-provider";
 import { Icon } from "./icons";
+import { ChatPanel } from "./chat-panel";
 
 const primaryLinks = [
   { href: "/", label: "Discover" },
@@ -145,6 +146,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </>
         )}
       </div>
+
+      <ChatPanel />
     </>
   );
 }

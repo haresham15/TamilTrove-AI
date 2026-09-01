@@ -2,9 +2,9 @@ import json
 import os
 import sys
 import time
-import pydantic
-import numpy as np
 from pathlib import Path
+
+import pydantic
 
 try:
     from google import genai
@@ -26,13 +26,13 @@ def main():
     data_dir = current_dir / 'data'
     
     movies_path = data_dir / 'movies_processed.json'
-    with open(movies_path, 'r', encoding='utf-8') as f:
+    with open(movies_path, encoding='utf-8') as f:
         movies_data = json.load(f)
         
     benchmark_path = data_dir / 'benchmark_queries.json'
     benchmark_titles = set()
     if benchmark_path.exists():
-        with open(benchmark_path, 'r', encoding='utf-8') as f:
+        with open(benchmark_path, encoding='utf-8') as f:
             bm_data = json.load(f)
             benchmark_titles = {item['target_title'] for item in bm_data}
             

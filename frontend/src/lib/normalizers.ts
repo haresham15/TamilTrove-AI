@@ -10,6 +10,7 @@ import type {
   RecommendationResponse,
   SearchLanguage,
   SearchResponse,
+  ChatResponse,
   UserPreferences,
   UserProfile,
 } from "../types/api";
@@ -259,6 +260,20 @@ export function normalizeRecommendationResponse(
 ): RecommendationResponse {
   const normalized = normalizeSearchResponse(value);
   return { results: normalized.results, meta: normalized.meta, source: "api" };
+}
+
+export function normalizeChatResponse(value: unknown): ChatResponse {
+  const raw = asRecord(value);
+  const sourceCitations = Array.isArray(raw.citations) ? raw.citations : [];
+  const citations = sourceCitations.map((item, index) =>
+    normalizeMovieResult(item, `citation-${index + 1}`),
+  );
+
+  return {
+    answer: asString(raw.answer),
+    query: asString(raw.query),
+    citations,
+  };
 }
 
 const defaultPreferences: UserPreferences = {

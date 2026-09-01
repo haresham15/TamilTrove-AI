@@ -164,6 +164,7 @@ class SearchIndex:
         self.encoder: Any | None = None
         self.semantic_matrix: Any = self.local_semantic_matrix
         self.semantic_backend = "multilingual-character-fallback"
+        self.cross_encoder: Any | None = None
         self.degraded_reasons: list[str] = []
         self.pca_components: np.ndarray | None = None
         self.pca_mean: np.ndarray | None = None
@@ -174,7 +175,7 @@ class SearchIndex:
 
     def _try_transformer(self) -> None:
         try:
-            from sentence_transformers import SentenceTransformer
+            from sentence_transformers import CrossEncoder, SentenceTransformer
 
             encoder = SentenceTransformer(self.settings.model_name)
             dimension = int(encoder.get_sentence_embedding_dimension())
@@ -195,6 +196,11 @@ class SearchIndex:
             self.encoder = encoder
             self.semantic_matrix = np.asarray(matrix, dtype=np.float32)
             self.semantic_backend = self.settings.model_name
+            
+            try:
+                self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", max_length=512)
+            except Exception as ce_exc:
+                self.degraded_reasons.append(f"cross_encoder_unavailable:{type(ce_exc).__name__}")
         except Exception as exc:
             self.degraded_reasons.append(f"transformer_unavailable:{type(exc).__name__}")
 
@@ -338,6 +344,7 @@ class SearchIndex:
         signals: UserSignals | None = None,
         seed_movie_id: str | None = None,
         candidate_provider: CandidateProvider | None = None,
+        ranking_version: str = "v2-local-hybrid-1",
     ) -> tuple[list[RankedMovie], dict[str, Any], tuple[float | None, float | None]]:
         signals = signals or UserSignals()
         hints = parse_query_hints(query.normalized)
@@ -488,6 +495,22 @@ class SearchIndex:
                     plot_y=y,
                 )
             )
+            
+        if request.sort == SearchSort.relevance and self.cross_encoder is not None and ranking_version.startswith("v3"):
+            ranked.sort(key=lambda item: (item.final, item.movie.data_quality_score), reverse=True)
+            candidate_limit = min(len(ranked), self.settings.ranking_candidate_limit)
+            top_candidates = ranked[:candidate_limit]
+            if top_candidates:
+                pairs = [[query.original, item.movie.searchable_text] for item in top_candidates]
+                try:
+                    cross_scores = self.cross_encoder.predict(pairs, show_progress_bar=False)
+                    cross_probs = 1 / (1 + np.exp(-cross_scores))
+                    for i, item in enumerate(top_candidates):
+                        ce_score = float(cross_probs[i])
+                        item.final = round(0.7 * ce_score + 0.3 * item.final, 6)
+                except Exception:
+                    pass
+
         if request.sort == SearchSort.year_desc:
             ranked.sort(key=lambda item: (item.movie.release_year or 0, item.final), reverse=True)
         elif request.sort == SearchSort.year_asc:

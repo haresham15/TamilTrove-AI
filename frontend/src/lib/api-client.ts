@@ -6,6 +6,7 @@ import {
   normalizeMovie,
   normalizeRecommendationResponse,
   normalizeSearchResponse,
+  normalizeChatResponse,
   normalizeProfile,
 } from "./normalizers";
 import type {
@@ -19,6 +20,7 @@ import type {
   RecommendationResponse,
   SearchRequest,
   SearchResponse,
+  ChatResponse,
   UserProfile,
 } from "../types/api";
 
@@ -147,6 +149,20 @@ export const apiClient = {
       token,
     });
     return normalizeSearchResponse(payload);
+  },
+
+  async chat(
+    query: string,
+    signal?: AbortSignal,
+    token?: string | null,
+  ): Promise<ChatResponse> {
+    const payload = await request<unknown>("/api/v1/chat", {
+      method: "POST",
+      body: { query },
+      signal,
+      token,
+    });
+    return normalizeChatResponse(payload);
   },
 
   async movie(
