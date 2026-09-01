@@ -1,0 +1,105 @@
+[
+  {
+    "query": "movie about I",
+    "positive_movie": {
+      "title": "I",
+      "genre": "Romance Thriller",
+      "overview": "I is a 2015 Indian Tamil-language romantic action thriller film directed and co-written by Shankar, produced and distributed by V. Ravichandran under Aascar Films. The film stars Vikram, Amy Jackson and Suresh Gopi in the lead roles along with Santhanam, Ramkumar Ganesan, Upen Patel, M. Kamaraj and Ojas Rajani in supporting roles. The film, told in nonlinear narrative, tells the story of Lingesan, a bodybuilder-turned-supermodel, who sets out to exact revenge against his enemies after they disfigure him by injecting him with the I virus. Parts of the film were loosely based on The Hunchback of Notre Dame and Beauty and the Beast.",
+      "director": "Shankar S",
+      "cast": "Vikram , Amy Jackson, Santhanam , Suresh Gopi, Upen Patel",
+      "prominence_score": 0.49653739612188363,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/5/56/I_film_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    },
+    "hard_negative_movie": {
+      "title": "Darling",
+      "genre": "Horror Comedy",
+      "overview": "Darling, Darling, Darling is a 1982 Indian Tamil-language romantic drama film, written and directed by K. Bhagyaraj. The film stars him, Poornima Jayaram and Suman. It was released on 14 November 1982. The film was remade in Kannada as Premi No. 1 (2001).",
+      "director": "Sam Anton",
+      "cast": "Gv Prakash, Karunas , Nikki Galrani, Rajendran, Bala Saravanan",
+      "prominence_score": 0.49653739612188363,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/9/9a/Darling%2C_Darling%2C_Darling.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    }
+  },
+  {
+    "query": "movie about Darling",
+    "positive_movie": {
+      "title": "Darling",
+      "genre": "Horror Comedy",
+      "overview": "Darling, Darling, Darling is a 1982 Indian Tamil-language romantic drama film, written and directed by K. Bhagyaraj. The film stars him, Poornima Jayaram and Suman. It was released on 14 November 1982. The film was remade in Kannada as Premi No. 1 (2001).",
+      "director": "Sam Anton",
+      "cast": "Gv Prakash, Karunas , Nikki Galrani, Rajendran, Bala Saravanan",
+      "prominence_score": 0.49653739612188363,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/9/9a/Darling%2C_Darling%2C_Darling.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    },
+    "hard_negative_movie": {
+      "title": "Aambala (U)",
+      "genre": "Comedy Action",
+      "overview": "Veerapandiya Kattabomman is a 1959 Indian Tamil-language historical war film produced and directed by B. R. Panthulu. The film stars Sivaji Ganesan, Gemini Ganesan, Padmini, S. Varalakshmi, and Ragini, with V. K. Ramasamy and Javar Seetharaman in supporting roles. Its soundtrack and score were composed by G. Ramanathan.",
+      "director": "Sundar C",
+      "cast": "Vishal Krishna, Hansika Motwani, Ramya Krishnan, Prabhu Ganesan, Santhanam , Vaibhav Reddy, Sathish ",
+      "prominence_score": 0.7853185595567868,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/7/7c/Veerapandiya_Kattabomman_film_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    }
+  },
+  {
+    "query": "movie about Aambala (U)",
+    "positive_movie": {
+      "title": "Aambala (U)",
+      "genre": "Comedy Action",
+      "overview": "Veerapandiya Kattabomman is a 1959 Indian Tamil-language historical war film produced and directed by B. R. Panthulu. The film stars Sivaji Ganesan, Gemini Ganesan, Padmini, S. Varalakshmi, and Ragini, with V. K. Ramasamy and Javar Seetharaman in supporting roles. Its soundtrack and score were composed by G. Ramanathan.",
+      "director": "Sundar C",
+      "cast": "Vishal Krishna, Hansika Motwani, Ramya Krishnan, Prabhu Ganesan, Santhanam , Vaibhav Reddy, Sathish ",
+      "prominence_score": 0.7853185595567868,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/7/7c/Veerapandiya_Kattabomman_film_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    },
+    "hard_negative_movie": {
+      "title": "Isai (U/A)",
+      "genre": "Love Drama",
+      "overview": "A maestro decides to snuff out his subordinate, after the latter subdued all his fame.",
+      "director": "Suryah S.j.",
+      "cast": "S J Surya, Savitri , Sathyaraj , Thambi Ramaiah, Ganja Karuppu, Jayaprakash",
+      "prominence_score": 0.35941828254847646
+    }
+  },
+  {
+    "query": "movie about Isai (U/A)",
+    "positive_movie": {
+      "title": "Isai (U/A)",
+      "genre": "Love Drama",
+      "overview": "A maestro decides to snuff out his subordinate, after the latter subdued all his fame.",
+      "director": "Suryah S.j.",
+      "cast": "S J Surya, Savitri , Sathyaraj , Thambi Ramaiah, Ganja Karuppu, Jayaprakash",
+      "prominence_score": 0.35941828254847646
+    },
+    "hard_negative_movie": {
+      "title": "Yennai Arindhaal",
+      "genre": "Action Drama",
+      "overview": "Yennai Arindhaal is a 2015 Indian Tamil-language action thriller film written and directed by Gautham Vasudev Menon and produced by S. Aishwarya. The film stars Ajith Kumar, Trisha Krishnan, Anushka Shetty and Arun Vijay in the lead roles, while Vivek, Anikha, Parvathy Nair, Ashish Vidyarthi, Suman and Avinash Yelandur appear in supporting roles. It is also the final film of Menon's police trilogy after Kaakha Kaakha and Vettaiyaadu Vilaiyaadu. The film revolves around a former police officer's battle to protect his step-daughter from his arch-enemy.",
+      "director": "Gautham Menon",
+      "cast": "Ajith Kumar, Anushka Shetty, Arun Vijay, Vivek , Trisha Krishnan, Daniel Balaji, Thalaivasal Vijay",
+      "prominence_score": 0.5609418282548476,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/4/4d/Yennai_Arindhaal.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    }
+  },
+  {
+    "query": "movie about Yennai Arindhaal",
+    "positive_movie": {
+      "title": "Yennai Arindhaal",
+      "genre": "Action Drama",
+      "overview": "Yennai Arindhaal is a 2015 Indian Tamil-language action thriller film written and directed by Gautham Vasudev Menon and produced by S. Aishwarya. The film stars Ajith Kumar, Trisha Krishnan, Anushka Shetty and Arun Vijay in the lead roles, while Vivek, Anikha, Parvathy Nair, Ashish Vidyarthi, Suman and Avinash Yelandur appear in supporting roles. It is also the final film of Menon's police trilogy after Kaakha Kaakha and Vettaiyaadu Vilaiyaadu. The film revolves around a former police officer's battle to protect his step-daughter from his arch-enemy.",
+      "director": "Gautham Menon",
+      "cast": "Ajith Kumar, Anushka Shetty, Arun Vijay, Vivek , Trisha Krishnan, Daniel Balaji, Thalaivasal Vijay",
+      "prominence_score": 0.5609418282548476,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/4/4d/Yennai_Arindhaal.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    },
+    "hard_negative_movie": {
+      "title": "I",
+      "genre": "Romance Thriller",
+      "overview": "I is a 2015 Indian Tamil-language romantic action thriller film directed and co-written by Shankar, produced and distributed by V. Ravichandran under Aascar Films. The film stars Vikram, Amy Jackson and Suresh Gopi in the lead roles along with Santhanam, Ramkumar Ganesan, Upen Patel, M. Kamaraj and Ojas Rajani in supporting roles. The film, told in nonlinear narrative, tells the story of Lingesan, a bodybuilder-turned-supermodel, who sets out to exact revenge against his enemies after they disfigure him by injecting him with the I virus. Parts of the film were loosely based on The Hunchback of Notre Dame and Beauty and the Beast.",
+      "director": "Shankar S",
+      "cast": "Vikram , Amy Jackson, Santhanam , Suresh Gopi, Upen Patel",
+      "prominence_score": 0.49653739612188363,
+      "poster_url": "https://upload.wikimedia.org/wikipedia/en/5/56/I_film_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
+    }
+  }
+]
