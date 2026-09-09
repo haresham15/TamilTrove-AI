@@ -88,7 +88,7 @@ services:
 
   redis:
     image: redis:7.4.11-alpine
-    profiles: ["cache"]
+    profiles: ["cache", "streaming"]
     restart: unless-stopped
     command:
       [
@@ -109,6 +109,37 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    security_opt:
+      - no-new-privileges:true
+
+  stream-worker:
+    build:
+      context: ../backend
+    profiles: ["streaming"]
+    restart: unless-stopped
+    command: ["python", "-m", "app.streaming"]
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-tamiltrove}:${POSTGRES_PASSWORD:-tamiltrove-local-only}@database:5432/${POSTGRES_DB:-tamiltrove}
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+
+  media-worker:
+    build:
+      context: ../backend
+    profiles: ["media"]
+    restart: unless-stopped
+    command: ["python", "-m", "app.multimodal"]
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-tamiltrove}:${POSTGRES_PASSWORD:-tamiltrove-local-only}@database:5432/${POSTGRES_DB:-tamiltrove}
+    depends_on:
+      database:
+        condition: service_healthy
     security_opt:
       - no-new-privileges:true
 

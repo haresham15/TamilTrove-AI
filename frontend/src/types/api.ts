@@ -19,6 +19,23 @@ export type SearchSort =
   | "hidden_gems"
   | "popularity";
 
+export interface VisualPalette {
+  dominant_colors: string[];
+  contrast: number;
+  saturation: number;
+  brightness: number;
+  aesthetic_tags: string[];
+}
+
+export interface AudioProfile {
+  bpm?: number;
+  energy: number;
+  dynamic_range: number;
+  instruments: string[];
+  mood: string;
+  mix_tags: string[];
+}
+
 export interface RankingScores {
   semantic: number;
   lexical: number;
@@ -26,6 +43,8 @@ export interface RankingScores {
   quality: number;
   hiddenGem: number;
   final: number;
+  visual?: number;
+  audio?: number;
 }
 
 export interface MatchExplanation {
@@ -52,6 +71,8 @@ export interface Movie {
   cast: string[];
   prominenceScore: number;
   qualityScore?: number;
+  visual_palette?: VisualPalette;
+  audio_profile?: AudioProfile;
 }
 
 export interface MovieResult extends Movie {
@@ -88,6 +109,10 @@ export interface SearchRequest {
   beta?: number;
   diversity?: number;
   include_debug?: boolean;
+  visual_query?: string;
+  audio_query?: string;
+  visual_weight?: number;
+  audio_weight?: number;
 }
 
 export interface PaginationMeta {
@@ -238,3 +263,50 @@ export interface ApiErrorEnvelope {
   detail?: string | Array<{ msg?: string }>;
   message?: string;
 }
+
+export interface ClarificationQuestion {
+  text: string;
+  options: string[];
+  context_type: string;
+}
+
+export interface AgentToolCall {
+  name: string;
+  arguments: Record<string, unknown>;
+  result?: Record<string, unknown>;
+}
+
+export interface AgentMessage {
+  role: "user" | "assistant" | "system";
+  content: string;
+  timestamp?: string;
+  clarification_options?: string[];
+}
+
+export interface AgentChatRequest {
+  message: string;
+  session_id?: string;
+  context?: Record<string, unknown>;
+}
+
+export interface AgentChatResponse {
+  session_id: string;
+  message: string;
+  needs_clarification?: boolean;
+  clarification_needed?: boolean;
+  clarification?: ClarificationQuestion | null;
+  clarification_question?: ClarificationQuestion | null;
+  recommendations?: MovieResult[];
+  recommended_movies?: MovieResult[];
+  tool_calls?: AgentToolCall[];
+  tool_calls_executed?: AgentToolCall[];
+  latency_ms: number;
+}
+
+export interface StreamingMetrics {
+  active_subscribers: number;
+  queue_depth: number;
+  events_processed: number;
+  active_profiles: number;
+}
+

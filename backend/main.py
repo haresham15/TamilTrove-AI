@@ -32,6 +32,8 @@ from app.observability import (
 )
 from app.ranking import SearchIndex
 from app.schemas import (
+    AgentChatRequest,
+    AgentChatResponse,
     AuthResponse,
     CollectionCreate,
     CollectionItemRequest,
@@ -63,6 +65,7 @@ from app.storage import create_store
 
 class ChatRequest(BaseModel):
     query: str
+    session_id: str | None = None
 
 logger = logging.getLogger("tamiltrove.api")
 bearer_scheme = HTTPBearer(auto_error=False, scheme_name="TamilTrove access token")
@@ -189,10 +192,17 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
                 settings.trusted_poster_hosts,
                 Path(settings.data_path).parent / "versions",
             )
+            from app.agent import RecommendationAgent
             from app.recommendation import ALSRecommender
+            from app.streaming import DynamicVectorUpdater, EventStream
+
             recommender = ALSRecommender(catalog, store)
             recommender.fit()
-            application.state.container = ServiceContainer(
+            vector_updater = DynamicVectorUpdater(catalog, index)
+            event_stream = EventStream(vector_updater)
+            event_stream.start()
+
+            container = ServiceContainer(
                 settings=settings,
                 catalog=catalog,
                 store=store,
@@ -201,7 +211,11 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
                 tracer=tracer,
                 ingestion=ingestion,
                 recommender=recommender,
+                event_stream=event_stream,
             )
+            agent = RecommendationAgent(container)
+            container.agent = agent
+            application.state.container = container
             logger.info(
                 "service_ready",
                 extra={
@@ -216,6 +230,9 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
             application.state.startup_error = f"{type(exc).__name__}: {exc}"
             logger.exception("service_initialization_failed")
         yield
+        container = getattr(application.state, "container", None)
+        if container is not None and getattr(container, "event_stream", None) is not None:
+            container.event_stream.stop()
         if store is not None:
             store.close()
 
@@ -796,6 +813,102 @@ def create_app(settings_override: Settings | None = None) -> FastAPI:
     @app.get("/api/v1/admin/dataset/versions", tags=["administration"])
     def dataset_versions(_: Admin, container: Container) -> dict[str, Any]:
         return {"items": container.store.list_dataset_versions()}
+
+    # --- V4 Agentic Conversational Discovery ---
+    @app.post("/api/v1/agent/chat", response_model=AgentChatResponse, tags=["agent"])
+    def agent_chat(
+        body: AgentChatRequest,
+        container: Container,
+        user: OptionalUser = None,
+    ) -> AgentChatResponse:
+        user_id = user.id if user else None
+        return container.agent.run(body, user_id=user_id)
+
+    @app.get("/api/v1/agent/sessions/{session_id}", tags=["agent"])
+    def get_agent_session(session_id: str, container: Container) -> dict[str, Any]:
+        messages = container.agent.memory.get_messages(session_id)
+        return {"session_id": session_id, "messages": [m.model_dump() for m in messages]}
+
+    @app.delete("/api/v1/agent/sessions/{session_id}", status_code=204, tags=["agent"])
+    def clear_agent_session(session_id: str, container: Container) -> Response:
+        container.agent.memory.clear(session_id)
+        return Response(status_code=204)
+
+    @app.post("/api/v1/chat", tags=["agent"])
+    def chat_legacy(
+        body: ChatRequest,
+        container: Container,
+        user: OptionalUser = None,
+    ) -> dict[str, Any]:
+        user_id = user.id if user else None
+        res = container.agent.run(body.query, user_id=user_id, session_id=body.session_id)
+        return {
+            "answer": res.message,
+            "citations": [c.model_dump() for c in res.citations],
+            "query": body.query,
+            "session_id": res.session_id,
+            "clarification": res.clarification.model_dump() if res.clarification else None,
+            "needs_clarification": res.needs_clarification,
+        }
+
+    # --- V4 Multimodal Search Endpoints ---
+    @app.post("/api/v1/multimodal/visual-search", response_model=SearchResponse, tags=["multimodal"])
+    def visual_search(
+        request: Request,
+        container: Container,
+        query: str = Query(..., description="Visual aesthetic description (e.g. dark, neon, golden-hour)"),
+        page: int = Query(1, ge=1),
+        page_size: int = Query(20, ge=1, le=50),
+        user: OptionalUser = None,
+    ) -> dict[str, Any]:
+        req = SearchRequest(
+            query=query,
+            visual_query=query,
+            visual_weight=0.65,
+            page=page,
+            page_size=page_size,
+        )
+        return SearchService(container).search(
+            req,
+            request_id=request.state.request_id,
+            user_id=user.id if user else None,
+        )
+
+    @app.post("/api/v1/multimodal/audio-search", response_model=SearchResponse, tags=["multimodal"])
+    def audio_search(
+        request: Request,
+        container: Container,
+        query: str = Query(..., description="Soundtrack mix or mood description (e.g. heavy synth, tense orchestral)"),
+        page: int = Query(1, ge=1),
+        page_size: int = Query(20, ge=1, le=50),
+        user: OptionalUser = None,
+    ) -> dict[str, Any]:
+        req = SearchRequest(
+            query=query,
+            audio_query=query,
+            audio_weight=0.65,
+            page=page,
+            page_size=page_size,
+        )
+        return SearchService(container).search(
+            req,
+            request_id=request.state.request_id,
+            user_id=user.id if user else None,
+        )
+
+    # --- V4 Real-Time Streaming Telemetry ---
+    @app.get("/api/v1/streaming/metrics", tags=["streaming"])
+    def streaming_metrics(container: Container) -> dict[str, Any]:
+        stream = getattr(container, "event_stream", None)
+        if not stream:
+            return {"status": "disabled", "produced": 0, "consumed": 0, "lag": 0}
+        return {
+            "status": "active",
+            "events_produced": stream.events_produced,
+            "events_consumed": stream.events_consumed,
+            "consumer_lag": stream.events_produced - stream.events_consumed,
+            "last_latency_ms": stream.last_latency_ms,
+        }
 
     return app
 

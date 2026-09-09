@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-09-09T03:11:40.178153+00:00",
+  "metrics": {
+    "p50_event_latency_ms": 0.126,
+    "p95_event_latency_ms": 0.425,
+    "p99_event_latency_ms": 0.678,
+    "max_event_latency_ms": 0.678,
+    "preference_reflection_time_ms": 87.19,
+    "throughput_events_per_sec": 6205.4,
+    "replay_verified_count": 2101,
+    "durable_replay_passed": true
+  },
+  "targets": {
+    "p95_event_latency_ms": {
+      "target": 500.0,
+      "actual": 0.4248000914230943,
+      "passed": true
+    },
+    "preference_reflection_time_ms": {
+      "target": 1000.0,
+      "actual": 87.19140000175685,
+      "passed": true
+    },
+    "throughput_events_per_sec": {
+      "target": 1000.0,
+      "actual": 6205.412174442301,
+      "passed": true
+    },
+    "durable_replay": {
+      "target": true,
+      "actual": true,
+      "passed": true
+    }
+  }
+}

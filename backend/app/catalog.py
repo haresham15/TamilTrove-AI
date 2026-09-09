@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from .multimodal import infer_audio_profile, infer_visual_palette
 from .normalization import normalize_text
 
 CATALOG_NAMESPACE = uuid.UUID("b915615d-5d47-4a95-aed5-c54e35775ce1")
@@ -168,6 +169,8 @@ class Movie:
     dataset_version: str
     provenance: dict[str, Any] = field(default_factory=dict)
     source_index: int | None = None
+    visual_palette: dict[str, Any] = field(default_factory=dict)
+    audio_profile: dict[str, Any] = field(default_factory=dict)
 
     @property
     def genre(self) -> str:
@@ -197,6 +200,8 @@ class Movie:
         data["cast"] = self.cast
         data["genres"] = list(self.genres)
         data["themes"] = list(self.themes)
+        data["visual_palette"] = dict(self.visual_palette)
+        data["audio_profile"] = dict(self.audio_profile)
         data.pop("cast_members", None)
         return data
 
@@ -332,6 +337,10 @@ class Catalog:
                     dataset_version=dataset_version,
                     provenance=provenance,
                     source_index=index,
+                    visual_palette=raw.get("visual_palette")
+                    or infer_visual_palette(canonical_title, genres, themes, overview),
+                    audio_profile=raw.get("audio_profile")
+                    or infer_audio_profile(canonical_title, genres, themes, overview),
                 )
             )
 

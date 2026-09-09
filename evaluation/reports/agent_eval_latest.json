@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-09-09T03:09:47.290389+00:00",
+  "metrics": {
+    "clarification_rate": 1.0,
+    "tool_call_accuracy": 1.0,
+    "grounding_fidelity": 1.0,
+    "avg_conversation_turns": 2.0,
+    "fallback_rate": 0.0,
+    "total_tool_calls": 16,
+    "total_recommendations_verified": 40
+  },
+  "multi_turn_results": [
+    {
+      "name": "Intense Non-Action Flow",
+      "turns": 2,
+      "top_recommended": "Parking",
+      "success": true
+    },
+    {
+      "name": "Hidden Gem Flow",
+      "turns": 2,
+      "top_recommended": "36 Vayadhinile",
+      "success": true
+    },
+    {
+      "name": "Tonight Mood Flow",
+      "turns": 2,
+      "top_recommended": "Vaagai Sooda Vaa",
+      "success": true
+    }
+  ],
+  "targets": {
+    "clarification_rate": {
+      "target": 0.8,
+      "passed": true
+    },
+    "tool_call_accuracy": {
+      "target": 0.95,
+      "passed": true
+    },
+    "grounding_fidelity": {
+      "target": 1.0,
+      "passed": true
+    },
+    "avg_conversation_turns": {
+      "target": 4.0,
+      "passed": true
+    },
+    "fallback_rate": {
+      "target": 0.05,
+      "passed": true
+    }
+  }
+}

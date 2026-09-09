@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime
+import uuid
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any, Literal
 
@@ -36,6 +37,23 @@ class SearchSort(StrEnum):
     hidden_gems = "hidden_gems"
 
 
+class VisualPalette(StrictModel):
+    dominant_colors: list[str] = Field(default_factory=list, max_length=10)
+    contrast: float = Field(default=0.5, ge=0, le=1)
+    saturation: float = Field(default=0.5, ge=0, le=1)
+    brightness: float = Field(default=0.5, ge=0, le=1)
+    aesthetic_tags: list[str] = Field(default_factory=list, max_length=20)
+
+
+class AudioProfile(StrictModel):
+    bpm: int | None = Field(default=None, ge=40, le=240)
+    energy: float = Field(default=0.5, ge=0, le=1)
+    dynamic_range: float = Field(default=0.5, ge=0, le=1)
+    instruments: list[str] = Field(default_factory=list, max_length=20)
+    mood: str = Field(default="balanced", max_length=50)
+    mix_tags: list[str] = Field(default_factory=list, max_length=20)
+
+
 class SearchFilters(StrictModel):
     year_min: int | None = Field(default=None, ge=1900, le=2100)
     year_max: int | None = Field(default=None, ge=1900, le=2100)
@@ -51,6 +69,10 @@ class SearchFilters(StrictModel):
     min_quality: float | None = Field(default=None, ge=0, le=1)
     exclude_watched: bool = False
     exclude_dismissed: bool = True
+    # V4 Multimodal filters
+    visual_aesthetic: str | None = Field(default=None, max_length=80)
+    audio_mood: str | None = Field(default=None, max_length=80)
+    audio_instruments: list[str] = Field(default_factory=list, max_length=10)
 
     @model_validator(mode="after")
     def validate_ranges(self) -> SearchFilters:
@@ -75,6 +97,11 @@ class SearchRequest(StrictModel):
     beta: float = Field(default=0.5, ge=0, le=2)
     diversity: float | None = Field(default=None, ge=0, le=1)
     include_debug: bool = False
+    # V4 Cross-modal query inputs & weights
+    visual_query: str | None = Field(default=None, max_length=500)
+    audio_query: str | None = Field(default=None, max_length=500)
+    visual_weight: float = Field(default=0.0, ge=0, le=1)
+    audio_weight: float = Field(default=0.0, ge=0, le=1)
 
 
 class EvidenceOut(BaseModel):
@@ -82,6 +109,7 @@ class EvidenceOut(BaseModel):
     value: str
     source_field: str
     contribution: float = 0.0
+    modality: Literal["text", "visual", "audio"] = "text"
 
 
 class ExplanationOut(BaseModel):
@@ -97,6 +125,8 @@ class ScoreOut(BaseModel):
     quality: float
     hidden_gem: float
     final: float
+    visual: float = 0.0
+    audio: float = 0.0
 
 
 class MovieOut(BaseModel):
@@ -124,6 +154,9 @@ class MovieOut(BaseModel):
     dataset_version: str
     provenance: dict[str, Any] | None = None
     user_state: dict[str, Any] | None = None
+    # V4 Multimodal profiles
+    visual_palette: dict[str, Any] | None = None
+    audio_profile: dict[str, Any] | None = None
 
 
 class SearchResultOut(MovieOut):
@@ -136,6 +169,63 @@ class SearchResultOut(MovieOut):
     scores: ScoreOut
     explanation: ExplanationOut
     debug: dict[str, Any] | None = None
+
+
+# V4 Real-Time Streaming & Event Schemas
+class InteractionEvent(StrictModel):
+    event_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    event_type: str
+    movie_id: str
+    timestamp: str = Field(default_factory=lambda: datetime.now(UTC).isoformat())
+    session_id: str | None = None
+    context: dict[str, Any] = Field(default_factory=dict)
+
+
+# V4 Agent Schemas
+class ToolCall(BaseModel):
+    id: str
+    name: str
+    arguments: dict[str, Any] = Field(default_factory=dict)
+
+
+class ToolResult(BaseModel):
+    tool_call_id: str
+    name: str
+    output: Any
+    error: str | None = None
+
+
+class AgentMessage(BaseModel):
+    role: Literal["user", "assistant", "system", "tool"]
+    content: str
+    tool_calls: list[ToolCall] = Field(default_factory=list)
+    tool_results: list[ToolResult] = Field(default_factory=list)
+    timestamp: str | None = None
+
+
+class ClarificationQuestion(BaseModel):
+    question: str
+    options: list[str] = Field(default_factory=list)
+    dimension: str = "genre"
+
+
+class AgentChatRequest(StrictModel):
+    message: str = Field(min_length=1, max_length=2000)
+    session_id: str | None = None
+    user_id: str | None = None
+
+
+class AgentChatResponse(BaseModel):
+    session_id: str
+    message: str
+    needs_clarification: bool = False
+    clarification: ClarificationQuestion | None = None
+    recommendations: list[SearchResultOut] = Field(default_factory=list)
+    citations: list[MovieOut] = Field(default_factory=list)
+    tool_calls_executed: list[ToolCall] = Field(default_factory=list)
+    latency_ms: float = 0.0
+    grounding_verified: bool = True
 
 
 class PaginationMeta(BaseModel):

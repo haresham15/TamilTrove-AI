@@ -13,6 +13,12 @@ from sklearn.preprocessing import normalize
 
 from .catalog import Catalog, Movie
 from .config import Settings
+from .multimodal import (
+    AESTHETIC_RULES,
+    INSTRUMENT_RULES,
+    MOOD_RULES,
+    generate_multimodal_vector,
+)
 from .normalization import NormalizedQuery, normalize_text, parse_query_hints
 from .schemas import SearchFilters, SearchRequest, SearchSort
 
@@ -41,6 +47,8 @@ class RankedMovie:
     semantic_vector: np.ndarray
     plot_x: float | None = None
     plot_y: float | None = None
+    visual: float = 0.0
+    audio: float = 0.0
 
 
 def cosine_rows(matrix: Any, vector: Any) -> np.ndarray:
@@ -48,6 +56,26 @@ def cosine_rows(matrix: Any, vector: Any) -> np.ndarray:
     if hasattr(values, "toarray"):
         values = values.toarray()
     return np.asarray(values).reshape(-1).astype(float)
+
+
+def cross_modal_rank_fusion(
+    channel_scores: list[tuple[np.ndarray, float]],
+    k: int = 60,
+) -> np.ndarray:
+    """Fuse 2+ channels (e.g., text semantic, lexical, visual palette, audio mix) using Reciprocal Rank Fusion."""
+    active_channels = [(scores, weight) for scores, weight in channel_scores if weight > 0]
+    if not active_channels:
+        return np.zeros(len(channel_scores[0][0]), dtype=np.float32)
+
+    total_fused = np.zeros(len(active_channels[0][0]), dtype=np.float32)
+    for scores, weight in active_channels:
+        order = np.argsort(-scores, kind="stable")
+        rank = np.empty_like(order)
+        rank[order] = np.arange(len(order)) + 1
+        total_fused += weight / (k + rank)
+
+    maximum = total_fused.max(initial=0.0)
+    return total_fused / maximum if maximum else total_fused
 
 
 def reciprocal_rank_fusion(
@@ -59,15 +87,7 @@ def reciprocal_rank_fusion(
 ) -> np.ndarray:
     if semantic.shape != lexical.shape:
         raise ValueError("Score vectors must have the same shape")
-    semantic_order = np.argsort(-semantic, kind="stable")
-    lexical_order = np.argsort(-lexical, kind="stable")
-    semantic_rank = np.empty_like(semantic_order)
-    lexical_rank = np.empty_like(lexical_order)
-    semantic_rank[semantic_order] = np.arange(len(semantic_order)) + 1
-    lexical_rank[lexical_order] = np.arange(len(lexical_order)) + 1
-    fused = semantic_weight / (k + semantic_rank) + lexical_weight / (k + lexical_rank)
-    maximum = fused.max(initial=0.0)
-    return fused / maximum if maximum else fused
+    return cross_modal_rank_fusion([(semantic, semantic_weight), (lexical, lexical_weight)], k=k)
 
 
 def hidden_gem_score(prominence: float, relevance: float, preference: float) -> float:
@@ -84,6 +104,8 @@ def phrase_in_query(phrase: str, query: str) -> bool:
     """
 
     if not phrase or not query:
+        return False
+    if phrase not in query:
         return False
     return bool(re.search(rf"(?<!\w){re.escape(phrase)}(?!\w)", query, re.UNICODE))
 
@@ -172,6 +194,50 @@ class SearchIndex:
         if settings.enable_transformer:
             self._try_transformer()
         self._fit_projection()
+        self._build_multimodal_matrices()
+
+    def _build_multimodal_matrices(self) -> None:
+        visual_vectors = []
+        audio_vectors = []
+        for movie in self.catalog.movies:
+            v_tags = movie.visual_palette.get("aesthetic_tags", [])
+            tag_keywords = []
+            for t in v_tags:
+                tag_keywords.append(t)
+                tag_keywords.extend(AESTHETIC_RULES.get(t, ()))
+            palette_desc = (
+                " ".join(v_tags)
+                + " "
+                + " ".join(tag_keywords)
+                + " "
+                + " ".join(movie.genres)
+                + " cinematography visual grading tone aesthetic look"
+            )
+
+            a_mood = str(movie.audio_profile.get("mood", ""))
+            a_insts = movie.audio_profile.get("instruments", [])
+            inst_keywords = []
+            for inst in a_insts:
+                inst_keywords.append(inst)
+                inst_keywords.extend(INSTRUMENT_RULES.get(inst, ()))
+            audio_desc = (
+                a_mood
+                + " "
+                + " ".join(MOOD_RULES.get(a_mood, ()))
+                + " "
+                + " ".join(inst_keywords)
+                + " "
+                + " ".join(movie.audio_profile.get("mix_tags", []))
+                + " soundtrack music score beats sound"
+            )
+            visual_vectors.append(
+                generate_multimodal_vector(palette_desc, dimension=384, salt="visual")
+            )
+            audio_vectors.append(
+                generate_multimodal_vector(audio_desc, dimension=384, salt="audio")
+            )
+        self.visual_matrix = np.asarray(visual_vectors, dtype=np.float32)
+        self.audio_matrix = np.asarray(audio_vectors, dtype=np.float32)
 
     def _try_transformer(self) -> None:
         try:
@@ -335,7 +401,24 @@ class SearchIndex:
             return False
         if filters.exclude_dismissed and movie.id in signals.dismissed_movie_ids:
             return False
-        return not (filters.exclude_watched and movie.id in signals.watched_movie_ids)
+        if filters.exclude_watched and movie.id in signals.watched_movie_ids:
+            return False
+        if filters.visual_aesthetic:
+            target_aesthetic = normalize_text(filters.visual_aesthetic)
+            tags = [normalize_text(t) for t in movie.visual_palette.get("aesthetic_tags", [])]
+            if target_aesthetic not in tags and not any(target_aesthetic in t for t in tags):
+                return False
+        if filters.audio_mood:
+            target_mood = normalize_text(filters.audio_mood)
+            movie_mood = normalize_text(str(movie.audio_profile.get("mood", "")))
+            if target_mood != movie_mood and target_mood not in movie_mood:
+                return False
+        if filters.audio_instruments:
+            movie_insts = {normalize_text(i) for i in movie.audio_profile.get("instruments", [])}
+            target_insts = {normalize_text(i) for i in filters.audio_instruments}
+            if not (movie_insts & target_insts):
+                return False
+        return True
 
     def rank(
         self,
@@ -432,9 +515,41 @@ class SearchIndex:
                     }
                 )
 
+        # V4 Multimodal cross-modal query handling
+        visual_query = request.visual_query or (request.filters.visual_aesthetic or "")
+        audio_query = request.audio_query or (request.filters.audio_mood or "")
+        has_visual = bool(visual_query.strip()) or request.visual_weight > 0
+        has_audio = bool(audio_query.strip()) or request.audio_weight > 0
+
+        if has_visual:
+            visual_q_desc = visual_query if visual_query.strip() else effective_query
+            v_vec = generate_multimodal_vector(visual_q_desc, dimension=384, salt="visual")
+            visual_scores = cosine_rows(self.visual_matrix, v_vec)
+            visual_scores = np.clip(visual_scores, 0.0, 1.0)
+        else:
+            visual_scores = np.zeros(len(self.catalog.movies), dtype=np.float32)
+
+        if has_audio:
+            audio_q_desc = audio_query if audio_query.strip() else effective_query
+            a_vec = generate_multimodal_vector(audio_q_desc, dimension=384, salt="audio")
+            audio_scores = cosine_rows(self.audio_matrix, a_vec)
+            audio_scores = np.clip(audio_scores, 0.0, 1.0)
+        else:
+            audio_scores = np.zeros(len(self.catalog.movies), dtype=np.float32)
+
         semantic_weight = self.settings.ranking_semantic_weight * request.alpha
         lexical_weight = self.settings.ranking_lexical_weight * (1.0 - request.alpha + 0.42)
-        fused = reciprocal_rank_fusion(semantic, lexical, semantic_weight, lexical_weight)
+        visual_weight = request.visual_weight if request.visual_weight > 0 else (0.45 if has_visual else 0.0)
+        audio_weight = request.audio_weight if request.audio_weight > 0 else (0.45 if has_audio else 0.0)
+
+        fused = cross_modal_rank_fusion(
+            [
+                (semantic, semantic_weight),
+                (lexical, lexical_weight),
+                (visual_scores, visual_weight),
+                (audio_scores, audio_weight),
+            ]
+        )
         positive_neighbors, negative_neighbors = self._profile_neighbors(
             signals.positive_movie_ids,
             signals.negative_movie_ids,
@@ -453,6 +568,8 @@ class SearchIndex:
                 max(semantic[index], lexical[index]),
                 min(1.0, signals.hidden_gem_preference * request.beta),
             )
+            v_val = float(visual_scores[index])
+            a_val = float(audio_scores[index])
             score = (
                 0.80 * float(fused[index])
                 + self.settings.ranking_preference_weight * max(-0.5, pref)
@@ -478,6 +595,30 @@ class SearchIndex:
                         "contribution": round(hidden, 4),
                     }
                 )
+            if has_visual and v_val >= 0.10:
+                tags = movie.visual_palette.get("aesthetic_tags", [])
+                tag_label = f"{tags[0]} visual tone" if tags else "cinematic palette"
+                evidence.append(
+                    {
+                        "type": "visual_tone",
+                        "value": tag_label,
+                        "source_field": "visual_palette",
+                        "contribution": round(v_val * 0.35, 4),
+                        "modality": "visual",
+                    }
+                )
+            if has_audio and a_val >= 0.08:
+                mood = movie.audio_profile.get("mood", "balanced")
+                bpm = movie.audio_profile.get("bpm", 110)
+                evidence.append(
+                    {
+                        "type": "audio_mix",
+                        "value": f"{mood} mood ({bpm} BPM)",
+                        "source_field": "audio_profile",
+                        "contribution": round(a_val * 0.35, 4),
+                        "modality": "audio",
+                    }
+                )
             vector = self.movie_vector(index)
             x, y = self.coordinates(vector)
             ranked.append(
@@ -493,6 +634,8 @@ class SearchIndex:
                     semantic_vector=vector,
                     plot_x=x,
                     plot_y=y,
+                    visual=round(v_val, 6),
+                    audio=round(a_val, 6),
                 )
             )
             
@@ -537,13 +680,22 @@ class SearchIndex:
 def build_explanation(
     item: RankedMovie, query: NormalizedQuery, personalized: bool
 ) -> dict[str, Any]:
-    evidence = sorted(item.evidence, key=lambda value: value["contribution"], reverse=True)[:4]
+    evidence = sorted(item.evidence, key=lambda value: value["contribution"], reverse=True)[:5]
     labels = [
         entry["value"]
         for entry in evidence
         if entry["type"] in {"genre", "theme", "title", "actor", "director"}
     ]
-    if labels:
+    visual_items = [entry["value"] for entry in evidence if entry.get("modality") == "visual"]
+    audio_items = [entry["value"] for entry in evidence if entry.get("modality") == "audio"]
+
+    if visual_items and audio_items:
+        summary = f"Cross-modal match: {visual_items[0]} with {audio_items[0]}."
+    elif visual_items:
+        summary = f"Visual aesthetic match: {visual_items[0]}."
+    elif audio_items:
+        summary = f"Soundtrack match: {audio_items[0]}."
+    elif labels:
         summary = f"Strong match for {', '.join(labels[:3])}."
     elif personalized and item.preference > 0:
         summary = "Recommended from your saved preferences and positive feedback."
@@ -553,7 +705,9 @@ def build_explanation(
         summary = "Its trusted synopsis and metadata are semantically related to this search."
     else:
         summary = "A diverse discovery from the validated Tamil-film catalog."
-    confidence = "high" if evidence and max(item.semantic, item.lexical) >= 0.35 else "medium"
-    if max(item.semantic, item.lexical) < 0.08 and not evidence:
+
+    max_signal = max(item.semantic, item.lexical, getattr(item, "visual", 0.0), getattr(item, "audio", 0.0))
+    confidence = "high" if evidence and max_signal >= 0.35 else "medium"
+    if max_signal < 0.08 and not evidence:
         confidence = "low"
     return {"summary": summary, "evidence": evidence, "confidence": confidence}

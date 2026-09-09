@@ -38,3 +38,7 @@ infrastructure/load-tests/results/
 
 .pytest_temp/
 .pytest_cache/
+.pytest_tmp/
+backend/tests/.pytest_tmp/
+backend/.venv-v2/
+backend/data/events.jsonl

@@ -21,6 +21,7 @@ import type {
   SearchRequest,
   SearchResponse,
   ChatResponse,
+  AgentChatResponse,
   UserProfile,
 } from "../types/api";
 
@@ -454,6 +455,20 @@ export const apiClient = {
     return normalizeDataQualityReport(
       await request<unknown>("/api/v1/admin/data-quality", { token, signal }),
     );
+  },
+
+  async agentChat(
+    message: string,
+    sessionId?: string,
+    signal?: AbortSignal,
+    token?: string | null,
+  ): Promise<AgentChatResponse> {
+    return await request<AgentChatResponse>("/api/v1/agent/chat", {
+      method: "POST",
+      body: { message, session_id: sessionId },
+      signal,
+      token,
+    });
   },
 };
 

@@ -32,6 +32,8 @@ class ServiceContainer:
     tracer: Tracer
     ingestion: Any
     recommender: ALSRecommender | None = None
+    event_stream: Any | None = None
+    agent: Any | None = None
 
 
 class AuthService:
@@ -245,6 +247,8 @@ class SearchService:
                         "quality": item.quality,
                         "hidden_gem": item.hidden_gem,
                         "final": item.final,
+                        "visual": getattr(item, "visual", 0.0),
+                        "audio": getattr(item, "audio", 0.0),
                     }
                     payload.update(
                         {
