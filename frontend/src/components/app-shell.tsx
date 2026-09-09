@@ -125,7 +125,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="footer-links" aria-label="Footer navigation">
           <Link href="/profile#privacy">Privacy</Link>
           <Link href="/collections/voices-of-change">Featured collection</Link>
-          <span>V2 preview</span>
+          <span>V4 production</span>
         </div>
       </footer>
 

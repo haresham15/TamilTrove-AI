@@ -296,6 +296,15 @@ class SQLiteStore:
         with self.transaction() as connection:
             return [self._interaction(row) for row in connection.execute(sql, params).fetchall()]
 
+    def list_all_interactions(self, interaction_type: str | None = None) -> list[dict[str, Any]]:
+        sql = "SELECT user_id, movie_id, interaction_type, value FROM user_interactions"
+        params: list[Any] = []
+        if interaction_type:
+            sql += " WHERE interaction_type=?"
+            params.append(interaction_type)
+        with self.transaction() as connection:
+            return [dict(row) for row in connection.execute(sql, params).fetchall()]
+
     def delete_interaction(self, user_id: str, movie_id: str, interaction_type: str) -> bool:
         with self.transaction() as connection:
             return (

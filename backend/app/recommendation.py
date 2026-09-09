@@ -30,7 +30,7 @@ class ALSRecommender:
 
     def fit(self) -> None:
         """Fetch all interactions and train the ALS model."""
-        if self.model_class is None:
+        if self.model_class is None or not self.store or not hasattr(self.store, "list_all_interactions"):
             return
 
         interactions = self.store.list_all_interactions()

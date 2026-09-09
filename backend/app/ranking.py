@@ -63,6 +63,8 @@ def cross_modal_rank_fusion(
     k: int = 60,
 ) -> np.ndarray:
     """Fuse 2+ channels (e.g., text semantic, lexical, visual palette, audio mix) using Reciprocal Rank Fusion."""
+    if not channel_scores:
+        return np.zeros(0, dtype=np.float32)
     active_channels = [(scores, weight) for scores, weight in channel_scores if weight > 0]
     if not active_channels:
         return np.zeros(len(channel_scores[0][0]), dtype=np.float32)
@@ -138,6 +140,8 @@ def mmr_rerank(items: list[RankedMovie], diversity: float, limit: int) -> list[R
         return []
     diversity = max(0.0, min(1.0, diversity))
     selection_limit = min(limit, len(items))
+    if diversity == 0.0:
+        return items[:selection_limit]
     vectors = np.vstack([item.semantic_vector for item in items]).astype(np.float32, copy=False)
     relevance = np.asarray([item.final for item in items], dtype=np.float32)
     available = np.ones(len(items), dtype=bool)

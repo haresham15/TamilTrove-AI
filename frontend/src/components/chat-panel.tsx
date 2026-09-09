@@ -82,7 +82,7 @@ export function ChatPanel() {
         content: res.message,
         clarification: res.clarification || null,
         recommendations: res.recommendations || [],
-        toolCalls: res.tool_calls || [],
+        toolCalls: res.tool_calls_executed || res.tool_calls || [],
         latencyMs: res.latency_ms,
       };
 

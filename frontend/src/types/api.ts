@@ -265,9 +265,11 @@ export interface ApiErrorEnvelope {
 }
 
 export interface ClarificationQuestion {
-  text: string;
+  question: string;
+  text?: string;
   options: string[];
-  context_type: string;
+  dimension?: string;
+  context_type?: string;
 }
 
 export interface AgentToolCall {
