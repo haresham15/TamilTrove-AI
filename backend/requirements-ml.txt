@@ -3,6 +3,6 @@
 -r requirements.txt
 
 sentence-transformers==3.0.1
-implicit==0.7.2
-scipy==1.14.0
+implicit==0.7.3
+scipy==1.18.1
 wandb>=0.17.0
