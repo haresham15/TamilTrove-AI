@@ -22,6 +22,120 @@ from .multimodal import (
 from .normalization import NormalizedQuery, normalize_text, parse_query_hints
 from .schemas import SearchFilters, SearchRequest, SearchSort
 
+GENERIC_QUERY_STOPWORDS = frozenset(
+    {
+        "the", "and", "for", "with", "film", "movie", "films", "movies", "tamil",
+        "star", "stars", "big", "high", "budget", "music", "song", "songs",
+        "director", "actor", "actress", "action", "story", "stories", "cinema",
+        "super", "superstar", "blockbuster", "like", "similar", "best", "good",
+        "top", "great", "scene", "scenes", "part", "dub", "dubbed", "all",
+        "give", "show", "tell", "find", "get", "need", "want", "kollywood",
+        # Tamil & Tanglish cinema & grammatical stopwords
+        "padam", "padangal", "thiraippadam", "kadhai", "kathai", "panra", "pandra",
+        "panradhu", "seira", "la", "le", "oda", "maari", "mathiri", "pola", "oru",
+        "enna", "venum", "da", "di", "pa",
+    }
+)
+
+TIER_1_STARS = frozenset(
+    {
+        "vijay", "joseph vijay", "rajinikanth", "kamal haasan", "ajith",
+        "ajith kumar", "suriya", "vikram", "dhanush", "sivakarthikeyan",
+        "karthi", "simbu", "silambarasan",
+    }
+)
+
+LCU_TITLES = frozenset({"kaithi", "vikram", "leo"})
+
+SIMILAR_PATTERNS = (
+    re.compile(r"^(?:movies?|films?)\s+(?:like|similar to)\s+(.+?)(?:\s+(?:movies?|films?))?$", re.IGNORECASE),
+    re.compile(r"^(?:similar to|like)\s+(.+?)(?:\s+(?:movies?|films?))?$", re.IGNORECASE),
+    re.compile(r"^(.+?)\s+(?:maari|mathiri|pola)\s*(?:padam|movies?|films?)?$", re.IGNORECASE),
+    re.compile(r"^(?:more like|anything like|something like)\s+(.+?)$", re.IGNORECASE),
+    re.compile(r"\b(?:movies?|films?)\s+like\s+([A-Za-z0-9\s]+?)(?:\s+(?:movies?|films?))?$", re.IGNORECASE),
+)
+
+
+def extract_similar_seed_title(query: str) -> str | None:
+    q = query.strip()
+    for pattern in SIMILAR_PATTERNS:
+        match = pattern.search(q)
+        if match:
+            extracted = match.group(1).strip()
+            extracted = re.sub(
+                r"\b(?:movie|film|padam|tamil|recommend|recommendation|suggestions?)\b",
+                "",
+                extracted,
+                flags=re.IGNORECASE,
+            ).strip()
+            if extracted and len(extracted) >= 2:
+                return extracted
+    return None
+
+
+def match_catalog_movie(catalog: Catalog, candidate_title: str) -> Movie | None:
+    norm_candidate = normalize_text(candidate_title)
+    if not norm_candidate:
+        return None
+    # 1. Exact canonical title or title
+    for movie in catalog.movies:
+        if (
+            movie.canonical_title.casefold() == candidate_title.casefold()
+            or movie.title.casefold() == candidate_title.casefold()
+        ):
+            return movie
+    # 2. Normalized title match
+    for movie in catalog.movies:
+        if (
+            normalize_text(movie.canonical_title) == norm_candidate
+            or normalize_text(movie.title) == norm_candidate
+        ):
+            return movie
+    # 3. Whole-word prefix or word match
+    if len(norm_candidate) >= 3:
+        for movie in catalog.movies:
+            norm_title = normalize_text(movie.canonical_title)
+            if norm_candidate == norm_title or norm_title.startswith(norm_candidate + " "):
+                return movie
+    return None
+
+
+def is_lead_star_match(seed_lead: str, candidate_cast: tuple[str, ...]) -> bool:
+    norm_lead = seed_lead.casefold().strip()
+    for actor in candidate_cast:
+        norm_actor = actor.casefold().strip()
+        if norm_lead == "vijay":
+            if norm_actor in ("vijay", "joseph vijay", "thalapathy vijay", "actor vijay"):
+                return True
+        elif norm_lead in ("rajinikanth", "rajini"):
+            if norm_actor in ("rajinikanth", "superstar rajinikanth", "rajini", "shivaji rao gaekwad"):
+                return True
+        elif norm_lead in ("kamal haasan", "kamal"):
+            if norm_actor in ("kamal haasan", "kamal hassan", "kamal"):
+                return True
+        elif norm_lead in ("ajith kumar", "ajith"):
+            if norm_actor in ("ajith kumar", "ajith"):
+                return True
+        elif norm_lead in ("suriya", "surya"):
+            if norm_actor in ("suriya", "surya", "suriya sivakumar"):
+                return True
+        elif norm_lead in ("vikram", "chiyaan vikram"):
+            if norm_actor in ("vikram", "chiyaan vikram", "kennedy john victor"):
+                return True
+        elif norm_lead in ("dhanush",):
+            if norm_actor in ("dhanush", "venkatesh prabhu"):
+                return True
+        elif norm_lead in ("karthi",):
+            if norm_actor in ("karthi", "karthik sivakumar"):
+                return True
+        elif norm_lead in ("sivakarthikeyan", "sk"):
+            if norm_actor in ("sivakarthikeyan", "sk"):
+                return True
+        else:
+            if norm_lead == norm_actor:
+                return True
+    return False
+
 
 @dataclass(slots=True)
 class UserSignals:
@@ -71,9 +185,11 @@ def cross_modal_rank_fusion(
 
     total_fused = np.zeros(len(active_channels[0][0]), dtype=np.float32)
     for scores, weight in active_channels:
+        n = len(scores)
         order = np.argsort(-scores, kind="stable")
-        rank = np.empty_like(order)
-        rank[order] = np.arange(len(order)) + 1
+        rank = np.full(n, n, dtype=np.int32)
+        positive_indices = order[scores[order] > 0]
+        rank[positive_indices] = np.arange(len(positive_indices), dtype=np.int32) + 1
         total_fused += weight / (k + rank)
 
     maximum = total_fused.max(initial=0.0)
@@ -247,8 +363,16 @@ class SearchIndex:
         try:
             from sentence_transformers import CrossEncoder, SentenceTransformer
 
-            encoder = SentenceTransformer(self.settings.model_name)
-            dimension = int(encoder.get_sentence_embedding_dimension())
+            try:
+                encoder = SentenceTransformer(self.settings.model_name, local_files_only=True)
+            except Exception:
+                encoder = SentenceTransformer(self.settings.model_name)
+
+            get_dim = getattr(encoder, "get_embedding_dimension", None) or getattr(
+                encoder, "get_sentence_embedding_dimension", None
+            )
+            raw_dim = get_dim() if callable(get_dim) else None
+            dimension = int(raw_dim) if raw_dim is not None else 384
             source = self.catalog.source_embeddings
             bundled_model_compatible = self.settings.model_name.rstrip("/").endswith(
                 "all-MiniLM-L6-v2"
@@ -268,9 +392,12 @@ class SearchIndex:
             self.semantic_backend = self.settings.model_name
             
             try:
-                self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", max_length=512)
-            except Exception as ce_exc:
-                self.degraded_reasons.append(f"cross_encoder_unavailable:{type(ce_exc).__name__}")
+                self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", max_length=512, local_files_only=True)
+            except Exception:
+                try:
+                    self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", max_length=512)
+                except Exception as ce_exc:
+                    self.degraded_reasons.append(f"cross_encoder_unavailable:{type(ce_exc).__name__}")
         except Exception as exc:
             self.degraded_reasons.append(f"transformer_unavailable:{type(exc).__name__}")
 
@@ -439,10 +566,33 @@ class SearchIndex:
         if not effective_query:
             profile_terms = " ".join((*signals.favorite_genres, *signals.favorite_themes))
             effective_query = profile_terms or "diverse tamil cinema"
-        query_matrix, query_dense = self.encode_query(effective_query)
+
+        # Check for seed movie (either passed explicitly or extracted from natural query like 'movies like LEO')
+        seed_movie: Movie | None = None
+        if seed_movie_id:
+            seed_movie = self.catalog.get(seed_movie_id)
+        else:
+            seed_title = extract_similar_seed_title(query.original) or extract_similar_seed_title(effective_query)
+            if seed_title:
+                seed_movie = match_catalog_movie(self.catalog, seed_title)
+                if seed_movie:
+                    seed_movie_id = seed_movie.id
+
+        # Dense vector encoding uses clean semantic English query if present (from Tanglish/Tamil normalization)
+        dense_query_text = query.semantic_query.strip() if getattr(query, "semantic_query", None) else effective_query
+        query_matrix, query_dense = self.encode_query(dense_query_text)
         semantic = cosine_rows(self.semantic_matrix, query_matrix)
         lexical_query = self.lexical_vectorizer.transform([effective_query])
         lexical = cosine_rows(self.lexical_matrix, lexical_query)
+
+        if seed_movie and seed_movie.source_index is not None:
+            seed_vec = self.movie_vector(seed_movie.source_index)
+            seed_sim = cosine_rows(self.semantic_matrix, seed_vec)
+            semantic = np.clip(seed_sim, 0.0, 1.0)
+            seed_text = f"{seed_movie.genre} {' '.join(seed_movie.themes)} {seed_movie.overview[:500]} {seed_movie.director} {seed_movie.music_director}"
+            seed_lex = cosine_rows(self.lexical_matrix, self.lexical_vectorizer.transform([seed_text]))
+            lexical = np.clip(seed_lex, 0.0, 1.0)
+
 
         # PostgreSQL deployments retrieve the bounded candidate set through
         # pgvector and weighted full-text search. The deterministic local
@@ -467,23 +617,100 @@ class SearchIndex:
         # Exact metadata evidence gets a bounded lexical lift.
         normalized_query = normalize_text(effective_query)
         query_tokens = set(normalized_query.split())
+
+        # Domain setting requirements detection
+        PRIMARY_DOMAINS = {
+            "courtroom": {"courtroom", "court", "lawyer", "advocate", "trial", "judge", "vakeel", "vakil", "needhimandram", "legal drama"},
+            "prison": {"prison", "jail", "prisoner", "convict", "kaithi", "kaidhi"},
+            "heist": {"heist", "robbery", "bank robbery"},
+            "police": {"police", "cop", "inspector", "kavalthurai"},
+            "sports": {"cricket", "football", "sports", "coach"},
+        }
+        DOMAIN_SETTING_EVIDENCE = {
+            "courtroom": {"courtroom", "court", "lawyer", "advocate", "trial", "magistrate", "court judge", "presiding judge", "vakeel", "vakil", "needhimandram", "legal drama", "habeas corpus", "verdict"},
+            "prison": {"prison", "jail", "prisoner", "convict", "kaithi", "kaidhi"},
+            "heist": {"heist", "robbery", "bank robbery"},
+            "police": {"police", "cop", "inspector", "kavalthurai"},
+            "sports": {"cricket", "football", "sports", "coach"},
+        }
+        active_domains = {
+            dom for dom, keywords in PRIMARY_DOMAINS.items()
+            if any(kw in query_tokens for kw in keywords)
+        }
+
+        # Blockbuster & Tier-1 star intent detection
+        is_blockbuster_intent = any(
+            phrase_in_query(phrase, normalized_query)
+            for phrase in (
+                "big star", "superstar", "high budget", "blockbuster", "mass",
+                "massu", "pan indian", "commercial"
+            )
+        )
+
         exact_evidence: list[list[dict[str, Any]]] = [[] for _ in self.catalog.movies]
         for index, movie in enumerate(self.catalog.movies):
             title = normalize_text(movie.canonical_title)
-            if phrase_in_query(title, normalized_query):
-                lexical[index] = min(1.0, lexical[index] + 0.35)
+            title_tokens = set(title.split())
+            if not seed_movie and title == normalized_query:
+                lexical[index] = min(1.0, lexical[index] + 0.65)
                 exact_evidence[index].append(
                     {
                         "type": "title",
                         "value": movie.canonical_title,
                         "source_field": "canonical_title",
-                        "contribution": 0.35,
+                        "contribution": 0.65,
                     }
                 )
+            elif not seed_movie and phrase_in_query(title, normalized_query):
+                lexical[index] = min(1.0, lexical[index] + 0.45)
+                exact_evidence[index].append(
+                    {
+                        "type": "title",
+                        "value": movie.canonical_title,
+                        "source_field": "canonical_title",
+                        "contribution": 0.45,
+                    }
+                )
+            elif not seed_movie and len(normalized_query) >= 3 and phrase_in_query(normalized_query, title):
+                lexical[index] = min(1.0, lexical[index] + 0.40)
+                exact_evidence[index].append(
+                    {
+                        "type": "title",
+                        "value": movie.canonical_title,
+                        "source_field": "canonical_title",
+                        "contribution": 0.40,
+                    }
+                )
+            elif not seed_movie:
+                common_title_tokens = {
+                    t for t in (query_tokens & title_tokens)
+                    if len(t) >= 3 and t not in GENERIC_QUERY_STOPWORDS
+                }
+                if common_title_tokens:
+                    token_contrib = min(0.35, 0.18 * len(common_title_tokens))
+                    lexical[index] = min(1.0, lexical[index] + token_contrib)
+                    exact_evidence[index].append(
+                        {
+                            "type": "title",
+                            "value": ", ".join(common_title_tokens),
+                            "source_field": "canonical_title",
+                            "contribution": token_contrib,
+                        }
+                    )
+
+            THEMATIC_WEIGHTS = {
+                "courtroom": 0.35,
+                "social_justice": 0.28,
+                "politics": 0.25,
+                "prison": 0.25,
+                "heist": 0.25,
+                "survival": 0.25,
+            }
             for field_name, values in (("genre", movie.genres), ("theme", movie.themes)):
                 matches = [value for value in values if value in query_tokens]
                 if matches:
-                    contribution = min(0.2, 0.08 * len(matches))
+                    base_weight = max(THEMATIC_WEIGHTS.get(m, 0.12) for m in matches)
+                    contribution = min(0.40, base_weight * len(matches))
                     lexical[index] = min(1.0, lexical[index] + contribution)
                     exact_evidence[index].append(
                         {
@@ -493,31 +720,174 @@ class SearchIndex:
                             "contribution": contribution,
                         }
                     )
-            if movie.director and phrase_in_query(normalize_text(movie.director), normalized_query):
-                lexical[index] = min(1.0, lexical[index] + 0.28)
-                exact_evidence[index].append(
-                    {
-                        "type": "director",
-                        "value": movie.director,
-                        "source_field": "director",
-                        "contribution": 0.28,
-                    }
+
+            # Domain setting alignment boost
+            if active_domains:
+                movie_plot_text = f"{movie.overview} {' '.join(movie.genres)} {' '.join(movie.themes)}".casefold()
+                has_domain_match = any(
+                    dom in movie.themes
+                    or any(re.search(rf"\b{re.escape(kw)}\b", movie_plot_text) for kw in DOMAIN_SETTING_EVIDENCE.get(dom, ()))
+                    for dom in active_domains
                 )
-            cast_matches = [
-                name
-                for name in movie.cast_members
-                if phrase_in_query(normalize_text(name), normalized_query)
-            ]
-            if cast_matches:
-                lexical[index] = min(1.0, lexical[index] + 0.28)
-                exact_evidence[index].append(
-                    {
-                        "type": "actor",
-                        "value": cast_matches[0],
-                        "source_field": "cast",
-                        "contribution": 0.28,
-                    }
-                )
+                if has_domain_match:
+                    lexical[index] = min(1.0, lexical[index] + 0.35)
+                    exact_evidence[index].append(
+                        {
+                            "type": "theme",
+                            "value": f"Matches setting: {', '.join(sorted(active_domains))}",
+                            "source_field": "themes",
+                            "contribution": 0.35,
+                        }
+                    )
+
+            # Director matching (seed movie affinity or query match)
+            if seed_movie and seed_movie.director and movie.director:
+                if normalize_text(seed_movie.director) == normalize_text(movie.director):
+                    lexical[index] = min(1.0, lexical[index] + 0.45)
+                    exact_evidence[index].append(
+                        {
+                            "type": "director",
+                            "value": f"Same director: {seed_movie.director}",
+                            "source_field": "director",
+                            "contribution": 0.45,
+                        }
+                    )
+            elif movie.director:
+                norm_dir = normalize_text(movie.director)
+                if (
+                    phrase_in_query(norm_dir, normalized_query)
+                    or (len(normalized_query) >= 4 and phrase_in_query(normalized_query, norm_dir))
+                ):
+                    lexical[index] = min(1.0, lexical[index] + 0.35)
+                    exact_evidence[index].append(
+                        {
+                            "type": "director",
+                            "value": movie.director,
+                            "source_field": "director",
+                            "contribution": 0.35,
+                        }
+                    )
+
+            # Cast / Actor matching (seed movie lead actor affinity or query match)
+            if seed_movie and seed_movie.cast_members and movie.cast_members:
+                seed_lead = seed_movie.cast_members[0]
+                if is_lead_star_match(seed_lead, movie.cast_members):
+                    lexical[index] = min(1.0, lexical[index] + 0.40)
+                    exact_evidence[index].append(
+                        {
+                            "type": "actor",
+                            "value": f"Stars {seed_lead}",
+                            "source_field": "cast",
+                            "contribution": 0.40,
+                        }
+                    )
+            else:
+                cast_matches = [
+                    name
+                    for name in movie.cast_members
+                    if phrase_in_query(normalize_text(name), normalized_query)
+                    or (len(normalized_query) >= 4 and phrase_in_query(normalized_query, normalize_text(name)))
+                ]
+                if cast_matches:
+                    lexical[index] = min(1.0, lexical[index] + 0.35)
+                    exact_evidence[index].append(
+                        {
+                            "type": "actor",
+                            "value": cast_matches[0],
+                            "source_field": "cast",
+                            "contribution": 0.35,
+                        }
+                    )
+
+            # Music Director matching (seed movie composer affinity or query match)
+            if seed_movie and seed_movie.music_director and movie.music_director:
+                if normalize_text(seed_movie.music_director) == normalize_text(movie.music_director):
+                    lexical[index] = min(1.0, lexical[index] + 0.30)
+                    exact_evidence[index].append(
+                        {
+                            "type": "music",
+                            "value": f"Music by {seed_movie.music_director}",
+                            "source_field": "music_director",
+                            "contribution": 0.30,
+                        }
+                    )
+            elif movie.music_director:
+                norm_md = normalize_text(movie.music_director)
+                md_tokens = {
+                    t for t in norm_md.split()
+                    if len(t) >= 3 and t not in GENERIC_QUERY_STOPWORDS
+                }
+                if (
+                    phrase_in_query(norm_md, normalized_query)
+                    or any(phrase_in_query(t, normalized_query) for t in md_tokens)
+                ):
+                    lexical[index] = min(1.0, lexical[index] + 0.45)
+                    exact_evidence[index].append(
+                        {
+                            "type": "music",
+                            "value": movie.music_director,
+                            "source_field": "music_director",
+                            "contribution": 0.45,
+                        }
+                    )
+
+            # Franchise / LCU Universe affinity
+            if seed_movie:
+                s_title = seed_movie.canonical_title.casefold()
+                m_title = movie.canonical_title.casefold()
+                if s_title in LCU_TITLES and m_title in LCU_TITLES:
+                    lexical[index] = min(1.0, lexical[index] + 0.40)
+                    exact_evidence[index].append(
+                        {
+                            "type": "universe",
+                            "value": "Lokesh Cinematic Universe (LCU)",
+                            "source_field": "themes",
+                            "contribution": 0.40,
+                        }
+                    )
+                # Genre overlap with seed movie
+                shared_seed_genres = set(movie.genres) & set(seed_movie.genres)
+                if shared_seed_genres:
+                    g_contrib = min(0.20, 0.08 * len(shared_seed_genres))
+                    lexical[index] = min(1.0, lexical[index] + g_contrib)
+                    exact_evidence[index].append(
+                        {
+                            "type": "genre",
+                            "value": ", ".join(sorted(shared_seed_genres)),
+                            "source_field": "genres",
+                            "contribution": g_contrib,
+                        }
+                    )
+
+            # Blockbuster intent boosts (high budget, big star, mass)
+            if is_blockbuster_intent:
+                if movie.prominence_score >= 0.65:
+                    lexical[index] = min(1.0, lexical[index] + 0.25)
+                    exact_evidence[index].append(
+                        {
+                            "type": "prominence",
+                            "value": "High-budget blockbuster",
+                            "source_field": "prominence_score",
+                            "contribution": 0.25,
+                        }
+                    )
+                cast_text_lower = movie.cast.casefold()
+                matching_stars = [
+                    star.title()
+                    for star in TIER_1_STARS
+                    if phrase_in_query(star, cast_text_lower)
+                ]
+                if matching_stars:
+                    lexical[index] = min(1.0, lexical[index] + 0.25)
+                    exact_evidence[index].append(
+                        {
+                            "type": "actor",
+                            "value": f"Tier-1 star: {matching_stars[0]}",
+                            "source_field": "cast",
+                            "contribution": 0.25,
+                        }
+                    )
+
 
         # V4 Multimodal cross-modal query handling
         visual_query = request.visual_query or (request.filters.visual_aesthetic or "")
@@ -572,14 +942,52 @@ class SearchIndex:
                 max(semantic[index], lexical[index]),
                 min(1.0, signals.hidden_gem_preference * request.beta),
             )
+            # Dampen obscurity bias when user is searching for a specific topic/theme unless they explicitly asked for hidden gems
+            is_explicit_gem = any(w in normalized_query for w in ("hidden gem", "underrated", "obscure", "rare"))
+            has_thematic_search = any(
+                t in query_tokens for t in (
+                    "courtroom", "lawyer", "trial", "judge", "police", "gangster",
+                    "politics", "village", "revenge", "heist", "survival", "sports",
+                    "injustice", "rights", "oppression"
+                )
+            )
+            if has_thematic_search and not is_explicit_gem:
+                hidden = hidden * 0.20
+
             v_val = float(visual_scores[index])
             a_val = float(audio_scores[index])
+
+            seed_affinity = 0.0
+            if seed_movie:
+                s_title = seed_movie.canonical_title.casefold()
+                m_title = movie.canonical_title.casefold()
+                if s_title in LCU_TITLES and m_title in LCU_TITLES:
+                    seed_affinity += 0.35
+                if seed_movie.director and movie.director and normalize_text(seed_movie.director) == normalize_text(movie.director):
+                    seed_affinity += 0.30
+                if seed_movie.music_director and movie.music_director and normalize_text(seed_movie.music_director) == normalize_text(movie.music_director):
+                    seed_affinity += 0.15
+                if seed_movie.cast_members and is_lead_star_match(seed_movie.cast_members[0], movie.cast_members):
+                    seed_affinity += 0.20
+
             score = (
                 0.80 * float(fused[index])
+                + seed_affinity
                 + self.settings.ranking_preference_weight * max(-0.5, pref)
                 + self.settings.ranking_quality_weight * movie.data_quality_score
                 + self.settings.ranking_hidden_gem_weight * hidden
             )
+
+            # If user explicitly requested a setting/domain (e.g. courtroom), dampen films with zero domain evidence
+            if active_domains:
+                movie_plot_text = f"{movie.overview} {' '.join(movie.genres)} {' '.join(movie.themes)}".casefold()
+                has_domain_match = any(
+                    dom in movie.themes
+                    or any(re.search(rf"\b{re.escape(kw)}\b", movie_plot_text) for kw in DOMAIN_SETTING_EVIDENCE.get(dom, ()))
+                    for dom in active_domains
+                )
+                if not has_domain_match:
+                    score = score * 0.45
             evidence = list(exact_evidence[index])
             if pref > 0:
                 evidence.append(
@@ -644,8 +1052,9 @@ class SearchIndex:
             )
             
         if request.sort == SearchSort.relevance and self.cross_encoder is not None and ranking_version.startswith("v3"):
-            ranked.sort(key=lambda item: (item.final, item.movie.data_quality_score), reverse=True)
-            candidate_limit = min(len(ranked), self.settings.ranking_candidate_limit)
+            ranked.sort(key=lambda item: (item.final, item.movie.prominence_score, item.movie.data_quality_score), reverse=True)
+
+            candidate_limit = min(len(ranked), 10)
             top_candidates = ranked[:candidate_limit]
             if top_candidates:
                 pairs = [[query.original, item.movie.searchable_text] for item in top_candidates]
@@ -667,7 +1076,8 @@ class SearchIndex:
         elif request.sort == SearchSort.hidden_gems:
             ranked.sort(key=lambda item: (item.hidden_gem, item.final), reverse=True)
         else:
-            ranked.sort(key=lambda item: (item.final, item.movie.data_quality_score), reverse=True)
+            ranked.sort(key=lambda item: (item.final, item.movie.prominence_score, item.movie.data_quality_score), reverse=True)
+
 
         candidate_limit = min(len(ranked), self.settings.ranking_candidate_limit)
         diversity = (
@@ -688,12 +1098,15 @@ def build_explanation(
     labels = [
         entry["value"]
         for entry in evidence
-        if entry["type"] in {"genre", "theme", "title", "actor", "director"}
+        if entry["type"] in {"genre", "theme", "title", "actor", "director", "music", "universe", "prominence"}
     ]
     visual_items = [entry["value"] for entry in evidence if entry.get("modality") == "visual"]
     audio_items = [entry["value"] for entry in evidence if entry.get("modality") == "audio"]
+    universe_items = [entry["value"] for entry in evidence if entry.get("type") == "universe"]
 
-    if visual_items and audio_items:
+    if universe_items:
+        summary = f"LCU universe connection with high-octane action and shared style."
+    elif visual_items and audio_items:
         summary = f"Cross-modal match: {visual_items[0]} with {audio_items[0]}."
     elif visual_items:
         summary = f"Visual aesthetic match: {visual_items[0]}."

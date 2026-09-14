@@ -396,7 +396,7 @@ class SearchService:
         movie = self.container.catalog.get(movie_id)
         if not movie:
             raise NotFoundError("Movie")
-        query = " ".join((movie.genre, " ".join(movie.themes), movie.overview[:700]))
+        query = " ".join((movie.genre, " ".join(movie.themes), movie.overview[:250]))[:450]
         request = SearchRequest(query=query, page=page, page_size=page_size, diversity=0.12)
         response = self.search(request, request_id, user_id, seed_movie_id=movie_id)
         response["seed_movie"] = movie_payload(movie)

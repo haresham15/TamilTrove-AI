@@ -31,10 +31,15 @@ class Settings:
     embeddings_path: Path = BACKEND_DIR / "data" / "embeddings.npy"
     model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     model_version: str = "1"
-    enable_transformer: bool = False
+    enable_transformer: bool = True
     secret_key: str = "development-only-change-me-at-least-32"
     auth_token_ttl_seconds: int = 60 * 60
-    allowed_origins: tuple[str, ...] = ("http://localhost:3000",)
+    allowed_origins: tuple[str, ...] = (
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    )
     admin_emails: tuple[str, ...] = ()
     trusted_poster_hosts: tuple[str, ...] = (
         "upload.wikimedia.org",
@@ -113,10 +118,14 @@ class Settings:
             ),
             model_name=os.getenv("TAMILTROVE_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2"),
             model_version=os.getenv("TAMILTROVE_MODEL_VERSION", "1"),
-            enable_transformer=_as_bool(os.getenv("TAMILTROVE_ENABLE_TRANSFORMER"), False),
+            enable_transformer=_as_bool(os.getenv("TAMILTROVE_ENABLE_TRANSFORMER"), True),
+
             secret_key=secret,
             auth_token_ttl_seconds=max(300, int(os.getenv("AUTH_TOKEN_TTL_SECONDS", "3600"))),
-            allowed_origins=_as_csv(os.getenv("ALLOWED_ORIGINS"), ("http://localhost:3000",)),
+            allowed_origins=_as_csv(
+                os.getenv("ALLOWED_ORIGINS"),
+                ("http://localhost:3000", "http://localhost:3001", "http://127.0.0.1:3000", "http://127.0.0.1:3001"),
+            ),
             admin_emails=tuple(
                 email.casefold() for email in _as_csv(os.getenv("TAMILTROVE_ADMIN_EMAILS"))
             ),

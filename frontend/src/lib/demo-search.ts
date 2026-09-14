@@ -38,6 +38,12 @@ const QUERY_REPLACEMENTS: Array<[RegExp, string]> = [
   [/உணர்ச்சி/gu, " emotional drama "],
   [/காதல்/gu, " romance "],
   [/நகைச்சுவை/gu, " comedy "],
+  [/courtroom-la|court-la/giu, " courtroom legal "],
+  [/fight panra|fight pandra/giu, " fighting injustice "],
+  [/vakeel|vakil/giu, " lawyer advocate "],
+  [/theerpu/giu, " verdict "],
+  [/neethi/giu, " justice "],
+  [/aneethi/giu, " injustice "],
   [/maari|mathiri/giu, " like "],
   [/padam/giu, " movie "],
   [/oru/giu, " one "],
@@ -63,6 +69,12 @@ const STOP_WORDS = new Set([
   "story",
   "the",
   "with",
+  "padam",
+  "padangal",
+  "panra",
+  "pandra",
+  "la",
+  "le",
 ]);
 
 const SEARCH_ALIASES: Record<string, string> = {
@@ -251,15 +263,26 @@ function scoreMovie(
   const tokens = queryTokens(query);
   const movieText = searchableMovieText(movie);
   const matchedTokens = tokens.filter((token) => movieText.includes(token));
-  const exactTitle = normalized.includes(normalizeDiscoveryQuery(movie.title));
+  const normTitle = normalizeDiscoveryQuery(movie.title);
+  const exactTitle = normalized === normTitle;
+  const partialTitle =
+    exactTitle ||
+    normalized.includes(normTitle) ||
+    (normalized.length >= 3 && normTitle.includes(normalized));
   const lexical = tokens.length
     ? Math.min(
         1,
-        matchedTokens.length / tokens.length + (exactTitle ? 0.35 : 0),
+        matchedTokens.length / tokens.length +
+          (exactTitle ? 0.65 : partialTitle ? 0.42 : 0),
       )
     : 0.58;
   const semantic = tokens.length
-    ? Math.min(1, lexical * 0.78 + (matchedTokens.length ? 0.18 : 0))
+    ? Math.min(
+        1,
+        lexical * 0.78 +
+          (matchedTokens.length ? 0.18 : 0) +
+          (exactTitle ? 0.2 : 0),
+      )
     : 0.72;
   const hiddenGem = 1 - movie.prominenceScore;
   const quality = movie.qualityScore ?? 0.8;

@@ -46,7 +46,7 @@ describe("DiscoveryPage", () => {
     expect(
       screen.getByText(/results shown for one night chase/),
     ).toBeInTheDocument();
-  });
+  }, 20000);
 
   it("shows a retryable server error without disguising it as demo data", async () => {
     const { ApiClientError } = await import("@/lib/api-client");

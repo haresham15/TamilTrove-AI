@@ -12,7 +12,9 @@ from app.normalization import normalize_query
 from app.ranking import (
     SearchIndex,
     UserSignals,
+    extract_similar_seed_title,
     hidden_gem_score,
+    is_lead_star_match,
     mmr_rerank,
     phrase_in_query,
     reciprocal_rank_fusion,
@@ -114,3 +116,20 @@ def test_database_candidate_provider_bounds_local_reranking(index: SearchIndex) 
 def test_mmr_handles_empty_and_zero_limit() -> None:
     assert mmr_rerank([], diversity=0.5, limit=10) == []
     assert mmr_rerank([], diversity=0.5, limit=0) == []
+
+
+def test_extract_similar_seed_title_handles_natural_language_queries() -> None:
+    assert extract_similar_seed_title("movies like LEO") == "LEO"
+    assert extract_similar_seed_title("films similar to Vikram") == "Vikram"
+    assert extract_similar_seed_title("kaithi maari padam") == "kaithi"
+    assert extract_similar_seed_title("something like Master") == "Master"
+    assert extract_similar_seed_title("action thriller with big star") is None
+
+
+def test_lead_star_matching_distinguishes_actors() -> None:
+    assert is_lead_star_match("Vijay", ("Vijay", "Trisha")) is True
+    assert is_lead_star_match("Vijay", ("Joseph Vijay", "Samantha")) is True
+    assert is_lead_star_match("Vijay", ("Vijay Sethupathi", "Nayanthara")) is False
+    assert is_lead_star_match("Rajinikanth", ("Superstar Rajinikanth", "Ramya Krishnan")) is True
+    assert is_lead_star_match("Kamal Haasan", ("Kamal Hassan", "Gautami")) is True
+

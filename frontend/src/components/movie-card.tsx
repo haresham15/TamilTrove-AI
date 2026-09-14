@@ -60,7 +60,7 @@ export function MovieCard({
         </div>
 
         <div className="chip-row" aria-label="Genres and themes">
-          {[...movie.genres, ...movie.themes]
+          {Array.from(new Set([...movie.genres, ...movie.themes]))
             .slice(0, compact ? 2 : 4)
             .map((tag) => (
               <span className="chip" key={tag}>

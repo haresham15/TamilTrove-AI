@@ -47,6 +47,22 @@ TANGLISH_TERMS: dict[str, str] = {
     "gramam": "village rural",
     "graamam": "village rural",
     "ooru": "village rural",
+    "court-la": "courtroom court legal trial lawyer advocate",
+    "courtroom-la": "courtroom court legal trial lawyer advocate",
+    "vakeel": "lawyer advocate courtroom legal",
+    "vakil": "lawyer advocate courtroom legal",
+    "theerpu": "verdict judgment court",
+    "neethi": "justice court legal",
+    "aneethi": "injustice oppression corruption rights legal",
+    "sanda": "fight action battles",
+    "panra": "",
+    "pandra": "",
+    "panradhu": "",
+    "seira": "",
+    "satta": "legal law",
+    "sattam": "legal law courtroom",
+    "nyayam": "justice fair",
+    "droham": "betrayal revenge",
     "village-la": "village",
     "sirippu": "comedy",
     "comedy-ah": "comedy",
@@ -55,7 +71,6 @@ TANGLISH_TERMS: dict[str, str] = {
     "peyi": "ghost horror",
     "arasiyal": "political politics",
     "needhimandram": "courtroom court",
-    "neethi": "justice",
     "pazhivangum": "revenge",
     "policeu": "police",
     "kuttram": "crime",
@@ -74,6 +89,7 @@ TANGLISH_TERMS: dict[str, str] = {
     "mathiri": "like similar",
     "pola": "like similar",
     "la": "",
+    "le": "",
 }
 
 GENRE_ALIASES: dict[str, str] = {
@@ -96,6 +112,45 @@ TANGLISH_MARKERS = frozenset(TANGLISH_TERMS) | {
     "irukkura",
     "nalla",
     "semma",
+    "panra",
+    "pandra",
+    "seira",
+    "vakeel",
+    "aneethi",
+}
+
+
+QUERY_CORRECTIONS: dict[str, str] = {
+    # Music directors & composers
+    "anirduh": "anirudh",
+    "aniruth": "anirudh",
+    "anirud": "anirudh",
+    "ani": "anirudh",
+    "u1": "yuvan",
+    "arr": "rahman",
+    "sana": "santhosh narayanan",
+    "gvp": "g.v. prakash",
+    # Directors
+    "loki": "lokesh kanagaraj",
+    "lokesh": "lokesh kanagaraj",
+    "nelson": "nelson dilipkumar",
+    "atlee": "atlee",
+    "arm": "a.r. murugadoss",
+    "ksr": "k.s. ravikumar",
+    "gvm": "gautham menon",
+    "selva": "selvaraghavan",
+    "vetri": "vetrimaran",
+    "vetrimaaran": "vetrimaran",
+    # Stars
+    "thalapathy": "vijay",
+    "thala": "ajith",
+    "superstar": "rajinikanth",
+    "ulaganayagan": "kamal haasan",
+    "chiyaan": "vikram",
+    "vjs": "vijay sethupathi",
+    "sk": "sivakarthikeyan",
+    "str": "silambarasan",
+    "simbu": "silambarasan",
 }
 
 
@@ -105,6 +160,7 @@ class NormalizedQuery:
     normalized: str
     detected_language: str
     expanded_terms: tuple[str, ...]
+    semantic_query: str = ""
 
 
 def normalize_text(value: str) -> str:
@@ -133,6 +189,27 @@ def normalize_query(value: str) -> NormalizedQuery:
     original = unicodedata.normalize("NFKC", value or "").strip()
     language = detect_language(original)
     normalized = normalize_text(original)
+
+    # Apply typo corrections and domain shorthand mappings
+    tokens = normalized.split()
+    corrected_tokens = [QUERY_CORRECTIONS.get(t, t) for t in tokens]
+    normalized = " ".join(corrected_tokens)
+
+    # Suffix stripping for common Tanglish locative and emphasis suffixes
+    processed_tokens: list[str] = []
+    for t in normalized.split():
+        if t.endswith("-la") and len(t) > 3:
+            processed_tokens.append(t[:-3])
+        elif t.endswith("-le") and len(t) > 3:
+            processed_tokens.append(t[:-3])
+        elif t.endswith("-ah") and len(t) > 3:
+            processed_tokens.append(t[:-3])
+        elif t.endswith("-aa") and len(t) > 3:
+            processed_tokens.append(t[:-3])
+        else:
+            processed_tokens.append(t)
+    normalized = " ".join(processed_tokens)
+
     expanded: list[str] = []
 
     for token in normalized.split():
@@ -149,11 +226,45 @@ def normalize_query(value: str) -> NormalizedQuery:
 
     unique_expanded = tuple(dict.fromkeys(term for term in expanded if term))
     augmented = " ".join(part for part in (normalized, " ".join(unique_expanded)) if part).strip()
+
+    # Clean semantic representation specifically for dense neural sentence transformers
+    if language in ("tanglish", "tamil", "mixed"):
+        semantic_tokens: list[str] = []
+        stop_particles = {
+            "la", "le", "ah", "aa", "panra", "pandra", "panradhu", "seira",
+            "padam", "padamum", "oru", "enna", "venum", "irukra", "irukkura",
+            "da", "di", "ba", "pa", "kadhai", "kathai"
+        }
+        for token in normalized.split():
+            if token in stop_particles:
+                continue
+            mapped = TAMIL_TERMS.get(token) or TANGLISH_TERMS.get(token) or GENRE_ALIASES.get(token)
+            if mapped:
+                clean_mapped = " ".join(w for w in mapped.split() if w not in stop_particles)
+                semantic_tokens.append(clean_mapped)
+            else:
+                semantic_tokens.append(token)
+
+        # Contextual semantic enrichments for neural dense retrieval
+        lowered_norm = normalized.lower()
+        if any(w in lowered_norm for w in ("courtroom", "court", "vakeel", "vakil", "needhimandram")):
+            if any(w in lowered_norm for w in ("injustice", "aneethi", "fight", "sanda", "corruption", "rights")):
+                semantic_tokens.append("courtroom legal drama lawyer advocate trial fighting against injustice and state oppression")
+            else:
+                semantic_tokens.append("courtroom legal drama lawyer advocate trial")
+        elif any(w in lowered_norm for w in ("injustice", "aneethi")):
+            semantic_tokens.append("social justice drama fighting against injustice and corruption")
+
+        semantic_query = " ".join(dict.fromkeys(" ".join(semantic_tokens).split())).strip()
+    else:
+        semantic_query = augmented
+
     return NormalizedQuery(
         original=original,
         normalized=augmented,
         detected_language=language,
         expanded_terms=unique_expanded,
+        semantic_query=semantic_query,
     )
 
 

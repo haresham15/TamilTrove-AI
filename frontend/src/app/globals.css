@@ -171,6 +171,7 @@ legend {
   z-index: 100;
   border-bottom: 1px solid rgba(184, 170, 149, 0.65);
   background: rgba(245, 240, 230, 0.92);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 .header-inner {
@@ -623,7 +624,10 @@ input[type="range"] {
   overflow-x: auto;
   color: var(--ink-soft);
   font-size: 0.72rem;
-  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.example-row::-webkit-scrollbar {
+  height: 4px;
 }
 .example-row > span {
   flex: 0 0 auto;
@@ -1185,6 +1189,7 @@ input[type="range"] {
 .drawer-dialog::backdrop,
 .dialog::backdrop {
   background: rgba(18, 26, 22, 0.55);
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
 .drawer-panel {

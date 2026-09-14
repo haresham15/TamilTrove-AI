@@ -24,7 +24,40 @@ THEME_TERMS = {
     "family": ("family", "father", "mother", "siblings"),
     "politics": ("politic", "minister", "election", "government"),
     "crime": ("crime", "criminal", "murder", "gangster", "police"),
-    "courtroom": ("court", "lawyer", "trial", "justice"),
+    "courtroom": (
+        "courtroom",
+        "court room",
+        "high court",
+        "supreme court",
+        "court trial",
+        "on trial",
+        "stand trial",
+        "standing trial",
+        "lawyer",
+        "advocate",
+        "prosecutor",
+        "public prosecutor",
+        "magistrate",
+        "court judge",
+        "presiding judge",
+        "sessions judge",
+        "verdict",
+        "legal drama",
+        "legal battle",
+        "legal case",
+        "habeas corpus",
+    ),
+    "social_justice": (
+        "injustice",
+        "oppression",
+        "caste",
+        "marginalised",
+        "marginalized",
+        "rights",
+        "social justice",
+        "inequality",
+        "bias",
+    ),
     "village": ("village", "rural", "farmer"),
     "one-night": ("one night", "single night", "overnight"),
     "chase": ("chase", "pursuit", "escape"),
@@ -120,9 +153,18 @@ def _split_genres(value: object) -> tuple[str, ...]:
 
 def infer_themes(overview: str) -> tuple[str, ...]:
     text = normalize_text(overview)
-    return tuple(
-        theme for theme, needles in THEME_TERMS.items() if any(needle in text for needle in needles)
-    )
+    matched_themes: list[str] = []
+    for theme, needles in THEME_TERMS.items():
+        for needle in needles:
+            if " " in needle:
+                if needle in text:
+                    matched_themes.append(theme)
+                    break
+            else:
+                if re.search(rf"\b{re.escape(needle)}\b", text):
+                    matched_themes.append(theme)
+                    break
+    return tuple(matched_themes)
 
 
 def quality_score(raw: dict[str, Any], overview: str, poster_url: str | None) -> float:
@@ -159,14 +201,15 @@ class Movie:
     themes: tuple[str, ...]
     director: str
     cast_members: tuple[str, ...]
-    poster_url: str | None
-    source_url: str | None
-    source_updated_at: str | None
-    data_quality_status: str
-    data_quality_score: float
-    prominence_score: float
-    content_hash: str
-    dataset_version: str
+    music_director: str = ""
+    poster_url: str | None = None
+    source_url: str | None = None
+    source_updated_at: str | None = None
+    data_quality_status: str = "validated"
+    data_quality_score: float = 0.5
+    prominence_score: float = 0.5
+    content_hash: str = ""
+    dataset_version: str = ""
     provenance: dict[str, Any] = field(default_factory=dict)
     source_index: int | None = None
     visual_palette: dict[str, Any] = field(default_factory=dict)
@@ -190,6 +233,7 @@ class Movie:
                 " ".join(self.themes),
                 self.director,
                 self.cast,
+                self.music_director,
                 self.overview,
             )
         )
@@ -198,6 +242,7 @@ class Movie:
         data = asdict(self)
         data["genre"] = self.genre
         data["cast"] = self.cast
+        data["music_director"] = self.music_director
         data["genres"] = list(self.genres)
         data["themes"] = list(self.themes)
         data["visual_palette"] = dict(self.visual_palette)
@@ -327,6 +372,7 @@ class Catalog:
                     themes=themes,
                     director=director,
                     cast_members=_split_names(raw.get("cast")),
+                    music_director=str(raw.get("music_director") or "").strip(),
                     poster_url=poster_url,
                     source_url=validated_https_url(raw.get("source_url")),
                     source_updated_at=str(raw.get("source_updated_at") or "").strip() or None,

@@ -56,3 +56,16 @@ def test_schema_rejects_inverted_ranges_and_invalid_rating_steps() -> None:
 
     rating = InteractionRequest(movie_id="movie", type="rating", value=4.5)
     assert rating.value == 4.5
+
+
+def test_query_corrections_fixes_misspellings_and_aliases() -> None:
+    norm1 = normalize_query("anirduh music")
+    assert "anirudh" in norm1.normalized
+
+    norm2 = normalize_query("thalapathy loki movie")
+    assert "vijay" in norm2.normalized
+    assert "lokesh kanagaraj" in norm2.normalized
+
+    norm3 = normalize_query("superstar action film")
+    assert "rajinikanth" in norm3.normalized
+
