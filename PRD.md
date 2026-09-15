@@ -254,6 +254,7 @@ Validated CSV / External Sources
 ### 7.3 Release Gate
 
 A change cannot ship if it:
+
 - Causes an unexplained relevance regression.
 - Drops any language slice below its threshold.
 - Breaks diversity or coverage limits.
@@ -364,7 +365,7 @@ Users search with cross-modal queries like:
 
 The ranking pipeline fuses textual plot match, visual tone embeddings, and audio profile embeddings into a single unified relevance score with per-channel evidence in the explanation.
 
-#### Technical Additions
+#### Technical Additions (Multimodal Retrieval)
 
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -427,6 +428,7 @@ User Interaction (click, rate, dismiss)
 #### The Impact
 
 This demonstrates understanding of:
+
 - Distributed event-driven architectures and exactly-once semantics.
 - Zero-latency data pipelines critical for modern full-stack ML engineering.
 - Online learning and incremental model updates vs. batch retraining.
@@ -458,7 +460,7 @@ V4 upgrades the chat panel from a basic query parser into an autonomous recommen
 
 #### Conversation Flow Example
 
-```
+```text
 User: "I want something intense but not action — more psychological"
 
 Agent: [thinks] Query is ambiguous on genre. Clarify before searching.
@@ -479,7 +481,7 @@ Agent: "Here are 3 films that match — Ratsasan (2018) is the strongest
         shares the investigative cat-and-mouse structure you described..."
 ```
 
-#### Technical Additions
+#### Technical Additions (Agentic Discovery)
 
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |

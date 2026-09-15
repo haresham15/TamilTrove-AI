@@ -925,6 +925,7 @@ input[type="range"] {
   font: 0.82rem/1.5 var(--serif);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 .match-reason {
   display: grid;
@@ -2033,6 +2034,7 @@ input[type="range"] {
   color: var(--ink-soft);
   font-size: 0.83rem;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 .collection-card-copy small {
@@ -2164,6 +2166,7 @@ input[type="range"] {
   color: var(--ink-soft);
   font-family: var(--serif);
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 .inline-edit {

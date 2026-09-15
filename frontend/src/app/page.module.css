@@ -127,6 +127,7 @@
   border-radius: 4px;
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .slider::-webkit-slider-thumb {
@@ -287,6 +288,7 @@
   color: #cbd5e1;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-top: auto;
